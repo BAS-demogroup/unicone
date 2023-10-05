@@ -1,0 +1,2 @@
+#define LINE_LENGTH 40
+#define LINE_COUNT 50
