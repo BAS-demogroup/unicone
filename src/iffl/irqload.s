@@ -195,12 +195,14 @@ fastload_filename:
 fastload_filename_len:
 	.byte 0
 
+	.public fastload_address
 fastload_address:
 	.long 0
 
 fastload_iffl_counter:
 	.long 0
 
+	.public fastload_request
 fastload_request:
 	.byte 4											; Start with seeking to track 0
 
@@ -242,6 +244,7 @@ fastload_sector_buffer:
 ;	.byte 0
 ;.endrepeat
 
+	.public fastload_iffl_start_address_and_size
 fastload_iffl_start_address_and_size:
 fastload_directory_entries:
 	.space 256 , 0
@@ -252,9 +255,11 @@ fastload_directory_entries:
 fl_iffl_numfiles:
 	.byte 0
 
+	.public fl_iffl_currentfile
 fl_iffl_currentfile:
 	.byte 0
 
+	.public fl_iffl_sizeremaining
 fl_iffl_sizeremaining:
 	.long 0
 
