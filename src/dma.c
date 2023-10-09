@@ -4,7 +4,7 @@
 #include "chips.h"
 
 
-void dma_run_job(__far char *ptr) {
+void run_dma_job(__far char *ptr) {
 	DMA.ADDRMB = 0;	// Is there EVER a case where MB can be anything but 0?  As
 					// far as I know, DMA jobs can't be stores in the attic and
 					// run from there.

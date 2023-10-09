@@ -81,6 +81,6 @@ struct _dma_copy_job_huge_destination {
 	unsigned short modulo;
 };
 
-void dma_run_job(__far char *ptr);
+void run_dma_job(__far char *ptr);
 
 #endif
