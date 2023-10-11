@@ -3,14 +3,15 @@
 
 #include <stdint.h>
 
-typedef struct _CPU  _CPU_t;
-typedef struct _VIC2 _VIC2_t;
-typedef struct _VIC3 _VIC3_t;
-typedef struct _VIC4 _VIC4_t;
-typedef struct _FDC  _FDC_t;
-typedef struct _DMA  _DMA_t;
-typedef struct _CIA1 _CIA1_t;
-typedef struct _CIA2 _CIA2_t;
+typedef struct _CPU         _CPU_t;
+typedef struct _VIC2        _VIC2_t;
+typedef struct _VIC3        _VIC3_t;
+typedef struct _VIC4        _VIC4_t;
+typedef struct _FDC         _FDC_t;
+typedef struct _DMA         _DMA_t;
+typedef struct _CIA1        _CIA1_t;
+typedef struct _CIA2        _CIA2_t;
+typedef struct _IRQ_VECTORS _IRQ_VECTORS_t;
 
 struct _CPU {
 	uint8_t PORTDDR;
@@ -231,40 +232,35 @@ struct _VIC4 {
 		uint8_t VFAST  : 1;
 		uint8_t ALPHEN : 1;
 	};
-	uint8_t SPRHGTEN;
-	uint8_t SPRHGHT;
-	uint8_t SPRX64EN;
-	uint8_t LINESTEPLSB;
-	uint8_t LINESTEPMSB;
-	uint8_t CHRXSCL;
-	uint8_t CHRYSCL;
-	uint8_t SDBDRWDLSB;
+	uint8_t  SPRHGTEN;
+	uint8_t  SPRHGHT;
+	uint8_t  SPRX64EN;
+	uint16_t LINESTEP;
+	uint8_t  CHRXSCL;
+	uint8_t  CHRYSCL;
+	uint8_t  SDBDRWDLSB;
 	union {
 		uint8_t SDBDRWDMSB : 6;
 		uint8_t RSTDELEN   : 1;
 		uint8_t HOTREG     : 1;
 	};
-	uint8_t CHRCOUNTLSB;
-	uint8_t SPRXSMSBS;
-	uint8_t SCRNPTRLSB;
-	uint8_t SCRNPTRMSB;
-	uint8_t SCRNPTRBNK;
+	uint8_t  CHRCOUNTLSB;
+	uint8_t  SPRXSMSBS;
+	uint16_t SCRNPTR;
+	uint8_t  SCRNPTRBNK;
 	union {
 		uint8_t SCRNPTRMB   : 4;
 		uint8_t CHRCOUNTMSB : 2;
 		uint8_t FCOLMCM     : 1;
 		uint8_t EXGLYPH     : 1;
 	};
-	uint8_t COLPTRLSB;
-	uint8_t COLPTRMSB;
-	uint8_t _NA2;
-	uint8_t SBPDEBUG;
-	uint8_t CHARPTRLSB;
-	uint8_t CHARPTRMSB;
-	uint8_t CHARPTRBNK;
-	uint8_t SPR16EN;
-	uint8_t SPRPTRADRLSB;
-	uint8_t SPRPTRADRMSB;
+	uint16_t COLPTR;
+	uint8_t  _NA2;
+	uint8_t  SBPDEBUG;
+	uint16_t CHARPTR;
+	uint8_t  CHARPTRBNK;
+	uint8_t  SPR16EN;
+	uint16_t SPRPTRADR;
 	union {
 		uint8_t SPRPTADRRBNK : 7;
 		uint8_t SPRPTR16     : 1;
@@ -374,52 +370,55 @@ struct _DMA {
 	uint8_t ADDRLSB;
 };
 
+// I can't get the CIA chips to work right.
 struct _CIA1 {
-	uint8_t PORTA;
-	uint8_t PORTB;
-	uint8_t DDRA;
-	uint8_t DDRB;
-	uint8_t TIMERALSB;
-	uint8_t TIMERAMSB;
-	uint8_t TIMERBLSB;
-	uint8_t TIMERBMSB;
-	uint8_t TODJIF;
-	uint8_t TODSEC;
-	uint8_t TODMIN;
-	union {
-		uint8_t TODHOUR : 5;
-		uint8_t _NA0    : 2;
-		uint8_t TODAMPM : 1;
-	};
+	uint8_t  PORTA;
+	uint8_t  PORTB;
+	uint8_t  DDRA;
+	uint8_t  DDRB;
+	uint16_t TIMERA;
+	uint16_t TIMERB;
+	uint8_t  TODJIF;
+	uint8_t  TODSEC;
+	uint8_t  TODMIN;
+	uint8_t  TODHOUR;
+	// union {
+		// uint8_t TODHOUR : 5;
+		// uint8_t _NA0    : 2;
+		// uint8_t TODAMPM : 1;
+	// };
 	uint8_t SDR;
-	union {
-		uint8_t TA   : 1;
-		uint8_t TB   : 1;
-		uint8_t ALRM : 1;
-		uint8_t SP   : 1;
-		uint8_t FLG  : 1;
-		uint8_t _NA1 : 2;
-		uint8_t IR   : 1;
-	};
-	union {
-		uint8_t STRTA : 1;
-		uint8_t PBONA : 1;
-		uint8_t OMODA : 1;
-		uint8_t RMODA : 1;
-		uint8_t _NA2  : 1;
-		uint8_t IMODA : 1;
-		uint8_t SPMOD : 1;
-		uint8_t TOD50 : 1;
-	};
-	union {
-		uint8_t STRTB   : 1;
-		uint8_t PBONB   : 1;
-		uint8_t OMODB   : 1;
-		uint8_t RMODB   : 1;
-		uint8_t LOAD    : 1;
-		uint8_t IMODB   : 2;
-		uint8_t TODEDIT : 1;
-	};
+	uint8_t ICR;
+	// union {
+		// uint8_t TA   : 1;
+		// uint8_t TB   : 1;
+		// uint8_t ALRM : 1;
+		// uint8_t SP   : 1;
+		// uint8_t FLG  : 1;
+		// uint8_t _NA1 : 2;	
+		// uint8_t IR   : 1;
+	// };
+	uint8_t CRA;
+	// union {
+		// uint8_t STRTA : 1;
+		// uint8_t PBONA : 1;
+		// uint8_t OMODA : 1;
+		// uint8_t RMODA : 1;
+		// uint8_t LOADA : 1;	// is this actually supposed to be whether the timer repeats?
+		// uint8_t IMODA : 1;
+		// uint8_t SPMOD : 1;
+		// uint8_t TOD50 : 1;
+	// };
+	uint8_t CRB;
+	// union {
+		// uint8_t STRTB   : 1;
+		// uint8_t PBONB   : 1;
+		// uint8_t OMODB   : 1;
+		// uint8_t RMODB   : 1;
+		// uint8_t LOADB   : 1;
+		// uint8_t IMODB   : 2;
+		// uint8_t TODEDIT : 1;
+	// };
 	uint8_t TALATCH0;
 	uint8_t TALATCH1;
 	uint8_t TALATCH2;
@@ -428,69 +427,74 @@ struct _CIA1 {
 	uint8_t TALATCH5;
 	uint8_t TALATCH6;
 	uint8_t TALATCH7;
-	union {
-		uint8_t GS_TODJIF : 4;
-		uint8_t IMTB      : 1;
-		uint8_t IMALRM    : 1;
-		uint8_t IMSP      : 1;
-		uint8_t IMFLG     : 1;
-	};
+	uint8_t IRM;
+	// union {
+		// uint8_t GS_TODJIF : 4;
+		// uint8_t IMTB      : 1;
+		// uint8_t IMALRM    : 1;
+		// uint8_t IMSP      : 1;
+		// uint8_t IMFLG     : 1;
+	// };
 	uint8_t GS_TODSEC;
 	uint8_t GS_TODMIN;
-	union {
-		uint8_t GS_TODHOUR : 7;
-		uint8_t GS_TODAMPM : 1;
-	};
+	uint8_t GS_TODHOUR;
+	// union {
+		// uint8_t GS_TODHOUR : 7;
+		// uint8_t GS_TODAMPM : 1;
+	// };
 	uint8_t ALRMJIF;
 	uint8_t ALRMSEC;
 	uint8_t ALRMMIN;
-	union {
-		uint8_t ALRMHOUR : 7;
-		uint8_t ALRMAMPM : 1;
-	};
+	uint8_t ALRMHOUR;
+	// union {
+		// uint8_t ALRMHOUR : 7;
+		// uint8_t ALRMAMPM : 1;
+	// };
 };
 
 struct _CIA2 {
-	uint8_t PORTA;
-	uint8_t PORTB;
-	uint8_t DDRA;
-	uint8_t DDRB;
-	uint8_t TIMERALSB;
-	uint8_t TIMERAMSB;
-	uint8_t TIMERBLSB;
-	uint8_t TIMERBMSB;
-	uint8_t TODJIF;
-	uint8_t TODSEC;
-	uint8_t TODMIN;
-	union {
-		uint8_t TODHOUR : 5;
-		uint8_t _NA0    : 2;
-		uint8_t TODAMPM : 1;
-	};
+	uint8_t  PORTA;
+	uint8_t  PORTB;
+	uint8_t  DDRA;
+	uint8_t  DDRB;
+	uint16_t TIMERA;
+	uint16_t TIMERB;
+	uint8_t  TODJIF;
+	uint8_t  TODSEC;
+	uint8_t  TODMIN;
+	uint8_t  TODHOUR;
+	// union {
+		// uint8_t TODHOUR : 5;
+		// uint8_t _NA0    : 2;
+		// uint8_t TODAMPM : 1;
+	// };
 	uint8_t SDR;
-	union {
-		uint8_t NMISIG : 4;
-		uint8_t NMIIRQ : 4;
-	};
-	union {
-		uint8_t STRTA : 1;
-		uint8_t PBONA : 1;
-		uint8_t OMODA : 1;
-		uint8_t RMODA : 1;
-		uint8_t _NA2  : 1;
-		uint8_t IMODA : 1;
-		uint8_t SPMOD : 1;
-		uint8_t TOD50 : 1;
-	};
-	union {
-		uint8_t STRTB   : 1;
-		uint8_t PBONB   : 1;
-		uint8_t OMODB   : 1;
-		uint8_t RMODB   : 1;
-		uint8_t LOAD    : 1;
-		uint8_t IMODB   : 2;
-		uint8_t TODEDIT : 1;
-	};
+	uint8_t ICR;
+	// union {
+		// uint8_t NMISIG : 4;
+		// uint8_t NMIIRQ : 4;
+	// };
+	uint8_t CRA;
+	// union {
+		// uint8_t STRTA : 1;
+		// uint8_t PBONA : 1;
+		// uint8_t OMODA : 1;
+		// uint8_t RMODA : 1;
+		// uint8_t _NA2  : 1;
+		// uint8_t IMODA : 1;
+		// uint8_t SPMOD : 1;
+		// uint8_t TOD50 : 1;
+	// };
+	uint8_t CRB;
+	// union {
+		// uint8_t STRTB   : 1;
+		// uint8_t PBONB   : 1;
+		// uint8_t OMODB   : 1;
+		// uint8_t RMODB   : 1;
+		// uint8_t LOAD    : 1;
+		// uint8_t IMODB   : 2;
+		// uint8_t TODEDIT : 1;
+	// };
 	uint8_t TALATCH0;
 	uint8_t TALATCH1;
 	uint8_t TALATCH2;
@@ -499,38 +503,49 @@ struct _CIA2 {
 	uint8_t TALATCH5;
 	uint8_t TALATCH6;
 	uint8_t TALATCH7;
-	union {
-		uint8_t GS_TODJIF : 4;
-		uint8_t IMTB      : 1;
-		uint8_t IMALRM    : 1;
-		uint8_t IMSP      : 1;
-		uint8_t IMFLG     : 1;
-	};
+	uint8_t IRM;
+	// union {
+		// uint8_t GS_TODJIF : 4;
+		// uint8_t IMTB      : 1;
+		// uint8_t IMALRM    : 1;
+		// uint8_t IMSP      : 1;
+		// uint8_t IMFLG     : 1;
+	// };
 	uint8_t GS_TODSEC;
 	uint8_t GS_TODMIN;
-	union {
-		uint8_t GS_TODHOUR : 7;
-		uint8_t GS_TODAMPM : 1;
-	};
-	union {
-		uint8_t ALRMJIF   : 7;
-		uint8_t DD00DELAY : 1;
-	};
+	uint8_t GS_TODHOUR;
+	// union {
+		// uint8_t GS_TODHOUR : 7;
+		// uint8_t GS_TODAMPM : 1;
+	// };
+	uint8_t ALRMJIF;
+	// union {
+		// uint8_t ALRMJIF   : 7;
+		// uint8_t DD00DELAY : 1;
+	// };
 	uint8_t ALRMSEC;
 	uint8_t ALRMMIN;
-	union {
-		uint8_t ALRMHOUR : 7;
-		uint8_t ALRMAMPM : 1;
-	};
+	uint8_t ALRMHOUR;
+	// union {
+		// uint8_t ALRMHOUR : 7;
+		// uint8_t ALRMAMPM : 1;
+	// };
 };
 
-#define CPU   (* (volatile _CPU_t *)   0x00)
-#define VIC2  (* (volatile _VIC2_t *)  0xd000)
-#define VIC3  (* (volatile _VIC3_t *)  0xd000)
-#define VIC4  (* (volatile _VIC4_t *)  0xd000)
-#define FDC   (* (volatile _FDC_t *)   0xd080)
-#define DMA   (* (volatile _DMA_t *)   0xd700)
-#define CIA1  (* (volatile _CIA1_t *)  0xdc00)
-#define CIA2  (* (volatile _CIA2_t *)  0xdd00)
+struct _IRQ_VECTORS {
+	uint16_t NMI;
+	uint16_t COLDSTART;
+	uint16_t IRQ;
+};
+
+#define CPU         (* (volatile _CPU_t *)          0x00)
+#define VIC2        (* (volatile _VIC2_t *)         0xd000)
+#define VIC3        (* (volatile _VIC3_t *)         0xd000)
+#define VIC4        (* (volatile _VIC4_t *)         0xd000)
+#define FDC         (* (volatile _FDC_t *)          0xd080)
+#define DMA         (* (volatile _DMA_t *)          0xd700)
+#define CIA1        (* (volatile _CIA1_t *)         0xdc00)
+#define CIA2        (* (volatile _CIA2_t *)         0xdd00)
+#define IRQ_VECTORS (* (volatile _IRQ_VECTORS_t *)  0xfffa)
 
 #endif

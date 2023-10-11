@@ -152,35 +152,35 @@ fl_waiting_done:
 
 ; ----------------------------------------------------------------------------------------------------
 
-	.section `0x0xinterruptVector_0xfffe`,text
-	.public fastload_irq_handler
-	.word   fastload_irq_handler
-	.section code,text
-fastload_irq_handler:
-	;php
-	pha
-	;txa
-	;phx
-	;tya
-	;phy
-
-	inc 0xd020
-	inc 0xd021
-
-	lda 0xd012
-	adc #0x20
-	sta 0xd012
-
-	; nop
-
-	;pla
-	;tay
-	;pla
-	;tax
-	pla
-	;plp
-	asl 0xd019
-	rti
+;	.section `0x0xinterruptVector_0xfffe`,text
+;	.public fastload_irq_handler
+;	.word   fastload_irq_handler
+;	.section code,text
+;fastload_irq_handler:
+;	;php
+;	pha
+;	;txa
+;	;phx
+;	;tya
+;	;phy
+;
+;	inc 0xd020
+;	inc 0xd021
+;
+;	lda 0xd012
+;	adc #0x20
+;	sta 0xd012
+;
+;	; nop
+;
+;	;pla
+;	;tay
+;	;pla
+;	;tax
+;	pla
+;	;plp
+;	asl 0xd019
+;	rti
 
 ; ------------------------------------------------------------------------------------------------------------------------------
 ; Actual fast-loader code
@@ -238,6 +238,7 @@ fl_prev_side:
 	.byte 0
 
 	.align 256
+	.public fastload_sector_buffer
 fastload_sector_buffer:
 	.space 512 , 0
 ;.repeat 512
@@ -425,6 +426,7 @@ fl_filename_differs:
 	inx
 	iny
 	jmp fl_filename_differs
+	.public fl_end_of_name
 fl_end_of_name:
 	txa												; Advance to next directory entry
 	clc
@@ -433,7 +435,7 @@ fl_end_of_name:
 	bcc fl_filenamecheckloop
 	inc fl_buffaddr+2
 	lda fl_buffaddr+2
-	cmp #.byte1 (fastload_sector_buffer+1)
+	cmp #.byte1 (fastload_sector_buffer+0x100)
 	bne fl_checked_both_halves
 	jmp fl_check_logical_sector
 
@@ -691,11 +693,11 @@ fl_iffl_partialcopy:										; no, copy until remaining size
 	lda fl_file_next_sector							; Work out which half we care about
 	and #0x01
 	bne fl_iffl_partial_read_from_second_half		; odd next sector number, so second half
-	lda #(.byte1 fastload_sector_buffer)+0
+	lda #.byte1 fastload_sector_buffer
 	sta fl_read_page+1
 	bra fl_iffl_dopartialcopy
 fl_iffl_partial_read_from_second_half:
-	lda #.byte1 (fastload_sector_buffer+1)
+	lda #.byte1 (fastload_sector_buffer+0x100)
 	sta fl_read_page+1
 
 fl_iffl_dopartialcopy:
@@ -723,7 +725,7 @@ fl_iffl_fullcopy:
 	and #0x01
 	bne fl_iffl_read_from_second_half				; odd next sector number, so second half
 
-	lda #(.byte1 fastload_sector_buffer)+0				; fl_read_from_first_half
+	lda #.byte1 fastload_sector_buffer				; fl_read_from_first_half
 	sta fl_read_page+1
 	lda fastload_sector_buffer+1
 	sta fl_file_next_sector
@@ -732,7 +734,7 @@ fl_iffl_fullcopy:
 	jmp fl_iffl_dma_read_bytes
 
 fl_iffl_read_from_second_half:
-	lda #.byte1 (fastload_sector_buffer+1)
+	lda #.byte1 (fastload_sector_buffer+0x100)
 	sta fl_read_page+1
 	lda fastload_sector_buffer+0x101
 	sta fl_file_next_sector
@@ -840,7 +842,7 @@ fl_read_file_block:
 	and #0x01
 	bne fl_read_from_second_half					; odd next sector number, so second half
 
-	lda #(.byte1 fastload_sector_buffer)+0				; fl_read_from_first_half
+	lda #.byte1 fastload_sector_buffer				; fl_read_from_first_half
 	sta fl_read_page+1
 	lda fastload_sector_buffer+1
 	sta fl_file_next_sector
@@ -857,7 +859,7 @@ fl_read_file_block:
 	jmp fl_dma_read_bytes
 
 fl_read_from_second_half:
-	lda #.byte1 (fastload_sector_buffer+1)
+	lda #.byte1 (fastload_sector_buffer+0x100)
 	sta fl_read_page+1
 	lda fastload_sector_buffer+0x101
 	sta fl_file_next_sector

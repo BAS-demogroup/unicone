@@ -1,11 +1,17 @@
 #include "setup.h"
 
 
-#include "chips.h"
-//#include "mega65_io.h"
-#include "macros.h"
-#include "constants.h"
 #include <calypsi/intrinsics6502.h>
+
+
+#include "chips.h"
+#include "constants.h"
+#include "interrupt.h"
+#include "macros.h"
+
+
+#include "iffl/iffl.h"
+#include "iffl/irqload.h"
 
 
 void setup() {
@@ -18,18 +24,11 @@ void setup() {
 	CPU.PORT    = 0b00000101;
 	
 	// disable CIA interrupts
-	CIA1.TA   = 1;
-	CIA1.TB   = 1;
-	CIA1.ALRM = 1;
-	CIA1.SP   = 1;
-	CIA1.FLG  = 1;
-	CIA1.IR   = 0;
+	CIA1.ICR = 0b01111111;
+	CIA2.ICR = 0b01111111;
 
-	CIA2.NMISIG = 15;
-	CIA2.NMIIRQ = 15;
-
-	CIA1.IR;
-	CIA2.NMISIG;
+	CIA1.ICR;
+	CIA2.ICR;
 	
 	// map I/O (Mega65 memory mapping)
 	VIC3.ROM8  = 0;
@@ -82,9 +81,8 @@ void setup() {
 	VIC2.MCM = 1;
 	
 	// configure screen row length
-	VIC4.LINESTEPLSB = LINE_LENGTH << 1;
+	VIC4.LINESTEP = LINE_LENGTH << 1;
 	VIC4.CHRCOUNTLSB = LINE_LENGTH;
-	VIC4.LINESTEPMSB = LINE_LENGTH >> 7;
 	VIC4.CHRCOUNTMSB = LINE_LENGTH >> 8;
 	VIC4.DISPROWS    = LINE_COUNT;
 	
@@ -103,10 +101,33 @@ void setup() {
 	// disable double-height rrb
 	VIC4.DBLRR = 0;
 	
+	// bank the music in
+	__asm(" lda #0xc0\n"
+		  " tax\n"
+		  " tay\n"
+		  " ldz #0x30\n"
+		  " map\n"
+		  " nop");
+	
 	// initalize the music
 	musicInit();
+	
+	// restore the original bank configuration
+	__asm(" lda #0x00\n"
+		  " tax\n"
+		  " tay\n"
+		  " taz\n"
+		  " map\n"
+		  " nop");
+	
+	__enable_interrupts();
 }
 
 // load all the data from the IFFL
 void load() {
+	fl_init();
+	fl_waiting();
+	floppy_iffl_fast_load_init("+UNICONE");
+	floppy_iffl_fast_load();
+	fl_exit();
 }

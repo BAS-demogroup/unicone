@@ -396,3 +396,18 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/iffl/old
+/dump.bin
+/assets/sentimental_thing.prg.bak
+/assets/+unicone
+/assets/sentimental_thing.prg.addr
+/assets/sentimental_thing.prg.addr.mc
+*.o
+*.lst
+*.prg
+/reference/xanadu_build.cmd
+/build/setup.s
+/build/decruncher.s
+/build/dma.s
+/build/interrupt.s
+/build/main.s

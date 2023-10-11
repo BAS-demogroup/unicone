@@ -5,5 +5,5 @@
 
 typedef void (*PROC_PTR)(void);
 
-#define musicInit ((PROC_PTR)0x3000)
-#define musicPlay ((PROC_PTR)0x3003)
+#define musicInit ((PROC_PTR)0x4000)
+#define musicPlay ((PROC_PTR)0x4003)
