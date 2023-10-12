@@ -1,5 +1,5 @@
-#ifndef _DMA_H
-#define _DMA_H
+#ifndef __DMA_H
+#define __DMA_H
 
 typedef struct _dma_copy_job dma_copy_job_t;
 typedef struct _dma_copy_job_huge_source dma_copy_job_huge_source_t;

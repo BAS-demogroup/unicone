@@ -6,7 +6,6 @@
 
 #include "chips.h"
 #include "constants.h"
-#include "interrupt.h"
 #include "macros.h"
 
 
@@ -119,8 +118,6 @@ void setup() {
 		  " taz\n"
 		  " map\n"
 		  " nop");
-	
-	__enable_interrupts();
 }
 
 // load all the data from the IFFL
@@ -128,6 +125,7 @@ void load() {
 	fl_init();
 	fl_waiting();
 	floppy_iffl_fast_load_init("+UNICONE");
+	floppy_iffl_fast_load();
 	floppy_iffl_fast_load();
 	fl_exit();
 }

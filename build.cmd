@@ -2,6 +2,12 @@
 
 cls
 
+cd assets
+
+..\..\tilemizer_nopack.py -b4 -m=16d80 -o=pixies -t="pixies.png"
+
+cd ..
+
 cc6502 -O 2 --list-file build/main.lst --assembly-source build/main.s --core 45gs02 --target MEGA65 src/main.c
 cc6502 -o build/main.o -O 2 --list-file build/main.lst --core 45gs02 --target MEGA65 src/main.c
 cc6502 -O 2 --list-file build/setup.lst --assembly-source build/setup.s --core 45gs02 --target MEGA65 src/setup.c
@@ -18,8 +24,12 @@ ln6502 -o build/unicone.prg --list-file build/unicone.lst --verbose --output-for
 pause
 
 C:\Users\death\Documents\C65\megatool\megatool -a assets/sentimental_thing.prg 00010000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.chrs 00016d80
+
 C:\Users\death\Documents\C65\megatool\megatool -c assets/sentimental_thing.prg.addr
-C:\Users\death\Documents\C65\megatool\megatool -i assets/sentimental_thing.prg.addr.mc assets/+unicone
+C:\Users\death\Documents\C65\megatool\megatool -c assets/pixies.chrs.addr
+
+C:\Users\death\Documents\C65\megatool\megatool -i assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc assets/+unicone
 
 C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicone.d81 -delete "unicone" -delete "+unicone" -write "build/unicone.prg" "unicone" -write "assets/+unicone" "+unicone" -list
 
