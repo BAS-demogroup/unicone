@@ -428,3 +428,4 @@ FodyWeavers.xsd
 /build/maps.s
 *.ods#
 /build/pixies.s
+/build/input.s

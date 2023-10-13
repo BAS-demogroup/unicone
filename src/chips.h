@@ -8,6 +8,8 @@ typedef struct _VIC2        _VIC2_t;
 typedef struct _VIC3        _VIC3_t;
 typedef struct _VIC4        _VIC4_t;
 typedef struct _FDC         _FDC_t;
+typedef struct _SID         _SID_t;
+typedef struct _KEYSCAN     _KEYSCAN_t;
 typedef struct _DMA         _DMA_t;
 typedef struct _CIA1        _CIA1_t;
 typedef struct _CIA2        _CIA2_t;
@@ -358,6 +360,36 @@ struct _FDC {
 	uint8_t PCODE;
 };
 
+struct _SID {
+	uint16_t FREQUENCY_1;
+	uint16_t PULSE_WIDTH_1;
+	uint8_t  CONTROL_1;		// Choosing to not expand all the bits, as you 
+							// can't use TRB/TSB with SID chips.
+	uint8_t  ATTACKDECAY_1;
+	uint8_t  SUSTAINRELEASE_1;
+	uint16_t FREQUENCY_2;
+	uint16_t PULSE_WIDTH_2;
+	uint8_t  CONTROL_2;		// Choosing to not expand all the bits, as you 
+							// can't use TRB/TSB with SID chips.
+	uint8_t  ATTACKDECAY_2;
+	uint8_t  SUSTAINRELEASE_2;
+	uint16_t FREQUENCY_3;
+	uint16_t PULSE_WIDTH_3;
+	uint8_t  CONTROL_3;		// Choosing to not expand all the bits, as you 
+							// can't use TRB/TSB with SID chips.
+	uint8_t  ATTACKDECAY_3;
+	uint8_t  SUSTAINRELEASE_3;
+	uint8_t  CUTOFF_LSB;
+	uint8_t  CUTOFF_MSB;
+	uint8_t  RESONANCE_ROUTING;
+	uint8_t  VOLUME_FTYPE;
+};
+
+struct _KEYSCAN {
+	uint8_t CRTACSCNT;
+	uint8_t MATRIXPEEK;
+};
+
 struct _DMA {
 	uint8_t ADDRLSBTRIG;
 	uint8_t ADDRMSB;
@@ -543,6 +575,11 @@ struct _IRQ_VECTORS {
 #define VIC3        (* (volatile _VIC3_t *)         0xd000)
 #define VIC4        (* (volatile _VIC4_t *)         0xd000)
 #define FDC         (* (volatile _FDC_t *)          0xd080)
+#define SID1        (* (volatile _SID_t *)          0xd400)
+#define SID2        (* (volatile _SID_t *)          0xd420)
+#define SID3        (* (volatile _SID_t *)          0xd440)
+#define SID4        (* (volatile _SID_t *)          0xd460)
+#define KEYSCAN     (* (volatile _KEYSCAN_t *)      0xd613)
 #define DMA         (* (volatile _DMA_t *)          0xd700)
 #define CIA1        (* (volatile _CIA1_t *)         0xdc00)
 #define CIA2        (* (volatile _CIA2_t *)         0xdd00)

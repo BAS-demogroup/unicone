@@ -4,6 +4,7 @@
 #include "chips.h"
 #include "dma.h"
 #include "dma_jobs.h"
+#include "input.h"
 #include "macros.h"
 #include "maps.h"
 #include "pixies.h"
@@ -32,6 +33,8 @@ void game_loop() {
 
 		VIC2.BORDERCOL = 5;
 		VIC2.SCREENCOL = 5;
+		
+		process_input();
 		
 		// draw the screen in vertical order, so unicorn first, then falling 
 		// ice cream, then ice cream stack, then cone
