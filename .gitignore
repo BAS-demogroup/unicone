@@ -427,3 +427,4 @@ FodyWeavers.xsd
 /build/tilemap.bin
 /build/maps.s
 *.ods#
+/build/pixies.s

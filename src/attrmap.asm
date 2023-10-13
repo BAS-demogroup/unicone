@@ -7,7 +7,7 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// unicorn pixie
+!word	$0090,$1f08,$1f08	// unicorn pixie
 !word	$0090,$0f08			// tail
 !word	$0090,$0f08			// mane
 
@@ -22,7 +22,7 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// unicorn pixie
+!word	$0090,$1f08,$1f08	// unicorn pixie
 !word	$0090,$0f08			// tail
 !word	$0090,$0f08			// mane
 
@@ -37,7 +37,7 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// unicorn pixie
+!word	$0090,$1f08,$1f08	// unicorn pixie
 !word	$0090,$0f08			// tail
 !word	$0090,$0f08			// mane
 
@@ -52,7 +52,7 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// unicorn pixie
+!word	$0090,$1f08,$1f08	// unicorn pixie
 !word	$0090,$0f08			// tail
 
 !word	$0090,$0f08,$0090,$0f08,$0090
@@ -66,7 +66,7 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// unicorn pixie
+!word	$0090,$1f08,$1f08	// unicorn pixie
 
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08,$0090
 !word	$0f08,$0090,$0f08,$0090,$0f08,$0090,$0f08,$0090,$0f08,$0090
@@ -794,8 +794,8 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// cone shadow
-!word	$0090,$0f08,$0f08	// cone
+!word	$0090,$2f08,$2f08	// cone shadow
+!word	$0090,$2f08,$2f08	// cone
 !word	$0090,$0f08,$0f08	// lower ice cream shadow
 !word	$0090,$0f08,$0f08	// upper ice cream shadow
 !word	$0090,$0f08			// small ice cream shadow a
@@ -817,8 +817,8 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// cone shadow
-!word	$0090,$0f08,$0f08	// cone
+!word	$0090,$2f08,$2f08	// cone shadow
+!word	$0090,$2f08,$2f08	// cone
 !word	$0090,$0f08,$0f08	// lower ice cream shadow
 !word	$0090,$0f08,$0f08	// upper ice cream shadow
 !word	$0090,$0f08			// small ice cream shadow a
@@ -840,8 +840,8 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// cone shadow
-!word	$0090,$0f08,$0f08	// cone
+!word	$0090,$2f08,$2f08	// cone shadow
+!word	$0090,$2f08,$2f08	// cone
 !word	$0090,$0f08,$0f08	// lower ice cream shadow
 !word	$0090,$0f08,$0f08	// upper ice cream shadow
 !word	$0090,$0f08			// small ice cream shadow a
@@ -863,8 +863,8 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// cone shadow
-!word	$0090,$0f08,$0f08	// cone
+!word	$0090,$2f08,$2f08	// cone shadow
+!word	$0090,$2f08,$2f08	// cone
 !word	$0090,$0f08,$0f08	// lower ice cream shadow
 !word	$0090,$0f08,$0f08	// upper ice cream shadow
 !word	$0090,$0f08			// small ice cream shadow a
@@ -886,8 +886,8 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// cone shadow
-!word	$0090,$0f08,$0f08	// cone
+!word	$0090,$2f08,$2f08	// cone shadow
+!word	$0090,$2f08,$2f08	// cone
 !word	$0090,$0f08,$0f08	// lower ice cream shadow
 !word	$0090,$0f08,$0f08	// upper ice cream shadow
 !word	$0090,$0f08			// small ice cream shadow a
@@ -909,8 +909,8 @@
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 !word	$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08,$0f08
 
-!word	$0090,$0f08,$0f08	// cone shadow
-!word	$0090,$0f08,$0f08	// cone
+!word	$0090,$2f08,$2f08	// cone shadow
+!word	$0090,$2f08,$2f08	// cone
 !word	$0090,$0f08,$0f08	// lower ice cream shadow
 !word	$0090,$0f08,$0f08	// upper ice cream shadow
 !word	$0090,$0f08			// small ice cream shadow a

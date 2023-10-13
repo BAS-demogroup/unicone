@@ -5,8 +5,7 @@
 #include "rrb.h"
 
 
-#define TILE_MAP 0x8000
-#define ATTR_MAP 0xa000
+#define TILE_MAP 0xa000
 
 
 // unicorn tiles

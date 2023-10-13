@@ -9,10 +9,9 @@ typedef struct _RRB_ATTR_NORMAL RRB_ATTR_NORMAL_t;
 typedef struct _RRB_ATTR_GOTOX  RRB_ATTR_GOTOX_t;
 
 struct _RRB_TILE_NORMAL {
-	uint8_t TILE_IDX_LSB;
 	union {
-		uint8_t TILE_IDX_MSB : 5;
-		uint8_t HTRIM_LSB    : 3;
+		uint16_t TILE      : 13;
+		uint16_t HTRIM_LSB : 3;
 	};
 };
 
@@ -33,11 +32,10 @@ struct _RRB_ATTR_NORMAL {
 };
 
 struct _RRB_TILE_GOTOX {
-	uint8_t XPOS_LSB;
 	union {
-		uint8_t XPOS_MSB : 2;
-		uint8_t RESERVED : 2;	// set to 0
-		uint8_t YOFF     : 4;
+		uint16_t XPOS     : 10;
+		uint16_t RESERVED : 2;	// set to 0
+		uint16_t YOFF     : 4;
 	};
 };
 

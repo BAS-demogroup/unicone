@@ -55,23 +55,23 @@ void setup() {
 	VIC3.KEY = 0x47;
 	VIC3.KEY = 0x53;
 	
-	VIC2.BORDERCOL = 0;
-	VIC2.SCREENCOL = 0;
+	VIC2.BORDERCOL = 15;
+	VIC2.SCREENCOL = 15;
 	
 	load();
 	
 	// clear the screens
 	run_dma_job((__far char *)&clear_tilemap);
-	run_dma_job((__far char *)&clear_attrmap);
-	run_dma_job((__far char *)&pageflip_attrmap);
+	//run_dma_job((__far char *)&clear_attrmap);
+	run_dma_job((__far char *)&load_attrmap);
 	
 	// conigure PAL or NTSC
 	if(VIC4.PALNTSC) {
 		VIC4.PALNTSC = 1;
-		matrix_raster = 0x180;
+		matrix_raster = 0x196;
 	} else {
 		VIC4.PALNTSC = 0;
-		matrix_raster = 0x1b0;
+		matrix_raster = 0x1c7;
 	}
 	
 	// disable raster interrupts
