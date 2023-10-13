@@ -411,3 +411,5 @@ FodyWeavers.xsd
 /build/dma.s
 /build/interrupt.s
 /build/main.s
+/assets/pixies.chrs.addr.mc
+/assets/pixies.chrs.addr

@@ -6,7 +6,11 @@
 
 #include "chips.h"
 #include "constants.h"
+#include "dma.h"
+#include "dma_jobs.h"
+#include "gameloop.h"
 #include "macros.h"
+#include "maps.h"
 
 
 #include "iffl/iffl.h"
@@ -56,16 +60,59 @@ void setup() {
 	
 	load();
 	
+	// setup screen clearing DMA jobs
+	clear_tilemap.type					= 0x0b;
+	clear_tilemap.end_options			= 0x00;
+	clear_tilemap.command				= 0x00;
+	clear_tilemap.count					= 0x1db0;
+	clear_tilemap.source				= TILE_MAP_BAK & 0xffff;
+	clear_tilemap.source_bank			= (TILE_MAP_BAK & 0xf0000) >> 16;
+	clear_tilemap.source_hold			= 0x0;
+	clear_tilemap.source_modulo			= 0x0;
+	clear_tilemap.source_io				= 0x0;
+	clear_tilemap.destination			= TILE_MAP_STORE & 0xffff;
+	clear_tilemap.destination_bank		= (TILE_MAP_STORE & 0xf0000) >> 16;
+	clear_tilemap.destination_hold		= 0x0;
+	clear_tilemap.destination_modulo	= 0x0;
+	clear_tilemap.destination_io		= 0x0;
+	clear_tilemap.modulo				= 0x0;
+	
+	clear_attrmap.type					= 0x0b;
+	clear_attrmap.end_options			= 0x00;
+	clear_attrmap.command				= 0x00;
+	clear_attrmap.count					= 0x1db0;
+	clear_attrmap.source				= ATTR_MAP_BAK & 0xffff;
+	clear_attrmap.source_bank			= (ATTR_MAP_BAK & 0xf0000) >> 16;
+	clear_attrmap.source_hold			= 0x0;
+	clear_attrmap.source_modulo			= 0x0;
+	clear_attrmap.source_io				= 0x0;
+	clear_attrmap.destination			= ATTR_MAP_STORE & 0xffff;
+	clear_attrmap.destination_bank		= (ATTR_MAP_STORE & 0xf0000) >> 16;
+	clear_attrmap.destination_hold		= 0x0;
+	clear_attrmap.destination_modulo	= 0x0;
+	clear_attrmap.destination_io		= 0x0;
+	clear_attrmap.modulo				= 0x0;
+	
+	// clear the screens
+	run_dma_job((__far char *)&clear_tilemap);
+	run_dma_job((__far char *)&clear_attrmap);
+	
 	// conigure PAL or NTSC
 	if(VIC4.PALNTSC) {
 		VIC4.PALNTSC = 1;
+		matrix_raster = 0x180;
 	} else {
 		VIC4.PALNTSC = 0;
+		matrix_raster = 0x1b0;
 	}
 	
 	// disable raster interrupts
 	VIC4.FNRST    = 0;
 	VIC4.FNRSTCMP = 0;
+	
+	// configure attribute RAM to not use the first 8K so the tile map can 
+	// live there
+	VIC4.COLPTR = 0x2000;
 
 	// enable 640 horizontal width
 	VIC3.H640 = 1;
@@ -85,10 +132,29 @@ void setup() {
 	VIC4.CHRCOUNTMSB = LINE_LENGTH >> 8;
 	VIC4.DISPROWS    = LINE_COUNT;
 	
-	// load attributes map
 	// set tile map location
-	// backup the maps for resetting
+	VIC4.SCRNPTR = TILE_MAP_STORE & 0xffff;
+	VIC4.SCRNPTRBNK = (TILE_MAP_STORE & 0xf0000) >> 16;
+	VIC4.SCRNPTRMB = 0x0;
+	
 	// load the color palette
+	load_palette.type				= 0x0b;
+	load_palette.end_options		= 0x00;
+	load_palette.command			= 0x00;
+	load_palette.count				= 0x0300;
+	load_palette.source				= PALETTE_STORE & 0xffff;
+	load_palette.source_bank		= (PALETTE_STORE & 0xf0000) >> 16;
+	load_palette.source_hold		= 0x0;
+	load_palette.source_modulo		= 0x0;
+	load_palette.source_io			= 0x0;
+	load_palette.destination		= 0xd100;
+	load_palette.destination_bank	= 0x0;
+	load_palette.destination_hold	= 0x0;
+	load_palette.destination_modulo	= 0x0;
+	load_palette.destination_io		= 0x1;
+	load_palette.modulo				= 0x0;
+	
+	run_dma_job((__far char *)&load_palette);
 	
 	// enable rrb double buffering
 	VIC4.NORRDEL = 0;
@@ -125,7 +191,8 @@ void load() {
 	fl_init();
 	fl_waiting();
 	floppy_iffl_fast_load_init("+UNICONE");
-	floppy_iffl_fast_load();
-	floppy_iffl_fast_load();
+	for (char i = 0; i < 5; i++) {
+		floppy_iffl_fast_load();
+	}
 	fl_exit();
 }
