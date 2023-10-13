@@ -8,6 +8,7 @@
 #include "macros.h"
 #include "maps.h"
 #include "pixies.h"
+#include "player.h"
 
 
 unsigned short matrix_raster;
@@ -18,7 +19,7 @@ void game_loop() {
 			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
 		
 		VIC2.BORDERCOL = 0;
-		VIC2.SCREENCOL = 0;
+		// VIC2.SCREENCOL = 0;
 		
 		// clear the screen
 		run_dma_job((__far char *)&clear_tilemap);
@@ -32,9 +33,10 @@ void game_loop() {
 			  " nop");
 
 		VIC2.BORDERCOL = 5;
-		VIC2.SCREENCOL = 5;
+		// VIC2.SCREENCOL = 5;
 		
 		process_input();
+		update_player();
 		
 		// draw the screen in vertical order, so unicorn first, then falling 
 		// ice cream, then ice cream stack, then cone
@@ -42,7 +44,7 @@ void game_loop() {
 		draw_cone();
 		
 		VIC2.BORDERCOL = 11;
-		VIC2.SCREENCOL = 11;
+		// VIC2.SCREENCOL = 11;
 		
 		// bank the music from $10000 into $4000-$bfff
 		__asm(" lda #0xc0\n"
@@ -65,14 +67,14 @@ void game_loop() {
 		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
 		
 		VIC2.BORDERCOL = 15;
-		VIC2.SCREENCOL = 15;
+		// VIC2.SCREENCOL = 15;
 	};
 }
 
 void draw_cone() {
 	for (char y = 0; y < 6; y++) {
-		cone_shadow_position[y]->XPOS = 304;
-		cone_position[y]->XPOS = 304;
+		cone_shadow_position[y]->XPOS = player_position;
+		cone_position[y]->XPOS = player_position;
 		
 		for (char x = 0; x < 2; x++) {
 			cone_shadow_tiles[x][y]->TILE = large_cone_pixie_tiles[1][x][y];

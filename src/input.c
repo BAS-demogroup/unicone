@@ -48,24 +48,24 @@ void process_input() {
 	
 	// is A pressed?
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x02)) == 0) {
-		player_input |= 0x00000100;
+		player_input |= 0b00000100;
 	}
 	
 	// is left shift pressed?
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x07)) == 0) {
-		player_input |= 0x00010000;
+		player_input |= 0b00010000;
 	}
 
 	// is D pressed?
 	KEYSCAN.MATRIXPEEK = 0x02;
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x02)) == 0) {
-		player_input |= 0x00001000;
+		player_input |= 0b00001000;
 	}
 	
 	// is right shift pressed?
 	KEYSCAN.MATRIXPEEK = 0x06;
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x04)) == 0) {
-		player_input |= 0x00010000;
+		player_input |= 0b00010000;
 	}
 }
 

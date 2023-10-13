@@ -429,3 +429,4 @@ FodyWeavers.xsd
 *.ods#
 /build/pixies.s
 /build/input.s
+/build/player.s
