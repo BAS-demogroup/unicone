@@ -426,3 +426,4 @@ FodyWeavers.xsd
 /build/gameloop.s
 /build/tilemap.bin
 /build/maps.s
+*.ods#

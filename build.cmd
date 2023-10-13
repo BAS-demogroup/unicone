@@ -25,9 +25,11 @@ as6502 -o build/irqload.o --list-file build/irqload.lst --core 45gs02 --target M
 as6502 -o build/decruncher.o --list-file build/decruncher.lst --core 45gs02 --target MEGA65 src/iffl/decruncher.s
 as6502 -o build/iffl.o --list-file build/iffl.lst --core 45gs02 --target MEGA65 src/iffl/iffl.s
 
-ln6502 -o build/unicone.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o ./mega65-unicone.scm
+ln6502 -o build/unicone_full.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o ./mega65-unicone.scm
 
 pause
+
+C:\Users\death\Documents\C65\exomizer-3.1.1\win32\exomizer sfx basic -t 65 -o build/unicone.prg build/unicone_full.prg
 
 C:\Users\death\Documents\C65\acme\acme src\tilemap.asm
 C:\Users\death\Documents\C65\acme\acme src\attrmap.asm
