@@ -31,7 +31,10 @@ void game_loop() {
 			  " ldz #0x37\n"
 			  " map\n"
 			  " nop");
-			  
+		
+		// copy changed attribute map data out to $ff8 0000
+		run_dma_job((__far char *)&pageflip_attrmap);
+		
 		// bank the music from $10000 into $4000-$bfff
 		// this also resets the MB mapping from above.
 		__asm(" lda #0x00\n"

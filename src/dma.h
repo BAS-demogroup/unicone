@@ -11,21 +11,9 @@ struct _dma_copy_job {
 	char command;
 	unsigned short count;
 	unsigned short source;
-	union {
-		char source_bank      : 4;
-		char source_hold      : 1;
-		char source_modulo    : 1;
-		char source_direction : 1;
-		char source_io        : 1;
-	};
+	char source_bank;
 	unsigned short destination;
-	union {
-		char destination_bank      : 4;
-		char destination_hold      : 1;
-		char destination_modulo    : 1;
-		char destination_direction : 1;
-		char destination_io        : 1;
-	};
+	char destination_bank;
 	unsigned short modulo;
 };
 
@@ -37,21 +25,9 @@ struct _dma_copy_job_huge_source {
 	char command;
 	unsigned short count;
 	unsigned short source;
-	union {
-		char source_bank      : 4;
-		char source_hold      : 1;
-		char source_modulo    : 1;
-		char source_direction : 1;
-		char source_io        : 1;
-	};
+	char source_bank;
 	unsigned short destination;
-	union {
-		char destination_bank      : 4;
-		char destination_hold      : 1;
-		char destination_modulo    : 1;
-		char destination_direction : 1;
-		char destination_io        : 1;
-	};
+	char destination_bank;
 	unsigned short modulo;
 };
 
@@ -63,21 +39,9 @@ struct _dma_copy_job_huge_destination {
 	char command;
 	unsigned short count;
 	unsigned short source;
-	union {
-		char source_bank      : 4;
-		char source_hold      : 1;
-		char source_modulo    : 1;
-		char source_direction : 1;
-		char source_io        : 1;
-	};
+	char source_bank;
 	unsigned short destination;
-	union {
-		char destination_bank      : 4;
-		char destination_hold      : 1;
-		char destination_modulo    : 1;
-		char destination_direction : 1;
-		char destination_io        : 1;
-	};
+	char destination_bank;
 	unsigned short modulo;
 };
 
