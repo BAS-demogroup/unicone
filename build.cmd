@@ -18,12 +18,14 @@ cc6502 -O 2 --list-file build/dma_jobs.lst --assembly-source build/dma_jobs.s --
 cc6502 -o build/dma_jobs.o -O 2 --list-file build/dma_jobs.lst --core 45gs02 --target MEGA65 src/dma_jobs.c
 cc6502 -O 2 --list-file build/gameloop.lst --assembly-source build/gameloop.s --core 45gs02 --target MEGA65 src/gameloop.c
 cc6502 -o build/gameloop.o -O 2 --list-file build/gameloop.lst --core 45gs02 --target MEGA65 src/gameloop.c
+cc6502 -O 2 --list-file build/maps.lst --assembly-source build/maps.s --core 45gs02 --target MEGA65 src/maps.c
+cc6502 -o build/maps.o -O 2 --list-file build/maps.lst --core 45gs02 --target MEGA65 src/maps.c
 
 as6502 -o build/irqload.o --list-file build/irqload.lst --core 45gs02 --target MEGA65 src/iffl/irqload.s
 as6502 -o build/decruncher.o --list-file build/decruncher.lst --core 45gs02 --target MEGA65 src/iffl/decruncher.s
 as6502 -o build/iffl.o --list-file build/iffl.lst --core 45gs02 --target MEGA65 src/iffl/iffl.s
 
-ln6502 -o build/unicone.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o ./mega65-unicone.scm
+ln6502 -o build/unicone.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o ./mega65-unicone.scm
 
 pause
 

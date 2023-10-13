@@ -18,31 +18,22 @@ void game_loop() {
 		run_dma_job((__far char *)&clear_tilemap);
 		run_dma_job((__far char *)&clear_attrmap);
 		
-		// bank the tile and attribute maps from $ff80000 into $8000-$bfff
+		// bank the tile and attribute maps from $20000-$23fff into $8000-$bfff
 		// since the source if $ff80000, this means it's an extended MAP
-		__asm(" lda #0xff\n"
-			  " ldx #0x0f\n"
-			  " ldy #0x00\n"
-			  " ldz #0x00\n"
-			  " map\n"
-			  " lda #0x00\n"
+		__asm(" lda #0x00\n"
 			  " tax\n"
 			  " ldy #0x80\n"
-			  " ldz #0x37\n"
+			  " ldz #0x31\n"
 			  " map\n"
 			  " nop");
 		
 		// copy changed attribute map data out to $ff8 0000
-		run_dma_job((__far char *)&pageflip_attrmap);
+		// at this time, I'm pretty sure the attribute map is completely 
+		// static.
+		//run_dma_job((__far char *)&pageflip_attrmap);
 		
 		// bank the music from $10000 into $4000-$bfff
-		// this also resets the MB mapping from above.
-		__asm(" lda #0x00\n"
-			  " ldx #0x0f\n"
-			  " tay\n"
-			  " taz\n"
-			  " map\n"
-			  " lda #0xc0\n"
+		__asm(" lda #0xc0\n"
 			  " tax\n"
 			  " tay\n"
 			  " ldz #0x30\n"
