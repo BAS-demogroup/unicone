@@ -413,3 +413,15 @@ FodyWeavers.xsd
 /build/main.s
 /assets/pixies.chrs.addr.mc
 /assets/pixies.chrs.addr
+/assets/pixies.clut.addr
+/assets/pixies.clut.addr.mc
+/assets/working/background_limited.png
+/assets/working/background.png
+/build/tilemap.bin.addr
+/build/tilemap.bin.addr.mc
+/build/attrmap.bin
+/build/attrmap.bin.addr
+/build/attrmap.bin.addr.mc
+/build/dma_jobs.s
+/build/gameloop.s
+/build/tilemap.bin
