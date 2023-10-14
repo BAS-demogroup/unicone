@@ -20,7 +20,6 @@ void game_loop() {
 			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
 		
 		VIC2.BORDERCOL = 0;
-		// VIC2.SCREENCOL = 0;
 		
 		// clear the screen
 		run_dma_job((__far char *)&clear_tilemap);
@@ -34,21 +33,24 @@ void game_loop() {
 			  " nop");
 
 		VIC2.BORDERCOL = 5;
-		// VIC2.SCREENCOL = 5;
 		
 		update_unicorn();
-		
+
 		process_input();
 		update_player();
 		
 		// draw the screen in vertical order, so unicorn first, then falling 
 		// ice cream, then ice cream stack, then cone
 		
+		VIC2.BORDERCOL = 11;
+		
 		draw_unicorn();
+		
+		VIC2.BORDERCOL = 14;
+		
 		draw_cone();
 		
-		VIC2.BORDERCOL = 11;
-		// VIC2.SCREENCOL = 11;
+		VIC2.BORDERCOL = 4;
 		
 		// bank the music from $10000 into $4000-$bfff
 		__asm(" lda #0xc0\n"
@@ -81,8 +83,8 @@ void draw_unicorn() {
 		unicorn_position[y]->YOFF = unicorn_y;
 		
 		char _frame = unicorn_frame_lookup[unicorn_frame_index];
-		unicorn_tiles[0][y]->TILE = unicorn_pixie_tiles[_frame][unicorn_facing ? 2 : 0][y];
-		unicorn_tiles[1][y]->TILE = unicorn_pixie_tiles[_frame][unicorn_facing ? 0 : 2][y];
+		unicorn_tiles[0][y]->TILE = unicorn_pixie_tiles[_frame][unicorn_facing ? 2 : unicorn_pooping][y];
+		unicorn_tiles[1][y]->TILE = unicorn_pixie_tiles[_frame][unicorn_facing ? unicorn_pooping : 2][y];
 		
 		unicorn_attr[0][y]->HFLIP = unicorn_facing;
 		unicorn_attr[1][y]->HFLIP = unicorn_facing;
@@ -91,7 +93,7 @@ void draw_unicorn() {
 			tail_position[y]->XPOS = unicorn_x + (unicorn_facing ? 16 : 0);
 			tail_position[y]->YOFF = unicorn_y;
 			
-			tail_tiles[y]->TILE = tail_pixie_tiles[0][_frame][y];
+			tail_tiles[y]->TILE = tail_pixie_tiles[unicorn_pooping][_frame][y];
 			tail_attr[y]->HFLIP = unicorn_facing;
 		}
 		
