@@ -29,6 +29,23 @@ RRB_TILE_NORMAL_t *unicorn_tiles[2][5] = {
 	}
 };
 
+__far RRB_ATTR_NORMAL_t *unicorn_attr[2][5] = {
+	{
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (41 * 2)),
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (41 * 2) + (LINE_LENGTH * 2)),
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (41 * 2) + (LINE_LENGTH * 2) * 2),
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (41 * 2) + (LINE_LENGTH * 2) * 3),
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (41 * 2) + (LINE_LENGTH * 2) * 4),
+	},
+	{
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (42 * 2)),
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (42 * 2) + (LINE_LENGTH * 2)),
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (42 * 2) + (LINE_LENGTH * 2) * 2),
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (42 * 2) + (LINE_LENGTH * 2) * 3),
+		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (42 * 2) + (LINE_LENGTH * 2) * 4),
+	}
+};
+
 RRB_TILE_GOTOX_t  *tail_position[4] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (43 * 2)),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (43 * 2) + (LINE_LENGTH * 2)),
@@ -43,6 +60,13 @@ RRB_TILE_NORMAL_t *tail_tiles[4] = {
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (44 * 2) + (LINE_LENGTH * 2) * 3),
 };
 
+__far RRB_ATTR_NORMAL_t *tail_attr[4] = {
+	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (44 * 2)),
+	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (44 * 2) + (LINE_LENGTH * 2)),
+	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (44 * 2) + (LINE_LENGTH * 2) * 2),
+	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (44 * 2) + (LINE_LENGTH * 2) * 3),
+};
+
 RRB_TILE_GOTOX_t  *mane_position[3] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (45 * 2)),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (45 * 2) + (LINE_LENGTH * 2)),
@@ -53,6 +77,12 @@ RRB_TILE_NORMAL_t *mane_tiles[3] = {
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (46 * 2)),
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (46 * 2) + (LINE_LENGTH * 2)),
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (46 * 2) + (LINE_LENGTH * 2) * 2),
+};
+
+__far RRB_ATTR_NORMAL_t *mane_attr[3] = {
+	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (46 * 2)),
+	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (46 * 2) + (LINE_LENGTH * 2)),
+	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (46 * 2) + (LINE_LENGTH * 2) * 2),
 };
 
 RRB_TILE_GOTOX_t  *cone_shadow_position[6] = {

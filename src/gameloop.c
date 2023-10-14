@@ -9,6 +9,7 @@
 #include "maps.h"
 #include "pixies.h"
 #include "player.h"
+#include "unicorn.h"
 
 
 unsigned short matrix_raster;
@@ -35,12 +36,15 @@ void game_loop() {
 		VIC2.BORDERCOL = 5;
 		// VIC2.SCREENCOL = 5;
 		
+		update_unicorn();
+		
 		process_input();
 		update_player();
 		
 		// draw the screen in vertical order, so unicorn first, then falling 
 		// ice cream, then ice cream stack, then cone
 		
+		draw_unicorn();
 		draw_cone();
 		
 		VIC2.BORDERCOL = 11;
@@ -71,10 +75,40 @@ void game_loop() {
 	};
 }
 
+void draw_unicorn() {
+	for (char y = 0; y < 5; y++) {
+		unicorn_position[y]->XPOS = unicorn_x;
+		unicorn_position[y]->YOFF = unicorn_y;
+		
+		char _frame = unicorn_frame_lookup[unicorn_frame_index];
+		unicorn_tiles[0][y]->TILE = unicorn_pixie_tiles[_frame][unicorn_facing ? 2 : 0][y];
+		unicorn_tiles[1][y]->TILE = unicorn_pixie_tiles[_frame][unicorn_facing ? 0 : 2][y];
+		
+		unicorn_attr[0][y]->HFLIP = unicorn_facing;
+		unicorn_attr[1][y]->HFLIP = unicorn_facing;
+		
+		if (y < 4) {
+			tail_position[y]->XPOS = unicorn_x + (unicorn_facing ? 16 : 0);
+			tail_position[y]->YOFF = unicorn_y;
+			
+			tail_tiles[y]->TILE = tail_pixie_tiles[0][_frame][y];
+			tail_attr[y]->HFLIP = unicorn_facing;
+		}
+		
+		if (y < 3) {
+			mane_position[y]->XPOS = unicorn_x + (unicorn_facing ? 0 : 16);
+			mane_position[y]->YOFF = unicorn_y;
+			
+			mane_tiles[y]->TILE = mane_pixie_tiles[_frame][y];
+			mane_attr[y]->HFLIP = unicorn_facing;
+		}
+	}
+}
+
 void draw_cone() {
 	for (char y = 0; y < 6; y++) {
-		cone_shadow_position[y]->XPOS = player_position;
-		cone_position[y]->XPOS = player_position;
+		cone_shadow_position[y]->XPOS = player_x;
+		cone_position[y]->XPOS = player_x;
 		
 		for (char x = 0; x < 2; x++) {
 			cone_shadow_tiles[x][y]->TILE = large_cone_pixie_tiles[1][x][y];

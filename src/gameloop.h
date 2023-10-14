@@ -2,6 +2,7 @@
 #define __GAMELOOP_H
 
 void game_loop();
+void draw_unicorn();
 void draw_cone();
 
 extern unsigned short matrix_raster;
