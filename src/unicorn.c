@@ -2,6 +2,7 @@
 
 
 #include "rng.h"
+#include "icecream.h"
 
 
 char _unicorn_animation_delay = 0;
@@ -49,13 +50,13 @@ void update_unicorn() {
 	}
 	
 	unsigned long rng = random();
-	if (!unicorn_pooping && (rng & 0x1ff) == 0x00) {
+	if (!falling_icecream_state && !unicorn_pooping && (rng & 0x1ff) == 0x00) {
 		unicorn_pooping = 1;
 		_unicorn_countdown = 50;
 	} else {
 		if (_unicorn_countdown) {
 			--_unicorn_countdown;
-		} else {
+		} else if (unicorn_pooping) {
 			unicorn_pooping = 0;
 			unicorn_drop_poop = 1;
 		}
@@ -63,6 +64,13 @@ void update_unicorn() {
 	
 	if ((rng & 0x7fe00) == 0x00) {
 		unicorn_facing = unicorn_facing ? 0 : 1;
+	}
+	
+	if (unicorn_drop_poop) {
+		falling_icecream_state = 1;
+		falling_icecream_x = unicorn_x;
+		falling_icecream_y = 0;
+		unicorn_drop_poop = 0;
 	}
 }
 

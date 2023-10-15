@@ -431,3 +431,8 @@ FodyWeavers.xsd
 /build/input.s
 /build/player.s
 /build/unicorn.s
+/build/icecream.s
+/build/music_swap_stub.bin
+/build/music_swap_stub.bin.addr
+/build/music_swap_stub.bin.addr.mc
+/reference/Xanadu.asm

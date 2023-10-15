@@ -34,8 +34,8 @@ struct _RRB_ATTR_NORMAL {
 struct _RRB_TILE_GOTOX {
 	union {
 		uint16_t XPOS     : 10;
-		uint16_t RESERVED : 2;	// set to 0
-		uint16_t YOFF     : 4;
+		uint16_t RESERVED : 3;	// set to 0
+		uint16_t YOFF     : 3;
 	};
 };
 

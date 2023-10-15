@@ -139,7 +139,7 @@ void load() {
 	fl_init();
 	fl_waiting();
 	floppy_iffl_fast_load_init("+UNICONE");
-	for (char i = 0; i < 5; i++) {
+	for (char i = 0; i < 6; i++) {
 		floppy_iffl_fast_load();
 	}
 	fl_exit();
