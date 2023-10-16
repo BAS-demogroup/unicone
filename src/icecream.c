@@ -29,7 +29,7 @@ void update_falling_icecream() {
 				if (abs(falling_icecream_x - player_x) < 24) {
 					// catch the ice cream and add it to the cone
 					for (char i = 0; i < 3; i++) {
-						stack_offsets[stack_size + i] = falling_icecream_x - 
+						stack_offsets[stack_size + i + 1] = falling_icecream_x - 
 							player_x;
 					}
 					stack_size += 3;
