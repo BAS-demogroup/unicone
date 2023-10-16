@@ -50,8 +50,8 @@ C:\Users\death\Documents\C65\megatool\megatool -a build/music_swap_stub.bin 0000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/sentimental_thing.prg 00010000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.chrs 00016d80
 C:\Users\death\Documents\C65\megatool\megatool -a build/tilemap.bin 0001a5c0
-C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 0001c5c8
-C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.clut 0001e5d0
+C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 0001ca78
+C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.clut 0001ef30
 
 C:\Users\death\Documents\C65\megatool\megatool -c build/music_swap_stub.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/sentimental_thing.prg.addr

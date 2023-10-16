@@ -54,11 +54,15 @@ void game_loop() {
 
 		VIC2.BORDERCOL = 4;
 		
-		draw_cone();
-		
+		draw_icecream_stack();
+
 		VIC2.BORDERCOL = 10;
 		
-		musicPlay();
+		draw_cone();
+		
+		VIC2.BORDERCOL = 13;
+		
+		//musicPlay();
 
 		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
 		
@@ -101,30 +105,59 @@ void draw_falling_icecream() {
 	if (!falling_icecream_state) return;
 	
 	char yoff = falling_icecream_y >> 3;
-	char ymod = ~(falling_icecream_y & 0x07);
+	char ymod = ~((char)falling_icecream_y & 0x07);
 	
 	for (char y = 0; y < 5; y++) {
-		icecream_shadow_position[0][y + yoff]->XPOS = falling_icecream_x;
-		icecream_shadow_position[0][y + yoff]->YOFF = ymod;
-		icecream_position[0][y + yoff]->XPOS = falling_icecream_x;
-		icecream_position[0][y + yoff]->YOFF = ymod;
+		falling_icecream_shadow_position[0][y + yoff]->XPOS = falling_icecream_x;
+		falling_icecream_position[0][y + yoff]->YOFF = ymod;
+
+		falling_icecream_position[0][y + yoff]->XPOS = falling_icecream_x;
+		falling_icecream_shadow_position[0][y + yoff]->YOFF = ymod;
 		
 		for (char x = 0; x < 2; x++) {
-			icecream_shadow_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[1][x][y];
-			icecream_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[0][x][y];
+			falling_icecream_shadow_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[1][x][y];
+			falling_icecream_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[0][x][y];
 		}
 	}
 
 	for (char ribbon = 0; ribbon < 2; ribbon++) {
 		for (char y = 0; y < 3; y++) {
-			icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->XPOS = falling_icecream_x;
-			icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->YOFF = ymod;
-			icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = falling_icecream_x;
-			icecream_position[2 - y][3 + ribbon + yoff + y]->YOFF = ymod;
+			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->XPOS = falling_icecream_x;
+			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->YOFF = ymod;
+			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = falling_icecream_x;
+			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->YOFF = ymod;
 		
 			for (char x = 0; x < 2; x++) {
-				icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
-				icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[0][x][y];
+				falling_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
+				falling_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[0][x][y];
+			}
+		}
+	}
+}
+
+void draw_icecream_stack() {
+	if (stack_size == 0) return;
+	
+	char yoff = 30 - stack_size;
+	
+	for (char y = 0; y < 5; y++) {
+		stacked_icecream_shadow_position[0][y + yoff]->XPOS = player_x + stack_offsets[stack_size - 1];
+		stacked_icecream_position[0][y + yoff]->XPOS = player_x + stack_offsets[stack_size - 1];
+		
+		for (char x = 0; x < 2; x++) {
+			stacked_icecream_shadow_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[1][x][y];
+			stacked_icecream_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[0][x][y];
+		}
+	}
+
+	for (char ribbon = 0; ribbon < stack_size - 1; ribbon++) {
+		for (char y = 1; y < 3; y++) {
+			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->XPOS = player_x + stack_offsets[stack_size - ribbon - 1];
+			stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = player_x + stack_offsets[stack_size - ribbon - 1];
+		
+			for (char x = 0; x < 2; x++) {
+				stacked_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
+				stacked_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[0][x][y];
 			}
 		}
 	}
