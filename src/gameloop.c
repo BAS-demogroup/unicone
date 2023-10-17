@@ -23,7 +23,7 @@ void game_loop() {
 		VIC2.BORDERCOL = 0;
 		
 		// clear the screen
-		run_dma_job((__far char *)&clear_tilemap);
+		//run_dma_job((__far char *)&clear_tilemap);
 		
 		// bank the tile and attribute maps from $20000-$21fff into $a000-$bfff
 		__asm(" lda #0x00\n"
@@ -61,8 +61,16 @@ void game_loop() {
 		draw_cone();
 		
 		VIC2.BORDERCOL = 13;
-		
-		//musicPlay();
+
+		// this is only necessary when the music is disabled.
+		// __asm(" lda #0x00\n"
+			  // " tax\n"
+			  // " tay\n"
+			  // " taz\n"
+			  // " map\n"
+			  // " nop");
+
+		musicPlay();
 
 		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
 		
@@ -77,8 +85,10 @@ void draw_unicorn() {
 		unicorn_position[y]->YOFF = unicorn_y;
 		
 		char _frame = unicorn_frame_lookup[unicorn_frame_index];
-		unicorn_tiles[0][y]->TILE = unicorn_pixie_tiles[_frame][unicorn_facing ? 2 : unicorn_pooping][y];
-		unicorn_tiles[1][y]->TILE = unicorn_pixie_tiles[_frame][unicorn_facing ? unicorn_pooping : 2][y];
+		unicorn_tiles[0][y]->TILE = unicorn_pixie_tiles[_frame]
+			[unicorn_facing ? 2 : unicorn_pooping][y];
+		unicorn_tiles[1][y]->TILE = unicorn_pixie_tiles[_frame]
+			[unicorn_facing ? unicorn_pooping : 2][y];
 		
 		unicorn_attr[0][y]->HFLIP = unicorn_facing;
 		unicorn_attr[1][y]->HFLIP = unicorn_facing;
@@ -101,76 +111,154 @@ void draw_unicorn() {
 	}
 }
 
+char _last_yoff = 0xff;
 void draw_falling_icecream() {
 	if (!falling_icecream_state) return;
 	
 	char yoff = falling_icecream_y >> 3;
-	char ymod = ~((char)falling_icecream_y & 0x07);
+	char ymod = (~(char)falling_icecream_y & 0x07);
 	
 	for (char y = 0; y < 5; y++) {
-		falling_icecream_shadow_position[0][y + yoff]->XPOS = falling_icecream_x;
 		falling_icecream_position[0][y + yoff]->YOFF = ymod;
-
-		falling_icecream_position[0][y + yoff]->XPOS = falling_icecream_x;
 		falling_icecream_shadow_position[0][y + yoff]->YOFF = ymod;
-		
-		for (char x = 0; x < 2; x++) {
-			falling_icecream_shadow_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[1][x][y];
-			falling_icecream_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[0][x][y];
+
+		if (_last_yoff != yoff) {
+			falling_icecream_shadow_position[0][y + yoff]->XPOS = 
+				falling_icecream_x;
+			falling_icecream_position[0][y + yoff]->XPOS = falling_icecream_x;
+			falling_icecream_shadow_position[1][y + yoff]->XPOS = 
+				0x280;
+			falling_icecream_position[1][y + yoff]->XPOS = 0x280;
+			
+			for (char x = 0; x < 2; x++) {
+				falling_icecream_shadow_tiles[0][x][y + yoff]->TILE = 
+					large_icecream_top_pixie_tiles[1][x][y];
+				falling_icecream_tiles[0][x][y + yoff]->TILE = 
+					large_icecream_top_pixie_tiles[0][x][y];
+			}
 		}
 	}
 
 	for (char ribbon = 0; ribbon < 2; ribbon++) {
 		for (char y = 0; y < 3; y++) {
-			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->XPOS = falling_icecream_x;
-			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->YOFF = ymod;
-			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = falling_icecream_x;
-			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->YOFF = ymod;
-		
-			for (char x = 0; x < 2; x++) {
-				falling_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
-				falling_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[0][x][y];
+			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
+				YOFF = ymod;
+			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->YOFF = 
+				ymod;
+
+			if (_last_yoff != yoff) {
+				falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
+					XPOS = falling_icecream_x;
+				falling_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
+					falling_icecream_x;
+			
+				for (char x = 0; x < 2; x++) {
+					falling_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]
+						->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
+					falling_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE =
+						large_icecream_bottom_pixie_tiles[0][x][y];
+				}
 			}
 		}
 	}
+	_last_yoff = yoff;
 }
 
+char _last_stack_size = 0;
 void draw_icecream_stack() {
 	if (stack_size == 0) return;
 	
 	char yoff = 30 - stack_size;
 	
 	for (char y = 0; y < 5; y++) {
-		stacked_icecream_shadow_position[0][y + yoff]->XPOS = player_x + stack_offsets[stack_size - 1];
-		stacked_icecream_position[0][y + yoff]->XPOS = player_x + stack_offsets[stack_size - 1];
+		stacked_icecream_shadow_position[0][y + yoff]->XPOS = player_x + 
+			stack_offsets[stack_size - 1];
+		stacked_icecream_position[0][y + yoff]->XPOS = player_x + 
+			stack_offsets[stack_size - 1];
 		
-		for (char x = 0; x < 2; x++) {
-			stacked_icecream_shadow_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[1][x][y];
-			stacked_icecream_tiles[0][x][y + yoff]->TILE = large_icecream_top_pixie_tiles[0][x][y];
+		if (_last_stack_size != stack_size) {
+			for (char x = 0; x < 2; x++) {
+				stacked_icecream_shadow_tiles[0][x][y + yoff]->TILE = 
+					large_icecream_top_pixie_tiles[1][x][y];
+				stacked_icecream_tiles[0][x][y + yoff]->TILE = 
+					large_icecream_top_pixie_tiles[0][x][y];
+			}
 		}
 	}
 
 	for (char ribbon = 0; ribbon < stack_size - 1; ribbon++) {
 		for (char y = 1; y < 3; y++) {
-			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->XPOS = player_x + stack_offsets[stack_size - ribbon - 1];
-			stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = player_x + stack_offsets[stack_size - ribbon - 1];
-		
+			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
+				XPOS = player_x + stack_offsets[stack_size - ribbon - 1];
+			stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
+				player_x + stack_offsets[stack_size - ribbon - 1];
+				
+			if (_last_stack_size == stack_size) continue;
+			// this doesn't work right, need to come back to this
+			// for now, the performance gains are enough.
+			//if (ribbon < _last_stack_size - 3) continue;
+			
 			for (char x = 0; x < 2; x++) {
-				stacked_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
-				stacked_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE = large_icecream_bottom_pixie_tiles[0][x][y];
+				stacked_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]
+					->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
+				stacked_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE =
+					large_icecream_bottom_pixie_tiles[0][x][y];
 			}
 		}
 	}
+	_last_stack_size = stack_size;
 }
 
+char _cone_drawn = 0;
 void draw_cone() {
 	for (char y = 0; y < 6; y++) {
 		cone_shadow_position[y]->XPOS = player_x;
 		cone_position[y]->XPOS = player_x;
 		
-		for (char x = 0; x < 2; x++) {
-			cone_shadow_tiles[x][y]->TILE = large_cone_pixie_tiles[1][x][y];
-			cone_tiles[x][y]->TILE = large_cone_pixie_tiles[0][x][y];
+		if (!_cone_drawn) {
+			for (char x = 0; x < 2; x++) {
+				cone_shadow_tiles[x][y]->TILE = large_cone_pixie_tiles[1][x][y];
+				cone_tiles[x][y]->TILE = large_cone_pixie_tiles[0][x][y];
+			}
 		}
+	}
+	_cone_drawn = 1;
+}
+
+void reset_level() {
+	_last_stack_size = 0;
+	_cone_drawn = 0;
+
+	falling_icecream_y = 0;
+	falling_icecream_state = 0;
+
+	player_input = 0;
+	key_down = 0;
+	
+	stack_size = 0;
+
+	unicorn_y = 0;
+	unicorn_facing = 0;
+	unicorn_frame_index = 0;
+	unicorn_pooping = 0;
+	unicorn_drop_poop = 0;
+	unicorn_animation_delay = 0;
+	vertical_sinus_index = 0;
+	unicorn_countdown = 0;
+	
+	acceleration = 1;
+	
+	unicorn_speed = 1;
+
+	stack_top = 224;
+
+	_last_yoff = 0xff;
+	
+	falling_icecream_x = 304;
+	player_x = 304;
+	unicorn_x = 304;
+	
+	for (char i = 0; i < 50; i++) {
+		stack_offsets[i] = 0;
 	}
 }

@@ -7,6 +7,8 @@ void draw_falling_icecream();
 void draw_icecream_stack();
 void draw_cone();
 
+void reset_level();
+
 extern unsigned short matrix_raster;
 
 #endif

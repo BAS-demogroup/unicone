@@ -9,6 +9,7 @@
 #include "dma.h"
 #include "dma_jobs.h"
 #include "gameloop.h"
+#include "input.h"
 #include "macros.h"
 #include "maps.h"
 
@@ -68,7 +69,7 @@ void setup() {
 	// conigure PAL or NTSC
 	if(VIC4.PALNTSC) {
 		VIC4.PALNTSC = 1;
-		matrix_raster = 0x196;
+		matrix_raster = 0x1be;
 	} else {
 		VIC4.PALNTSC = 0;
 		matrix_raster = 0x1c7;
@@ -114,24 +115,12 @@ void setup() {
 	// disable double-height rrb
 	VIC4.DBLRR = 0;
 	
-	// bank the music in
-	__asm(" lda #0xc0\n"
-		  " tax\n"
-		  " tay\n"
-		  " ldz #0x30\n"
-		  " map\n"
-		  " nop");
-	
 	// initalize the music
 	musicInit();
 	
-	// restore the original bank configuration
-	__asm(" lda #0x00\n"
-		  " tax\n"
-		  " tay\n"
-		  " taz\n"
-		  " map\n"
-		  " nop");
+	reset_level();
+	
+	muted = 0;
 }
 
 // load all the data from the IFFL

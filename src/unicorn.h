@@ -11,5 +11,8 @@ extern char unicorn_frame_index;
 extern char unicorn_speed;
 extern char unicorn_pooping;
 extern char unicorn_drop_poop;
+extern char unicorn_animation_delay;
+extern char vertical_sinus_index;
+extern char unicorn_countdown;
 
 #endif

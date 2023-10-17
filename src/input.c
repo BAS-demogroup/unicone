@@ -4,14 +4,12 @@
 #include "chips.h"
 
 
-char _key_down = 0;
-char _muted = 0;
 void process_input() {
 	// is M pressed?
 	KEYSCAN.MATRIXPEEK = 0x04;
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x04)) == 0) {
-		if (!_key_down) {
-			if (_muted) {
+		if (!key_down) {
+			if (muted) {
 				SID1.VOLUME_FTYPE = 0x6f;
 				SID2.VOLUME_FTYPE = 0x6a;
 				SID3.VOLUME_FTYPE = 0x2b;
@@ -22,11 +20,11 @@ void process_input() {
 				SID3.VOLUME_FTYPE = 0x20;
 				SID4.VOLUME_FTYPE = 0x30;
 			}
-			_muted = ~_muted;
-			_key_down = 1;
+			muted = ~muted;
+			key_down = 1;
 		}
 	} else {
-		_key_down = 0;
+		key_down = 0;
 	}
 	
 	// load joystick two
@@ -70,3 +68,5 @@ void process_input() {
 }
 
 char player_input = 0;
+char key_down = 0;
+char muted = 0;

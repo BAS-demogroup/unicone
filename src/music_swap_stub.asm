@@ -3,7 +3,29 @@
 
 * = $c000
 
-entry:
+	jmp init
+	jmp play
+	
+init:
+	lda #$c0 
+	tax
+	tay
+	ldz #$30 
+	map
+	eom
+	
+	jsr $4000
+	
+	lda #$00
+	tax
+	tay
+	taz
+	map
+	eom
+	
+	rts
+
+play:
 	lda #$c0 
 	tax
 	tay

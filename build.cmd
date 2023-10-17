@@ -67,4 +67,4 @@ C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicon
 
 pause
 
-call start /b "xemu" "C:\Users\death\Documents\C65\xemu-binaries-win64\xmega65" -8 build/unicone.d81
+run

@@ -8,7 +8,7 @@
 
 typedef void (*PROC_PTR)(void);
 
-#define musicInit ((PROC_PTR)0x4000)
-#define musicPlay ((PROC_PTR)0xc000)
+#define musicInit ((PROC_PTR)0xc000)
+#define musicPlay ((PROC_PTR)0xc003)
 
 #endif
