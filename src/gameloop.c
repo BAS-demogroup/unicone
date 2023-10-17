@@ -1,6 +1,9 @@
 #include "gameloop.h"
 
 
+#include <stdlib.h>
+
+
 #include "chips.h"
 #include "dma.h"
 #include "dma_jobs.h"
@@ -10,6 +13,7 @@
 #include "maps.h"
 #include "pixies.h"
 #include "player.h"
+#include "swing.h"
 #include "unicorn.h"
 
 
@@ -176,10 +180,15 @@ void draw_icecream_stack() {
 	char yoff = 30 - stack_size;
 	
 	for (char y = 0; y < 5; y++) {
-		stacked_icecream_shadow_position[0][y + yoff]->XPOS = player_x + 
-			stack_offsets[stack_size - 1];
-		stacked_icecream_position[0][y + yoff]->XPOS = player_x + 
-			stack_offsets[stack_size - 1];
+		short pos = player_x + stack_offsets[stack_size - 1];
+		if (icecream_swing < 0) {
+			pos -= (short)swing_table[abs(icecream_swing)][stack_size - 1];
+		} else {
+			pos += (short)swing_table[icecream_swing][stack_size - 1];
+		}
+			
+		stacked_icecream_shadow_position[0][y + yoff]->XPOS = pos;
+		stacked_icecream_position[0][y + yoff]->XPOS = pos;
 		
 		if (_last_stack_size != stack_size) {
 			for (char x = 0; x < 2; x++) {
@@ -193,12 +202,21 @@ void draw_icecream_stack() {
 
 	for (char ribbon = 0; ribbon < stack_size - 1; ribbon++) {
 		for (char y = 1; y < 3; y++) {
+			short pos = player_x + 
+				stack_offsets[stack_size - ribbon - 2];
+			if (icecream_swing < 0) {
+				pos -= (short)swing_table[abs(icecream_swing)][stack_size - ribbon - 1];
+			} else {
+				pos += (short)swing_table[icecream_swing][stack_size - ribbon - 1];
+			}
+			
 			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
-				XPOS = player_x + stack_offsets[stack_size - ribbon - 1];
+				XPOS = pos;
 			stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
-				player_x + stack_offsets[stack_size - ribbon - 1];
+				pos;
 				
 			if (_last_stack_size == stack_size) continue;
+			
 			// this doesn't work right, need to come back to this
 			// for now, the performance gains are enough.
 			//if (ribbon < _last_stack_size - 3) continue;
@@ -246,6 +264,8 @@ void reset_level() {
 	
 	stack_size = 0;
 	player_dying = 0;
+	icecream_swing = 0;
+	target_swing = 0;
 
 	unicorn_y = 0;
 	unicorn_facing = 0;
@@ -272,6 +292,7 @@ void reset_level() {
 	
 	for (char i = 0; i < 50; i++) {
 		stack_offsets[i] = 0;
+		stack_x[i] = 0;
 	}
 	
 	draw_lives();

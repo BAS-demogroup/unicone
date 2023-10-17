@@ -24,9 +24,11 @@ void update_falling_icecream() {
 			if (falling_icecream_y < stack_top) {
 				++falling_icecream_y;
 			} else {
-				signed short top_pos = player_x;
+				short top_pos = player_x;
 				if (stack_size) {
 					top_pos += stack_offsets[stack_size - 1];
+					top_pos = stack_x[stack_size - 1] +
+						stack_offsets[stack_size - 1];
 				}
 					
 				// determine if the player caught the ice cream
@@ -36,7 +38,7 @@ void update_falling_icecream() {
 					clear_falling_icecream();
 					// catch the ice cream and add it to the cone
 					for (char i = 0; i < 3; i++) {
-						stack_offsets[stack_size + i + 1] = falling_icecream_x 
+						stack_offsets[stack_size + i] = falling_icecream_x 
 							- player_x;
 					}
 					stack_size += 3;
@@ -48,9 +50,9 @@ void update_falling_icecream() {
 					falling_icecream_state = 2;
 				}
 			}
-			if (falling_icecream_y > stack_top) {
-				falling_icecream_y = stack_top;
-			}
+			// if (falling_icecream_y > stack_top) {
+				// falling_icecream_y = stack_top;
+			// }
 			return;
 		case 2:
 			if (falling_icecream_y < 248) {
