@@ -24,10 +24,15 @@ void update_falling_icecream() {
 			if (falling_icecream_y < stack_top) {
 				++falling_icecream_y;
 			} else {
+				signed short top_pos = player_x;
+				if (stack_size) {
+					top_pos += stack_offsets[stack_size - 1];
+				}
+					
 				// determine if the player caught the ice cream
 				// experiment with whether 24 is a reasonable distance or not
 				// this needs to check the x of the top piece, not the player
-				if (abs(falling_icecream_x - player_x) < 24) {
+				if (abs(falling_icecream_x - top_pos) < 24) {
 					// clear the falling cone
 					clear_falling_icecream();
 					// catch the ice cream and add it to the cone

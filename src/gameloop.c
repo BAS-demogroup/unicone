@@ -63,14 +63,15 @@ void game_loop() {
 		VIC2.BORDERCOL = 13;
 
 		// this is only necessary when the music is disabled.
-		// __asm(" lda #0x00\n"
-			  // " tax\n"
-			  // " tay\n"
-			  // " taz\n"
-			  // " map\n"
-			  // " nop");
+		// it's probably not necessary at all, but just to be on the safe side
+		__asm(" lda #0x00\n"
+			  " tax\n"
+			  " tay\n"
+			  " taz\n"
+			  " map\n"
+			  " nop");
 
-		musicPlay();
+		// musicPlay();
 
 		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
 		
