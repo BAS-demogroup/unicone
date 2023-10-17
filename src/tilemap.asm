@@ -1185,11 +1185,11 @@
 !word	$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6
 !word	$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6
 
-!word	$0250,$0691				// life shadow 1
-!word	$0260,$0691				// life shadow 2
-!word	$0270,$0691				// life shadow 3
-!word	$0250,$068e			    // life 1
-!word	$0260,$068e			    // life 2
+!word	$0280,$0691				// life shadow 1
+!word	$0280,$0691				// life shadow 2
+!word	$0280,$0691				// life shadow 3
+!word	$0280,$068e			    // life 1
+!word	$0280,$068e			    // life 2
 !word	$0280,$068e			    // life 3
 
 !word	$0270,$05b6,$0270,$05b6,$0270,$05b6,$0270,$05b6
@@ -1204,12 +1204,12 @@
 !word	$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6
 !word	$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6,$05b6
 
-!word	$0250,$0691				// life shadow 1
-!word	$0260,$0691				// life shadow 2
-!word	$0270,$0691				// life shadow 3
-!word	$0250,$068e			    // life 1
-!word	$0260,$068e			    // life 2
-!word	$0280,$068e			    // life 3
+!word	$0280,$0692				// life shadow 1
+!word	$0280,$0692				// life shadow 2
+!word	$0280,$0692				// life shadow 3
+!word	$0280,$068f			    // life 1
+!word	$0280,$068f			    // life 2
+!word	$0280,$068f			    // life 3
 
 !word	$0270,$05b6,$0270,$05b6,$0270,$05b6,$0270,$05b6
 !word	$0270,$05b6,$0270,$05b6,$0270,$05b6,$0270,$05b6,$0270,$05b6

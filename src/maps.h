@@ -56,9 +56,4 @@ extern RRB_TILE_NORMAL_t *small_icecream_tiles[2][38];
 extern RRB_TILE_GOTOX_t  *effect_position[2][38];
 extern RRB_TILE_NORMAL_t *effect_tiles[2][38];
 
-// life counter
-extern __far RRB_TILE_NORMAL_t *life_shadow_counters[3][2];
-extern __far RRB_TILE_GOTOX_t  *life_position[3][2];
-extern __far RRB_TILE_NORMAL_t *life_counters[3][2];
-
 #endif

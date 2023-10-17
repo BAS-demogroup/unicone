@@ -278,14 +278,25 @@ void reset_level() {
 }
 
 void draw_lives() {
-	unsigned short pos = 0x250;
-	for (char x = 0; x < player_lives; x++) {
-		for (char y = 0; y < 2; y++) {
-			// life_shadow_counters[x][y]->TILE = 
-				// small_cone_pixie_tiles[1][y + 1];
-			// life_counters[x][y]->TILE = small_cone_pixie_tiles[0][y + 1];
-		}
-		pos += 0x10;
+	// this isn't pretty, but there was a compiler error that needed a 
+	// workaround... and this IS fast.
+	if (player_lives > 0) {
+		farpoke(0x2215C,0x50);
+		farpoke(0x22218,0x50);
+		farpoke(0x22168,0x50);
+		farpoke(0x22224,0x50);
+	}
+	if (player_lives > 1) {
+		farpoke(0x22160,0x60);
+		farpoke(0x2221C,0x60);
+		farpoke(0x2216C,0x60);
+		farpoke(0x22228,0x60);
+	}
+	if (player_lives > 2) {
+		farpoke(0x22164,0x70);
+		farpoke(0x22220,0x70);
+		farpoke(0x22170,0x70);
+		farpoke(0x2222C,0x70);
 	}
 }
 
