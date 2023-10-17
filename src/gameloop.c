@@ -16,7 +16,7 @@
 unsigned short matrix_raster;
 
 void game_loop() {
-	while (1) {
+	while (lost_life_timer > 0) {
 		while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
 			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
 		
@@ -77,6 +77,10 @@ void game_loop() {
 		
 		VIC2.BORDERCOL = 15;
 		// VIC2.SCREENCOL = 15;
+		
+		if (player_dying) {
+			--lost_life_timer;
+		}
 	};
 }
 
@@ -227,6 +231,10 @@ void draw_cone() {
 }
 
 void reset_level() {
+	// clear the screens
+	run_dma_job((__far char *)&clear_tilemap);
+	run_dma_job((__far char *)&load_attrmap);
+	
 	_last_stack_size = 0;
 	_cone_drawn = 0;
 
@@ -237,6 +245,7 @@ void reset_level() {
 	key_down = 0;
 	
 	stack_size = 0;
+	player_dying = 0;
 
 	unicorn_y = 0;
 	unicorn_facing = 0;
@@ -250,7 +259,9 @@ void reset_level() {
 	acceleration = 1;
 	
 	unicorn_speed = 1;
-
+	
+	lost_life_timer = 100;
+	
 	stack_top = 224;
 
 	_last_yoff = 0xff;
@@ -262,4 +273,20 @@ void reset_level() {
 	for (char i = 0; i < 50; i++) {
 		stack_offsets[i] = 0;
 	}
+	
+	draw_lives();
 }
+
+void draw_lives() {
+	unsigned short pos = 0x250;
+	for (char x = 0; x < player_lives; x++) {
+		for (char y = 0; y < 2; y++) {
+			// life_shadow_counters[x][y]->TILE = 
+				// small_cone_pixie_tiles[1][y + 1];
+			// life_counters[x][y]->TILE = small_cone_pixie_tiles[0][y + 1];
+		}
+		pos += 0x10;
+	}
+}
+
+unsigned short lost_life_timer;

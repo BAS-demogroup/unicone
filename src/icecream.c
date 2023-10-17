@@ -31,7 +31,6 @@ void update_falling_icecream() {
 					
 				// determine if the player caught the ice cream
 				// experiment with whether 24 is a reasonable distance or not
-				// this needs to check the x of the top piece, not the player
 				if (abs(falling_icecream_x - top_pos) < 24) {
 					// clear the falling cone
 					clear_falling_icecream();
@@ -49,8 +48,8 @@ void update_falling_icecream() {
 					falling_icecream_state = 2;
 				}
 			}
-			if (falling_icecream_state > stack_top) {
-				falling_icecream_state = stack_top;
+			if (falling_icecream_y > stack_top) {
+				falling_icecream_y = stack_top;
 			}
 			return;
 		case 2:
@@ -58,7 +57,10 @@ void update_falling_icecream() {
 				falling_icecream_y += 3;
 			} else {
 				// done doing failure state
+				player_dying = 1;
+				--player_lives;
 				falling_icecream_y = 248;
+				falling_icecream_state = 3;
 			}
 			
 			return;

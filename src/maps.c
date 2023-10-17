@@ -136,6 +136,20 @@
 #define EFFECT_POSITION_U_C         90
 #define EFFECT_TILE_U_C             91
 
+
+// line 47 - lives
+#define LIFE_SHADOW_TILE_1          37
+#define LIFE_SHADOW_TILE_2          38
+#define LIFE_SHADOW_TILE_3          39
+
+#define LIFE_POSITION_1             40
+#define LIFE_TILE_1                 41
+#define LIFE_POSITION_2             42
+#define LIFE_TILE_2                 43
+#define LIFE_POSITION_3             44
+#define LIFE_TILE_3                 45
+
+
 RRB_TILE_GOTOX_t *unicorn_position[5] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (UNICORN_POSITION * 2)),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (UNICORN_POSITION * 2) + (LINE_LENGTH * 2)),
@@ -2178,5 +2192,51 @@ RRB_TILE_NORMAL_t *effect_tiles[2][38] = {
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (EFFECT_TILE_L_C * 2) + (LINE_LENGTH * 2) * 41),
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (EFFECT_TILE_L_C * 2) + (LINE_LENGTH * 2) * 42),
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (EFFECT_TILE_L_C * 2) + (LINE_LENGTH * 2) * 43)
+	}
+};
+
+// life counter shadow
+__far RRB_TILE_NORMAL_t *life_shadow_counters[3][2] = {
+	{
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_SHADOW_TILE_1 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_SHADOW_TILE_1 * 2) + (LINE_LENGTH * 2) * 46)
+	},
+	{
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_SHADOW_TILE_2 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_SHADOW_TILE_2 * 2) + (LINE_LENGTH * 2) * 46)
+	},
+	{
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_SHADOW_TILE_3 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_SHADOW_TILE_3 * 2) + (LINE_LENGTH * 2) * 46)
+	}
+};
+
+__far RRB_TILE_GOTOX_t  *life_position[3][2] = {
+	{
+		(__far RRB_TILE_GOTOX_t *)(TILE_MAP_STORE + (LIFE_POSITION_1 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_GOTOX_t *)(TILE_MAP_STORE + (LIFE_POSITION_1 * 2) + (LINE_LENGTH * 2) * 46)
+	},
+	{
+		(__far RRB_TILE_GOTOX_t *)(TILE_MAP_STORE + (LIFE_POSITION_2 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_GOTOX_t *)(TILE_MAP_STORE + (LIFE_POSITION_2 * 2) + (LINE_LENGTH * 2) * 46)
+	},
+	{
+		(__far RRB_TILE_GOTOX_t *)(TILE_MAP_STORE + (LIFE_POSITION_3 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_GOTOX_t *)(TILE_MAP_STORE + (LIFE_POSITION_3 * 2) + (LINE_LENGTH * 2) * 46)
+	}
+};
+
+__far RRB_TILE_NORMAL_t *life_counters[3][2] = {
+	{
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_TILE_1 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_TILE_1 * 2) + (LINE_LENGTH * 2) * 46)
+	},
+	{
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_TILE_2 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_TILE_2 * 2) + (LINE_LENGTH * 2) * 46)
+	},
+	{
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_TILE_3 * 2) + (LINE_LENGTH * 2) * 45),
+		(__far RRB_TILE_NORMAL_t *)(TILE_MAP_STORE + (LIFE_TILE_3 * 2) + (LINE_LENGTH * 2) * 46)
 	}
 };

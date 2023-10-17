@@ -90,7 +90,7 @@ unsigned short medium_icecream_bottom_pixie_tiles[2][2] = {
 	{ 0x0664,0x0665 }
 };
 
-unsigned short small_icream_bottom_pixie_tiles[2][2] = {
+unsigned short small_icecream_bottom_pixie_tiles[2][2] = {
 	{ 0x0666,0x0667 },
 	{ 0x0668,0x0669 }
 };

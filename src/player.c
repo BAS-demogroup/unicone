@@ -6,7 +6,7 @@
 
 
 void update_player() {
-	if (falling_icecream_state != 2) {
+	if (falling_icecream_state < 2) {
 		// left?
 		if ((player_input & 0b00000100) && player_x > 1 ) {
 			player_x -= acceleration;
@@ -38,6 +38,8 @@ void update_player() {
 short player_x = 304;
 char stack_size = 0;
 char acceleration = 1;
+char player_lives = 3;
+char player_dying = 0;
 
 signed char stack_offsets[50] = {
 	0,0,0,0,0,0,0,0,0,0,

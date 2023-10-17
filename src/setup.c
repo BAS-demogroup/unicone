@@ -63,7 +63,6 @@ void setup() {
 	
 	// clear the screens
 	run_dma_job((__far char *)&clear_tilemap);
-	//run_dma_job((__far char *)&clear_attrmap);
 	run_dma_job((__far char *)&load_attrmap);
 	
 	// conigure PAL or NTSC
@@ -117,8 +116,6 @@ void setup() {
 	
 	// initalize the music
 	musicInit();
-	
-	reset_level();
 	
 	muted = 0;
 }

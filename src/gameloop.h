@@ -8,7 +8,11 @@ void draw_icecream_stack();
 void draw_cone();
 
 void reset_level();
+void draw_lives();
 
 extern unsigned short matrix_raster;
+
+// this might fit in a char
+extern unsigned short lost_life_timer;
 
 #endif
