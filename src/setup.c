@@ -67,10 +67,10 @@ void setup() {
 	
 	// conigure PAL or NTSC
 	if(VIC4.PALNTSC) {
-		VIC4.PALNTSC = 1;
+		VIC4.PALNTSC  = 1;
 		matrix_raster = 0x1be;
 	} else {
-		VIC4.PALNTSC = 0;
+		VIC4.PALNTSC  = 0;
 		matrix_raster = 0x1c7;
 	}
 	
@@ -91,15 +91,15 @@ void setup() {
 	VIC2.MCM = 1;
 	
 	// configure screen row length
-	VIC4.LINESTEP = LINE_LENGTH << 1;
+	VIC4.LINESTEP    = LINE_LENGTH << 1;
 	VIC4.CHRCOUNTLSB = LINE_LENGTH;
 	VIC4.CHRCOUNTMSB = LINE_LENGTH >> 8;
 	VIC4.DISPROWS    = LINE_COUNT;
 	
 	// set tile map location
-	VIC4.SCRNPTR = TILE_MAP_STORE & 0xffff;
+	VIC4.SCRNPTR    = TILE_MAP_STORE & 0xffff;
 	VIC4.SCRNPTRBNK = (TILE_MAP_STORE & 0xf0000) >> 16;
-	VIC4.SCRNPTRMB = 0x0;
+	VIC4.SCRNPTRMB  = 0x0;
 	
 	// load the color palette
 	run_dma_job((__far char *)&load_palette);
@@ -124,9 +124,12 @@ void setup() {
 void load() {
 	fl_init();
 	fl_waiting();
+	
 	floppy_iffl_fast_load_init("+UNICONE");
+	
 	for (char i = 0; i < 6; i++) {
 		floppy_iffl_fast_load();
 	}
+	
 	fl_exit();
 }

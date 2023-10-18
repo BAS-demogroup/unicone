@@ -10,16 +10,15 @@
 
 
 void update_player() {
-	//if (stack_size > 0) {
-		for (char i = stack_size; i > 0; i--) {
-			if (i > 49) {
-				VIC2.BORDERCOL = 5;
-				while (1);
-			}
-			stack_x[i] = stack_x[i - 1];
+	for (char i = stack_size; i > 0; i--) {
+		if (i > 49) {
+			VIC2.BORDERCOL = 5;
+			while (1);
 		}
-	//}
+		stack_x[i] = stack_x[i - 1];
+	}
 	stack_x[0] = player_x;
+
 	if (falling_icecream_state < 2) {
 		// left?
 		if ((player_input & 0b00000100) && player_x > 1 ) {
@@ -73,12 +72,12 @@ void update_player() {
 	} else if (target_swing != 0) {
 		if (target_swing > 2) {
 			--target_swing;
-		} else if (target_swing < 2) {
+		} else if (target_swing < -2) {
 			++target_swing;
 		}
 		if (target_swing > 1) {
 			--target_swing;
-		} else if (target_swing < 1) {
+		} else if (target_swing < -1) {
 			++target_swing;
 		}
 		if (target_swing > 0) {
@@ -92,14 +91,16 @@ void update_player() {
 	acceleration = 1;
 }
 
-short player_x = 304;
-char stack_size = 0;
-char acceleration = 1;
-char player_lives = 3;
-char player_dying = 0;
+char        stack_size     = 0;
+char        player_dying   = 0;
 signed char icecream_swing = 0;
-signed char target_swing = 0;
+signed char target_swing   = 0;
 
+char        acceleration   = 1;
+
+char        player_lives   = 3;
+
+short       player_x       = 304;
 
 signed char stack_offsets[50] = {
 	0,0,0,0,0,0,0,0,0,0,

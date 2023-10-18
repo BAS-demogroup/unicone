@@ -21,13 +21,11 @@ unsigned short matrix_raster;
 
 void game_loop() {
 	while (lost_life_timer > 0) {
+		
 		while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
 			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
 		
 		VIC2.BORDERCOL = 0;
-		
-		// clear the screen
-		//run_dma_job((__far char *)&clear_tilemap);
 		
 		// bank the tile and attribute maps from $20000-$21fff into $a000-$bfff
 		__asm(" lda #0x00\n"
@@ -80,7 +78,6 @@ void game_loop() {
 		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
 		
 		VIC2.BORDERCOL = 15;
-		// VIC2.SCREENCOL = 15;
 		
 		if (player_dying) {
 			--lost_life_timer;
@@ -94,8 +91,10 @@ void draw_unicorn() {
 		unicorn_position[y]->YOFF = unicorn_y;
 		
 		char _frame = unicorn_frame_lookup[unicorn_frame_index];
+
 		unicorn_tiles[0][y]->TILE = unicorn_pixie_tiles[_frame]
 			[unicorn_facing ? 2 : unicorn_pooping][y];
+
 		unicorn_tiles[1][y]->TILE = unicorn_pixie_tiles[_frame]
 			[unicorn_facing ? unicorn_pooping : 2][y];
 		
@@ -132,40 +131,54 @@ void draw_falling_icecream() {
 		falling_icecream_shadow_position[0][y + yoff]->YOFF = ymod;
 
 		if (_last_yoff != yoff) {
+			
 			falling_icecream_shadow_position[0][y + yoff]->XPOS = 
 				falling_icecream_x;
+
 			falling_icecream_position[0][y + yoff]->XPOS = falling_icecream_x;
+
 			falling_icecream_shadow_position[1][y + yoff]->XPOS = 
 				0x280;
+
 			falling_icecream_position[1][y + yoff]->XPOS = 0x280;
 			
 			for (char x = 0; x < 2; x++) {
+				
 				falling_icecream_shadow_tiles[0][x][y + yoff]->TILE = 
 					large_icecream_top_pixie_tiles[1][x][y];
+
 				falling_icecream_tiles[0][x][y + yoff]->TILE = 
 					large_icecream_top_pixie_tiles[0][x][y];
+
 			}
 		}
 	}
 
 	for (char ribbon = 0; ribbon < 2; ribbon++) {
 		for (char y = 0; y < 3; y++) {
+			
 			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
 				YOFF = ymod;
+			
 			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->YOFF = 
 				ymod;
 
 			if (_last_yoff != yoff) {
+				
 				falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
 					XPOS = falling_icecream_x;
+				
 				falling_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
 					falling_icecream_x;
 			
 				for (char x = 0; x < 2; x++) {
+					
 					falling_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]
 						->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
+					
 					falling_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE =
 						large_icecream_bottom_pixie_tiles[0][x][y];
+				
 				}
 			}
 		}
@@ -192,26 +205,38 @@ void draw_icecream_stack() {
 		
 		if (_last_stack_size != stack_size) {
 			for (char x = 0; x < 2; x++) {
+				
 				stacked_icecream_shadow_tiles[0][x][y + yoff]->TILE = 
 					large_icecream_top_pixie_tiles[1][x][y];
+					
 				stacked_icecream_tiles[0][x][y + yoff]->TILE = 
 					large_icecream_top_pixie_tiles[0][x][y];
+					
 			}
 		}
 	}
 
 	for (char ribbon = 0; ribbon < stack_size - 1; ribbon++) {
 		for (char y = 1; y < 3; y++) {
+			
 			short pos = player_x + 
 				stack_offsets[stack_size - ribbon - 2];
+				
 			if (icecream_swing < 0) {
-				pos -= (short)swing_table[abs(icecream_swing)][stack_size - ribbon - 1];
+				
+				pos -= (short)swing_table[abs(icecream_swing)]
+					[stack_size - ribbon - 1];
+					
 			} else {
-				pos += (short)swing_table[icecream_swing][stack_size - ribbon - 1];
+				
+				pos += (short)swing_table[icecream_swing]
+					[stack_size - ribbon - 1];
+					
 			}
 			
 			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
 				XPOS = pos;
+				
 			stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
 				pos;
 				
@@ -222,8 +247,10 @@ void draw_icecream_stack() {
 			//if (ribbon < _last_stack_size - 3) continue;
 			
 			for (char x = 0; x < 2; x++) {
+				
 				stacked_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]
 					->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
+					
 				stacked_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE =
 					large_icecream_bottom_pixie_tiles[0][x][y];
 			}
@@ -240,7 +267,10 @@ void draw_cone() {
 		
 		if (!_cone_drawn) {
 			for (char x = 0; x < 2; x++) {
-				cone_shadow_tiles[x][y]->TILE = large_cone_pixie_tiles[1][x][y];
+				
+				cone_shadow_tiles[x][y]->TILE = 
+					large_cone_pixie_tiles[1][x][y];
+					
 				cone_tiles[x][y]->TILE = large_cone_pixie_tiles[0][x][y];
 			}
 		}

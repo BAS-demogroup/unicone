@@ -1,8 +1,8 @@
 #ifndef __CONSTANTS_H
 #define __CONSTANTS_H
 
-#define LINE_LENGTH 94
-#define LINE_COUNT  50
+#define LINE_LENGTH    94
+#define LINE_COUNT     50
 
 #define TILE_MAP_BAK   0x001a5c0
 #define ATTR_MAP_BAK   0x001ca78

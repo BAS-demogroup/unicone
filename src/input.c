@@ -68,5 +68,5 @@ void process_input() {
 }
 
 char player_input = 0;
-char key_down = 0;
-char muted = 0;
+char key_down     = 0;
+char muted        = 0;

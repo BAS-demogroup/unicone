@@ -17,10 +17,13 @@ void main() {
 		player_lives = 3;
 
 		do {
+			
 			reset_level();
 			game_loop();
+			
 		} while (player_lives > 0);
 		
+		// this is just for now, once we have a title screen, then rip this out.
 		VIC2.BORDERCOL = 0;
 		while (1);
 	};

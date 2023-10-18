@@ -9,7 +9,6 @@ char _vertical_sinus[] = {
 	0,1,2,3,3,4,5,5,6,6,7,7,7,7,7,7,6,6,5,5,4,3,3,2,1
 };
 
-
 // char _test_delay = 0;
 void update_unicorn() {
 	// if (++_test_delay < 10) return;
@@ -70,16 +69,18 @@ void update_unicorn() {
 	}
 }
 
-unsigned short unicorn_x = 304;
-char unicorn_y = 0;
-char unicorn_facing = 0;
-char unicorn_frame_index = 0;
-char unicorn_speed = 1;
-char unicorn_pooping = 0;
-char unicorn_drop_poop = 0;
-char unicorn_animation_delay = 0;
-char vertical_sinus_index = 0;
-char unicorn_countdown = 0;
+char           unicorn_y               = 0;
+char           unicorn_facing          = 0;
+char           unicorn_frame_index     = 0;
+char           unicorn_pooping         = 0;
+char           unicorn_drop_poop       = 0;
+char           unicorn_animation_delay = 0;
+char           vertical_sinus_index    = 0;
+char           unicorn_countdown       = 0;
+
+char           unicorn_speed           = 1;
+
+unsigned short unicorn_x               = 304;
 
 char unicorn_frame_lookup[7] = {
 	0, 1, 2, 2, 3, 3, 4

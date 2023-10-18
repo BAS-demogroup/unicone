@@ -17,18 +17,18 @@ struct _RRB_TILE_NORMAL {
 
 struct _RRB_ATTR_NORMAL {
 	union {
-		uint8_t VTRIM         : 2;
-		uint8_t HTRIM_MSB     : 1;
-		uint8_t NCM_ON        : 1;
-		uint8_t GOTOX         : 1;	// For normal mode, this should always be 
-									// 0, otherwise, we're using the wrong 
-									// struct.
-		uint8_t ALPHABLEND_ON : 1;
-		uint8_t HFLIP         : 1;
-		uint8_t VFLIP         : 1;
+		uint8_t  VTRIM         : 2;
+		uint8_t  HTRIM_MSB     : 1;
+		uint8_t  NCM_ON        : 1;
+		uint8_t  GOTOX         : 1;	// For normal mode, this should always be 
+				 					// 0, otherwise, we're using the wrong 
+				 					// struct.
+		uint8_t  ALPHABLEND_ON : 1;
+		uint8_t  HFLIP         : 1;
+		uint8_t  VFLIP         : 1;
 	};
 	// At this time, these structs do not support VIC3 extended attributes
-	uint8_t FGCOLOR;
+	uint8_t      FGCOLOR;
 };
 
 struct _RRB_TILE_GOTOX {
@@ -41,15 +41,15 @@ struct _RRB_TILE_GOTOX {
 
 struct _RRB_ATTR_GOTOX {
 	union {
-		uint8_t RESERVED1  : 2;	// set to 0
-		uint8_t ALWAYS_FG  : 1;
-		uint8_t ROWMASK_ON : 1;
-		uint8_t GOTOX      : 1;	// For GOTOX mode, this of course must always 
-								// be 1
-		uint8_t RESERVED2  : 1;	// set to 0
-		uint8_t ALWAYS_BG  : 1;
+		uint8_t  RESERVED1  : 2;	// set to 0
+		uint8_t  ALWAYS_FG  : 1;
+		uint8_t  ROWMASK_ON : 1;
+		uint8_t  GOTOX      : 1;	// For GOTOX mode, this of course must always 
+				    				// be 1
+		uint8_t  RESERVED2  : 1;	// set to 0
+		uint8_t  ALWAYS_BG  : 1;
 	};
-	uint8_t ROWMASK;
+	uint8_t      ROWMASK;
 };
 
 #endif
