@@ -5,6 +5,7 @@ cls
 cd assets
 
 ..\..\tilemizer_nopack.py -b4 -m=16d80 -o=pixies -t="pixies.png"
+C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b4 -m=23000 -o=level_indicator -t="level_marker.png"
 
 cd ..
 
@@ -54,6 +55,7 @@ C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.chrs 00016d80
 C:\Users\death\Documents\C65\megatool\megatool -a build/tilemap.bin 0001a5c0
 C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 0001ca78
 C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.clut 0001ef30
+C:\Users\death\Documents\C65\megatool\megatool -a assets/level_indicator.chrs 00023000
 
 C:\Users\death\Documents\C65\megatool\megatool -c build/music_swap_stub.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/sentimental_thing.prg.addr
@@ -61,9 +63,9 @@ C:\Users\death\Documents\C65\megatool\megatool -c assets/pixies.chrs.addr
 C:\Users\death\Documents\C65\megatool\megatool -c build/tilemap.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c build/attrmap.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/pixies.clut.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/level_indicator.chrs.addr
 
-
-C:\Users\death\Documents\C65\megatool\megatool -i build/music_swap_stub.bin.addr.mc assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc build/tilemap.bin.addr.mc build/attrmap.bin.addr.mc assets/pixies.clut.addr.mc assets/+unicone
+C:\Users\death\Documents\C65\megatool\megatool -i build/music_swap_stub.bin.addr.mc assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc build/tilemap.bin.addr.mc build/attrmap.bin.addr.mc assets/pixies.clut.addr.mc build/level_indicator.chrs.mc assets/+unicone
 
 C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicone.d81 -delete "unicone" -delete "+unicone" -write "build/unicone.prg" "unicone" -write "assets/+unicone" "+unicone" -list
 

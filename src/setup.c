@@ -127,7 +127,7 @@ void load() {
 	
 	floppy_iffl_fast_load_init("+UNICONE");
 	
-	for (char i = 0; i < 6; i++) {
+	for (char i = 0; i < 7; i++) {
 		floppy_iffl_fast_load();
 	}
 	

@@ -437,3 +437,5 @@ FodyWeavers.xsd
 /build/music_swap_stub.bin.addr.mc
 /reference/Xanadu.asm
 /build/swing.s
+/assets/level_indicator.info
+/assets/level_indicator.clut
