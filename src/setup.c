@@ -48,14 +48,14 @@ void setup() {
 		  " map\n"
 		  " nop");
 
-	// disable RAM protection in banks 2 and 3
-	poke(0xD640, 0x70);		// $d640 = HTRAP00
-	__no_operation();		// clv would be better
-
 	// Enable the VIC4
 	VIC3.KEY = 0x47;
 	VIC3.KEY = 0x53;
 	
+	// disable RAM protection in banks 2 and 3
+	poke(0xD640, 0x70);		// $d640 = HTRAP00
+	__no_operation();		// clv would be better
+
 	VIC2.BORDERCOL = 15;
 	VIC2.SCREENCOL = 15;
 	

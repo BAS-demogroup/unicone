@@ -65,7 +65,7 @@ C:\Users\death\Documents\C65\megatool\megatool -c build/attrmap.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/pixies.clut.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/level_indicator.chrs.addr
 
-C:\Users\death\Documents\C65\megatool\megatool -i build/music_swap_stub.bin.addr.mc assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc build/tilemap.bin.addr.mc build/attrmap.bin.addr.mc assets/pixies.clut.addr.mc build/level_indicator.chrs.mc assets/+unicone
+C:\Users\death\Documents\C65\megatool\megatool -i build/music_swap_stub.bin.addr.mc assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc build/tilemap.bin.addr.mc build/attrmap.bin.addr.mc assets/pixies.clut.addr.mc assets/level_indicator.chrs.addr.mc assets/+unicone
 
 C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicone.d81 -delete "unicone" -delete "+unicone" -write "build/unicone.prg" "unicone" -write "assets/+unicone" "+unicone" -list
 

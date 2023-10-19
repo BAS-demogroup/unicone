@@ -11,6 +11,7 @@ typedef struct _FDC         _FDC_t;
 typedef struct _SID         _SID_t;
 typedef struct _KEYSCAN     _KEYSCAN_t;
 typedef struct _DMA         _DMA_t;
+typedef struct _MATH        _MATH_t;
 typedef struct _CIA1        _CIA1_t;
 typedef struct _CIA2        _CIA2_t;
 typedef struct _IRQ_VECTORS _IRQ_VECTORS_t;
@@ -402,6 +403,19 @@ struct _DMA {
 	uint8_t     ADDRLSB;
 };
 
+struct _MATH {
+	union {
+		uint8_t _NA     : 6;
+		uint8_t MULBUSY : 1;
+		uint8_t DIVBUSY : 1;
+	};
+	uint32_t    DIVOUT;
+	uint32_t    DIVOUTFRACT;
+	uint32_t    MATHINA;
+	uint32_t    MATHINB;
+	uint32_t    MULTOUT;
+};
+
 // I can't get the CIA chips to work right.
 struct _CIA1 {
 	uint8_t     PORTA;
@@ -486,6 +500,7 @@ struct _IRQ_VECTORS {
 #define SID4        (* (volatile _SID_t *)         0xd460)
 #define KEYSCAN     (* (volatile _KEYSCAN_t *)     0xd613)
 #define DMA         (* (volatile _DMA_t *)         0xd700)
+#define MATH        (* (volatile _MATH_t *)        0xd70f)
 #define CIA1        (* (volatile _CIA1_t *)        0xdc00)
 #define CIA2        (* (volatile _CIA2_t *)        0xdd00)
 #define IRQ_VECTORS (* (volatile _IRQ_VECTORS_t *) 0xfffa)

@@ -376,6 +376,7 @@ void reset_level() {
 	
 	_last_stack_size = 0;
 	_cone_drawn = 0;
+	level = 10;
 
 	falling_icecream_y = 0;
 	falling_icecream_state = 0;
@@ -421,28 +422,74 @@ void reset_level() {
 	}
 	
 	draw_lives();
+	draw_level();
 }
 
 void draw_lives() {
 	// this isn't pretty, but there was a compiler error that needed a 
-	// workaround... and this IS fast.
+	// workaround... and this IS fast(ish).
 	if (player_lives > 0) {
-		farpoke(0x2215C,0x50);
-		farpoke(0x22218,0x50);
 		farpoke(0x22168,0x50);
 		farpoke(0x22224,0x50);
+		farpoke(0x22174,0x50);
+		farpoke(0x22230,0x50);
 	}
 	if (player_lives > 1) {
-		farpoke(0x22160,0x60);
-		farpoke(0x2221C,0x60);
-		farpoke(0x2216C,0x60);
+		farpoke(0x2216c,0x60);
 		farpoke(0x22228,0x60);
+		farpoke(0x22178,0x60);
+		farpoke(0x22234,0x60);
 	}
 	if (player_lives > 2) {
-		farpoke(0x22164,0x70);
-		farpoke(0x22220,0x70);
 		farpoke(0x22170,0x70);
-		farpoke(0x2222C,0x70);
+		farpoke(0x2222c,0x70);
+		farpoke(0x2217c,0x70);
+		farpoke(0x22238,0x70);
+	}
+}
+
+void draw_level() {
+	__attribute__((far)) unsigned short *tile = 
+		(__far unsigned short *)0x002215e;
+	
+	if (level > 9) {
+		char tens = level / 10;
+		
+		for (char y = 0; y < 5; y++) {
+			for (char x = 0; x < 2; x++) {
+				*tile = numbers[tens][x][y];
+				++tile;
+			}
+			tile += 92;
+		}
+		
+		tile = (__far unsigned short *)0x0022164;
+	}
+	
+	char ones = level % 10;
+		
+	for (char y = 0; y < 5; y++) {
+		for (char x = 0; x < 2; x++) {
+			*tile = numbers[ones][x][y];
+			++tile;
+		}
+		tile += 92;
+	}
+	
+	tile = (__far unsigned short *)0x002215c;
+	unsigned short pos = 310;
+	
+	for (char y = 0; y < 5; y++) {
+		*tile = pos;
+		tile += 94;
+	}
+	
+	tile = (__far unsigned short *)0x0022162;
+	pos += 22;
+	
+	for (char y = 0; y < 5; y++) {
+		*tile = pos;
+		tile += 94;
 	}
 }
 
@@ -471,3 +518,4 @@ void erase_dropped_stack() {
 }
 
 unsigned short lost_life_timer;
+char level;

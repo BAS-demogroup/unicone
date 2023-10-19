@@ -10,11 +10,13 @@ void draw_cone();
 
 void reset_level();
 void draw_lives();
+void draw_level();
 void erase_dropped_stack();
 
 extern unsigned short matrix_raster;
 
 // this might fit in a char
 extern unsigned short lost_life_timer;
+extern char level;
 
 #endif

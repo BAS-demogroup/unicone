@@ -13,5 +13,6 @@ extern unsigned short small_icecream_bottom_pixie_tiles[2][2];
 extern unsigned short large_cone_pixie_tiles[2][2][7];
 extern unsigned short medium_cone_pixie_tiles[2][4];
 extern unsigned short small_cone_pixie_tiles[2][3];
+extern unsigned short numbers[10][2][5];
 
 #endif
