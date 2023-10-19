@@ -19,7 +19,7 @@ void update_player() {
 	}
 	stack_x[0] = player_x;
 
-	if (falling_icecream_state < 2) {
+	if (falling_icecream_state < 2 && falling_stacked_state < 2) {
 		// left?
 		if ((player_input & 0b00000100) && player_x > 1 ) {
 			player_x -= acceleration;

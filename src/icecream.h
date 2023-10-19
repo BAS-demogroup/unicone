@@ -7,6 +7,11 @@ void clear_falling_icecream();
 extern unsigned short falling_icecream_x;
 extern unsigned short falling_icecream_y;
 extern char           falling_icecream_state;
+
 extern char           stack_top;
+
+extern unsigned short falling_stacked_x;
+extern unsigned short falling_stacked_y;
+extern char           falling_stacked_state;
 
 #endif

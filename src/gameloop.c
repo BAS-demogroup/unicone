@@ -56,13 +56,17 @@ void game_loop() {
 
 		VIC2.BORDERCOL = 4;
 		
-		draw_icecream_stack();
+		draw_falling_stacked();
 
 		VIC2.BORDERCOL = 10;
 		
+		draw_icecream_stack();
+
+		VIC2.BORDERCOL = 13;
+		
 		draw_cone();
 		
-		VIC2.BORDERCOL = 13;
+		VIC2.BORDERCOL = 3;
 
 		// this is only necessary when the music is disabled.
 		// it's probably not necessary at all, but just to be on the safe side
@@ -186,9 +190,77 @@ void draw_falling_icecream() {
 	_last_yoff = yoff;
 }
 
+char _last_stacked_yoff = 0xff;
+void draw_falling_stacked() {
+	if (!falling_stacked_state) return;
+	
+	char yoff = falling_stacked_y >> 3;
+	char ymod = (~(char)falling_stacked_y & 0x07);
+	
+	for (char y = 0; y < 5; y++) {
+		falling_icecream_position[0][y + yoff]->YOFF = ymod;
+		falling_icecream_shadow_position[0][y + yoff]->YOFF = ymod;
+
+		if (_last_stacked_yoff != yoff) {
+			
+			falling_icecream_shadow_position[0][y + yoff]->XPOS = 
+				falling_stacked_x;
+
+			falling_icecream_position[0][y + yoff]->XPOS = falling_stacked_x;
+
+			falling_icecream_shadow_position[1][y + yoff]->XPOS = 
+				0x280;
+
+			falling_icecream_position[1][y + yoff]->XPOS = 0x280;
+			
+			for (char x = 0; x < 2; x++) {
+				
+				falling_icecream_shadow_tiles[0][x][y + yoff]->TILE = 
+					large_icecream_top_pixie_tiles[1][x][y];
+
+				falling_icecream_tiles[0][x][y + yoff]->TILE = 
+					large_icecream_top_pixie_tiles[0][x][y];
+
+			}
+		}
+	}
+
+	for (char ribbon = 0; ribbon < 2; ribbon++) {
+		for (char y = 0; y < 3; y++) {
+			
+			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
+				YOFF = ymod;
+			
+			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->YOFF = 
+				ymod;
+
+			if (_last_stacked_yoff != yoff) {
+				
+				falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
+					XPOS = falling_stacked_x;
+				
+				falling_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
+					falling_stacked_x;
+			
+				for (char x = 0; x < 2; x++) {
+					
+					falling_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]
+						->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
+					
+					falling_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE =
+						large_icecream_bottom_pixie_tiles[0][x][y];
+				
+				}
+			}
+		}
+	}
+	_last_stacked_yoff = yoff;
+}
+
 char _last_stack_size = 0;
 void draw_icecream_stack() {
 	if (stack_size == 0) return;
+	short last_pos = 0;
 	
 	char yoff = 30 - stack_size;
 	
@@ -199,6 +271,7 @@ void draw_icecream_stack() {
 		} else {
 			pos += (short)swing_table[icecream_swing][stack_size - 1];
 		}
+		last_pos = pos;
 			
 		stacked_icecream_shadow_position[0][y + yoff]->XPOS = pos;
 		stacked_icecream_position[0][y + yoff]->XPOS = pos;
@@ -232,6 +305,24 @@ void draw_icecream_stack() {
 				pos += (short)swing_table[icecream_swing]
 					[stack_size - ribbon - 1];
 					
+			}
+			
+			// has the top of the stack fallen?
+			if (abs(last_pos - pos) >= 24) {
+				falling_stacked_x = last_pos;
+				falling_stacked_y = yoff << 3;
+				falling_stacked_state = 2;
+
+				if (falling_icecream_state == 1) {
+					falling_icecream_state = 2;
+				}
+				
+				// erase dropped icecream
+				erase_dropped_stack();
+
+				stack_size -= 3;
+				
+				return;
 			}
 			
 			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
@@ -288,6 +379,9 @@ void reset_level() {
 
 	falling_icecream_y = 0;
 	falling_icecream_state = 0;
+	falling_stacked_x = 0;
+	falling_stacked_y = 0;
+	falling_stacked_state = 0;
 
 	player_input = 0;
 	key_down = 0;
@@ -315,6 +409,7 @@ void reset_level() {
 	stack_top = 224;
 
 	_last_yoff = 0xff;
+	_last_stacked_yoff = 0xff;
 	
 	falling_icecream_x = 304;
 	player_x = 304;
@@ -348,6 +443,30 @@ void draw_lives() {
 		farpoke(0x22220,0x70);
 		farpoke(0x22170,0x70);
 		farpoke(0x2222C,0x70);
+	}
+}
+
+void erase_dropped_stack() {
+	char yoff = 30 - stack_size;
+
+	for (char y = 0; y < 5; y++) {
+
+		stacked_icecream_shadow_position[0][y + yoff]->XPOS = 
+			0x280;
+			
+		stacked_icecream_position[0][y + yoff]->XPOS = 0x280;
+	}
+	
+	for (char ribbon = 0; ribbon < 3 && ribbon < stack_size - 1; ribbon++) {
+		for (char y = 1; y < 3; y++) {
+			
+			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
+				XPOS = 0x280;
+				
+			stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
+				0x280;
+				
+		}
 	}
 }
 

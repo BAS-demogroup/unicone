@@ -9,7 +9,17 @@
 
 
 void update_falling_icecream() {
-	if (!falling_icecream_state) return;
+	if (falling_stacked_state == 2) {
+		if (falling_stacked_y < 248) {
+			falling_stacked_y += 3;
+		} else {
+			// done doing failure state
+			player_dying = 1;
+			--player_lives;
+			falling_stacked_y = 248;
+			falling_stacked_state = 3;
+		}
+	}
 	
 	switch (falling_icecream_state) {
 		case 0:
@@ -56,8 +66,10 @@ void update_falling_icecream() {
 				falling_icecream_y += 3;
 			} else {
 				// done doing failure state
+				if (!player_dying) {
+					--player_lives;
+				}
 				player_dying = 1;
-				--player_lives;
 				falling_icecream_y = 248;
 				falling_icecream_state = 3;
 			}
@@ -89,6 +101,10 @@ void clear_falling_icecream() {
 
 unsigned short falling_icecream_y     = 0;
 char           falling_icecream_state = 0;
+
+unsigned short falling_stacked_x      = 0;
+unsigned short falling_stacked_y      = 0;
+char           falling_stacked_state  = 0;
 
 char           stack_top              = 224;
 

@@ -45,7 +45,9 @@ void update_unicorn() {
 	}
 	
 	unsigned long rng = random();
-	if (!falling_icecream_state && !unicorn_pooping && (rng & 0x1ff) == 0x00) {
+	if (!falling_icecream_state && !unicorn_pooping && !falling_stacked_state 
+		&& (rng & 0x1ff) == 0x00) {
+			
 		unicorn_pooping = 1;
 		unicorn_countdown = 50;
 	} else {

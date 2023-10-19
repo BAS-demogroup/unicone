@@ -4,11 +4,13 @@
 void game_loop();
 void draw_unicorn();
 void draw_falling_icecream();
+void draw_falling_stacked();
 void draw_icecream_stack();
 void draw_cone();
 
 void reset_level();
 void draw_lives();
+void erase_dropped_stack();
 
 extern unsigned short matrix_raster;
 
