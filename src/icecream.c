@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 
+#include "gameloop.h"
 #include "player.h"
 #include "maps.h"
 
@@ -52,9 +53,16 @@ void update_falling_icecream() {
 							
 					}
 					stack_size += 3;
+					++dollops;
 					stack_top -= 24;
 					
-					falling_icecream_state = 0;
+					if (dollops < level) {
+						falling_icecream_state = 0;
+					} else {
+						falling_icecream_state = 3;
+						next_level = 1;
+						++level;
+					}
 				} else {
 					// if not, then do some failure thing.
 					falling_icecream_state = 2;

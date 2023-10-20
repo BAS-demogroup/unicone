@@ -95,6 +95,8 @@ char        stack_size     = 0;
 char        player_dying   = 0;
 signed char icecream_swing = 0;
 signed char target_swing   = 0;
+char		dollops        = 0;
+char        next_level     = 0;
 
 char        acceleration   = 1;
 

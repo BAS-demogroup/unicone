@@ -20,7 +20,7 @@
 unsigned short matrix_raster;
 
 void game_loop() {
-	while (lost_life_timer > 0) {
+	while (end_of_level_timer > 0) {
 		
 		while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
 			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
@@ -83,8 +83,8 @@ void game_loop() {
 		
 		VIC2.BORDERCOL = 15;
 		
-		if (player_dying) {
-			--lost_life_timer;
+		if (player_dying || next_level) {
+			--end_of_level_timer;
 		}
 	};
 }
@@ -376,7 +376,6 @@ void reset_level() {
 	
 	_last_stack_size = 0;
 	_cone_drawn = 0;
-	level = 10;
 
 	falling_icecream_y = 0;
 	falling_icecream_state = 0;
@@ -391,6 +390,8 @@ void reset_level() {
 	player_dying = 0;
 	icecream_swing = 0;
 	target_swing = 0;
+	dollops = 0;
+	next_level = 0;
 
 	unicorn_y = 0;
 	unicorn_facing = 0;
@@ -405,7 +406,7 @@ void reset_level() {
 	
 	unicorn_speed = 1;
 	
-	lost_life_timer = 100;
+	end_of_level_timer = 100;
 	
 	stack_top = 224;
 
@@ -517,5 +518,5 @@ void erase_dropped_stack() {
 	}
 }
 
-unsigned short lost_life_timer;
+unsigned short end_of_level_timer;
 char level;

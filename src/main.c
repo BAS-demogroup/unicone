@@ -15,10 +15,16 @@ void main() {
 		// reset game
 		
 		player_lives = 3;
+		level = 1;
 
 		do {
 			
 			reset_level();
+			
+			// the graphics will scale smaller as the level increases, because
+			// we can only fit about 10 ice cream stacks on the screen at the
+			// initial resolution.  The graphics are already drawn, and my guess
+			// is that the first scale change should happen after level 6.
 			game_loop();
 			
 		} while (player_lives > 0);

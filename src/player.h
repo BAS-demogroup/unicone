@@ -12,5 +12,7 @@ extern signed char icecream_swing;
 extern signed char target_swing;
 extern char        player_lives;
 extern char        player_dying;
+extern char        dollops;
+extern char        next_level;
 
 #endif
