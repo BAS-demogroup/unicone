@@ -19,4 +19,6 @@ extern char icecream_bottom_height;
 extern char icecream_bottom_width;
 extern char icecream_bottom_y_add;
 
+extern char falling_speed;
+
 #endif

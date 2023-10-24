@@ -132,7 +132,7 @@ void draw_unicorn() {
 }
 
 void draw_falling_icecream() {
-	if (!falling_icecream_state) return;
+	if (falling_icecream_state == 0 || falling_icecream_state == 3) return;
 	
 	unsigned short y_adj = falling_icecream_y;
 	
@@ -369,7 +369,7 @@ void reset_level() {
 	
 	acceleration = 1;
 	
-	unicorn_speed = 1;
+	//unicorn_speed = 1;
 	
 	end_of_level_timer = 100;
 	
@@ -435,30 +435,6 @@ void draw_level() {
 		pos += 22;
 	}
 }
-
-// void erase_dropped_stack() {
-	// char yoff = 30 - stack_size;
-
-	// for (char y = 0; y < 5; y++) {
-
-		// stacked_icecream_shadow_position[0][y + yoff]->XPOS = 
-			// 0x280;
-			
-		// stacked_icecream_position[0][y + yoff]->XPOS = 0x280;
-	// }
-	
-	// for (char ribbon = 0; ribbon < 3 && ribbon < stack_size - 1; ribbon++) {
-		// for (char y = 1; y < 3; y++) {
-			
-			// stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
-				// XPOS = 0x280;
-				
-			// stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
-				// 0x280;
-				
-		// }
-	// }
-// }
 
 unsigned short end_of_level_timer;
 char level;

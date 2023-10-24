@@ -2,11 +2,12 @@
 
 
 #include "gameloop.h"
+#include "unicorn.h"
 
 
 void set_level_difficulty() {
 	// set scale values
-	if (level < 7) {
+	if (level < 8) {
 		scale = 0;
 
 		cone_height = 6;
@@ -23,8 +24,14 @@ void set_level_difficulty() {
 		icecream_bottom_width = 2;
 		icecream_bottom_y_add = 8;
 		
-	// no actual idea if 14 is the next breakpoint, this is just a placeholder
-	} else if (level < 14) {
+		falling_speed = 2;
+		
+		if (level < 6) {
+			unicorn_speed = 1;
+		} else {
+			unicorn_speed = 2;
+		}
+	} else if (level < 16) {
 		scale = 1;
 
 		cone_height = 3;
@@ -40,6 +47,14 @@ void set_level_difficulty() {
 		icecream_bottom_height = 2;
 		icecream_bottom_width = 1;
 		icecream_bottom_y_add = 4;
+		
+		falling_speed = 2;
+		
+		if (level < 14) {
+			unicorn_speed = 1;
+		} else {
+			unicorn_speed = 2;
+		}
 	} else {
 		scale = 2;
 
@@ -56,6 +71,14 @@ void set_level_difficulty() {
 		icecream_bottom_height = 2;
 		icecream_bottom_width = 1;
 		icecream_bottom_y_add = 2;
+		
+		falling_speed = 3;
+
+		if (level < 22) {
+			unicorn_speed = 1;
+		} else {
+			unicorn_speed = 2;
+		}
 	}
 }
 
@@ -75,3 +98,5 @@ char icecream_top_y_add;
 char icecream_bottom_height;
 char icecream_bottom_width;
 char icecream_bottom_y_add;
+
+char falling_speed;

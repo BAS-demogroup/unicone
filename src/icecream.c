@@ -17,7 +17,7 @@ void update_falling_icecream() {
 		unsigned short calc_top = 292 - icecream_top_y_add - 
 			(icecream_bottom_y_add << 1);
 		if (falling_stacked_y < calc_top) {
-			falling_stacked_y += 3;
+			falling_stacked_y += (falling_speed << 2);
 		} else {
 			// done doing failure state
 			player_dying = 1;
@@ -35,7 +35,7 @@ void update_falling_icecream() {
 			// has either been caught, if it's close enough to the cone, or 
 			// the player has lost a life
 			if (falling_icecream_y < stack_top) {
-				++falling_icecream_y;
+				falling_icecream_y += falling_speed;
 			} else {
 				short top_pos = player_x;
 				if (stack_size) {
@@ -73,33 +73,24 @@ void update_falling_icecream() {
 			}
 			return;
 		case 2:
-			if (falling_icecream_y < 248) {
-				falling_icecream_y += 3;
-			} else {
-				// done doing failure state
-				if (!player_dying) {
-					--player_lives;
+			{
+				unsigned short calc_top = 292 - icecream_top_y_add - 
+					(icecream_bottom_y_add << 1);
+
+				if (falling_icecream_y < calc_top) {
+					falling_icecream_y += (falling_speed << 2);
+				} else {
+					// done doing failure state
+					if (!player_dying) {
+						--player_lives;
+					}
+					player_dying = 1;
+					falling_icecream_y = calc_top;
+					falling_icecream_state = 3;
 				}
-				player_dying = 1;
-				falling_icecream_y = 248;
-				falling_icecream_state = 3;
 			}
 			
 			return;
-	}
-}
-
-void clear_falling_icecream() {
-	signed char max_layer = scale == 0 ? 3 : 5;
-	
-	unsigned short y_adj = falling_icecream_y;
-	
-	char yoff = y_adj >> 3;
-	
-	for (char y = 0; y < 7; y++) {
-		for (char layer = 0; layer < max_layer; layer++) {
-			set_icecream_pos(layer, 0x280, y + yoff, 0);
-		}
 	}
 }
 
