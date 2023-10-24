@@ -33,13 +33,15 @@ cc6502 -O 2 --list-file build/icecream.lst --assembly-source build/icecream.s --
 cc6502 -o build/icecream.o -O 2 --list-file build/icecream.lst --core 45gs02 --target MEGA65 src/icecream.c
 cc6502 -O 2 --list-file build/swing.lst --assembly-source build/swing.s --core 45gs02 --target MEGA65 src/swing.c
 cc6502 -o build/swing.o -O 2 --list-file build/swing.lst --core 45gs02 --target MEGA65 src/swing.c
+cc6502 -O 2 --list-file build/difficulty.lst --assembly-source build/difficulty.s --core 45gs02 --target MEGA65 src/difficulty.c
+cc6502 -o build/difficulty.o -O 2 --list-file build/difficulty.lst --core 45gs02 --target MEGA65 src/difficulty.c
 
 as6502 -o build/irqload.o --list-file build/irqload.lst --core 45gs02 --target MEGA65 src/iffl/irqload.s
 as6502 -o build/decruncher.o --list-file build/decruncher.lst --core 45gs02 --target MEGA65 src/iffl/decruncher.s
 as6502 -o build/iffl.o --list-file build/iffl.lst --core 45gs02 --target MEGA65 src/iffl/iffl.s
 as6502 -o build/rng.o --list-file build/rng.lst --core 45gs02 --target MEGA65 src/rng.s
 
-ln6502 -o build/unicone_full.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o build/pixies.o build/input.o build/player.o build/unicorn.o build/rng.o build/icecream.o build/swing.o ./mega65-unicone.scm
+ln6502 -o build/unicone_full.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o build/pixies.o build/input.o build/player.o build/unicorn.o build/rng.o build/icecream.o build/swing.o build/difficulty.o ./mega65-unicone.scm
 
 pause
 
@@ -53,8 +55,8 @@ C:\Users\death\Documents\C65\megatool\megatool -a build/music_swap_stub.bin 0000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/sentimental_thing.prg 00010000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.chrs 00016d80
 C:\Users\death\Documents\C65\megatool\megatool -a build/tilemap.bin 0001a5c0
-C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 0001ca78
-C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.clut 0001ef30
+C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 00026000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.clut 00025000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/level_indicator.chrs 00023000
 
 C:\Users\death\Documents\C65\megatool\megatool -c build/music_swap_stub.bin.addr

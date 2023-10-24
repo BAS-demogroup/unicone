@@ -99,7 +99,6 @@ struct _VIC2 {
 };
 
 struct _VIC3 {
-	uint8_t     _NA0[0x2F];
 	uint8_t     KEY;
 	union {
 		uint8_t CRAM2K  : 1;
@@ -190,7 +189,6 @@ struct _VIC3 {
 };
 
 struct _VIC4 {
-	uint8_t     _NA0[0x48];
 	uint8_t     TBDRPOSLSB;
 	union {
 		uint8_t TBDRPOSMSB  : 4;
@@ -491,8 +489,8 @@ struct _IRQ_VECTORS {
 
 #define CPU         (* (volatile _CPU_t *)           0x00)
 #define VIC2        (* (volatile _VIC2_t *)        0xd000)
-#define VIC3        (* (volatile _VIC3_t *)        0xd000)
-#define VIC4        (* (volatile _VIC4_t *)        0xd000)
+#define VIC3        (* (volatile _VIC3_t *)        0xd02f)
+#define VIC4        (* (volatile _VIC4_t *)        0xd048)
 #define FDC         (* (volatile _FDC_t *)         0xd080)
 #define SID1        (* (volatile _SID_t *)         0xd400)
 #define SID2        (* (volatile _SID_t *)         0xd420)

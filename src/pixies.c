@@ -1,5 +1,225 @@
 #include "pixies.h"
 
+
+#include "difficulty.h"
+#include "maps.h"
+
+
+unsigned short get_cone_tile(char shadow, char x, char y) {
+	switch (scale) {
+		case 1:
+			return medium_cone_pixie_tiles[shadow][y];
+		case 2:
+			return small_cone_pixie_tiles[shadow][y];
+		default:
+			return large_cone_pixie_tiles[shadow][x][y];
+	}
+}
+
+unsigned short get_icecream_top_tile(char shadow, char x, char y) {
+	switch (scale) {
+		case 1:
+			return medium_icecream_top_pixie_tiles[shadow][y];
+		case 2:
+			return small_icecream_top_pixie_tiles[shadow][y];
+		default:
+			return large_icecream_top_pixie_tiles[shadow][x][y];
+	}
+}
+
+unsigned short get_icecream_bottom_tile(char shadow, char x, char y) {
+	switch (scale) {
+		case 1:
+			return medium_icecream_bottom_pixie_tiles[shadow][y];
+		case 2:
+			return small_icecream_bottom_pixie_tiles[shadow][y];
+		default:
+			return large_icecream_bottom_pixie_tiles[shadow][x][y];
+	}
+}
+
+void paint_icecream_top_tile(char x_tile, char y_tile, char y_offset) {
+	switch (scale) {
+		case 1:
+		case 2:
+			small_icecream_shadow_tiles[0][y_tile + y_offset]->TILE =
+				get_icecream_top_tile(1, x_tile, y_tile);
+				
+			small_icecream_tiles[0][y_tile + y_offset]->TILE =
+				get_icecream_top_tile(0, x_tile, y_tile);
+			break;
+			
+		default:
+			falling_icecream_shadow_tiles[0][x_tile][y_tile + y_offset]->TILE =
+				get_icecream_top_tile(1, x_tile, y_tile);
+
+			falling_icecream_tiles[0][x_tile][y_tile + y_offset]->TILE = 
+				get_icecream_top_tile(0, x_tile, y_tile);
+				
+			break;
+	}
+}
+
+void paint_icecream_bottom_tile(char layer, char x_tile, char y_tile, 
+	char y_offset) {
+		
+	switch (scale) {
+		case 1:
+		case 2:
+			if (layer < 2) {
+				small_icecream_shadow_tiles[layer][y_tile + y_offset]->TILE =
+					get_icecream_bottom_tile(1, x_tile, y_tile);
+					
+				small_icecream_tiles[layer][y_tile + y_offset]->TILE =
+					get_icecream_bottom_tile(0, x_tile, y_tile);
+					
+			} else {
+				falling_icecream_shadow_tiles[layer - 2][x_tile]
+					[y_tile + y_offset]->TILE = 
+					get_icecream_bottom_tile(1, x_tile, y_tile);
+
+				falling_icecream_tiles[layer - 2][x_tile][y_tile + y_offset]->
+					TILE = get_icecream_bottom_tile(0, x_tile, y_tile);
+			}
+			break;
+			
+		default:
+			falling_icecream_shadow_tiles[layer][x_tile][y_tile + y_offset]->
+				TILE = get_icecream_bottom_tile(1, x_tile, y_tile);
+
+			falling_icecream_tiles[layer][x_tile][y_tile + y_offset]->TILE = 
+				get_icecream_bottom_tile(0, x_tile, y_tile);
+			break;
+	}
+}
+
+void set_icecream_pos(char layer, unsigned short x_pix, char y_tile, 
+	char y_pix) {
+		
+	switch (scale) {
+		case 1:
+		case 2:
+			if (layer < 2) {
+				small_icecream_shadow_position[layer][y_tile]->YOFF = y_pix;
+				small_icecream_position[layer][y_tile]->YOFF = y_pix;
+				
+				small_icecream_shadow_position[layer][y_tile]->XPOS = x_pix;
+				small_icecream_position[layer][y_tile]->XPOS = x_pix;
+			} else {
+				falling_icecream_shadow_position[layer - 2][y_tile]->YOFF = 
+					y_pix;
+					
+				falling_icecream_position[layer - 2][y_tile]->YOFF = y_pix;
+
+				falling_icecream_shadow_position[layer - 2][y_tile]->XPOS = 
+					x_pix;
+					
+				falling_icecream_position[layer - 2][y_tile]->XPOS = x_pix;
+			}
+			break;
+			
+		default:
+			falling_icecream_shadow_position[layer][y_tile]->YOFF = y_pix;
+			falling_icecream_position[layer][y_tile]->YOFF = y_pix;
+
+			falling_icecream_shadow_position[layer][y_tile]->XPOS = x_pix;
+			falling_icecream_position[layer][y_tile]->XPOS = x_pix;
+			break;
+	}
+}
+
+void set_stacked_pos(char layer, unsigned short x_pix, char y_tile, 
+	char y_pix) {
+		
+	switch (scale) {
+		case 1:
+		case 2:
+			if (layer < 3) {
+				small_stacked_shadow_position[layer][y_tile]->YOFF = y_pix;
+				small_stacked_position[layer][y_tile]->YOFF = y_pix;
+				
+				small_stacked_shadow_position[layer][y_tile]->XPOS = x_pix;
+				small_stacked_position[layer][y_tile]->XPOS = x_pix;
+			} else {
+				stacked_icecream_shadow_position[layer - 3][y_tile]->YOFF = 
+					y_pix;
+					
+				stacked_icecream_position[layer - 3][y_tile]->YOFF = y_pix;
+
+				stacked_icecream_shadow_position[layer - 3][y_tile]->XPOS = 
+					x_pix;
+					
+				stacked_icecream_position[layer - 3][y_tile]->XPOS = x_pix;
+			}
+			break;
+			
+		default:
+			stacked_icecream_shadow_position[layer][y_tile]->YOFF = y_pix;
+			stacked_icecream_position[layer][y_tile]->YOFF = y_pix;
+
+			stacked_icecream_shadow_position[layer][y_tile]->XPOS = x_pix;
+			stacked_icecream_position[layer][y_tile]->XPOS = x_pix;
+			break;
+	}
+}
+	
+void paint_stacked_top_tile(char x_tile, char y_tile, char y_offset) {
+	switch (scale) {
+		case 1:
+		case 2:
+			small_stacked_shadow_tiles[0][y_tile + y_offset]->TILE =
+				get_icecream_top_tile(1, x_tile, y_tile);
+				
+			small_stacked_tiles[0][y_tile + y_offset]->TILE =
+				get_icecream_top_tile(0, x_tile, y_tile);
+			break;
+			
+		default:
+			stacked_icecream_shadow_tiles[0][x_tile][y_tile + y_offset]->TILE =
+				get_icecream_top_tile(1, x_tile, y_tile);
+
+			stacked_icecream_tiles[0][x_tile][y_tile + y_offset]->TILE = 
+				get_icecream_top_tile(0, x_tile, y_tile);
+				
+			break;
+	}
+}
+
+void paint_stacked_bottom_tile(char layer, char x_tile, char y_tile, 
+	char y_offset) {
+
+		
+	switch (scale) {
+		case 1:
+		case 2:
+			if (layer < 3) {
+				small_stacked_shadow_tiles[layer][y_tile + y_offset]->TILE =
+					get_icecream_bottom_tile(1, x_tile, y_tile);
+					
+				small_stacked_tiles[layer][y_tile + y_offset]->TILE =
+					get_icecream_bottom_tile(0, x_tile, y_tile);
+					
+			} else {
+				stacked_icecream_shadow_tiles[layer - 3][x_tile]
+					[y_tile + y_offset]->TILE = 
+					get_icecream_bottom_tile(1, x_tile, y_tile);
+
+				stacked_icecream_tiles[layer - 3][x_tile][y_tile + y_offset]->
+					TILE = get_icecream_bottom_tile(0, x_tile, y_tile);
+			}
+			break;
+			
+		default:
+			stacked_icecream_shadow_tiles[layer][x_tile][y_tile + y_offset]->
+				TILE = get_icecream_bottom_tile(1, x_tile, y_tile);
+
+			stacked_icecream_tiles[layer][x_tile][y_tile + y_offset]->TILE = 
+				get_icecream_bottom_tile(0, x_tile, y_tile);
+			break;
+	}
+}
+
+
 unsigned short unicorn_pixie_tiles[5][3][5] = {
 	{
 		{ 0x05b6,0x05b7,0x05b8,0x05b9,0x05ba },
@@ -64,7 +284,7 @@ unsigned short large_icecream_top_pixie_tiles[2][2][5] = {
 	}
 };
 
-unsigned short medium_iceream_top_pixie_tiles[2][3] = {
+unsigned short medium_icecream_top_pixie_tiles[2][3] = {
 	{ 0x064c,0x064d,0x064e },
 	{ 0x064f,0x0650,0x0651 }
 };
@@ -108,12 +328,12 @@ unsigned short large_cone_pixie_tiles[2][2][7] = {
 
 unsigned short medium_cone_pixie_tiles[2][4] = {
 	{ 0x0686,0x0687,0x0688,0x0689 },
-	{ 0x068a,0x068b,0x068b,0x068c }
+	{ 0x068a,0x068b,0x068c,0x068d }
 };
 
 unsigned short small_cone_pixie_tiles[2][3] = {
-	{ 0x068d,0x068e,0x068f },
-	{ 0x0690,0x0691,0x0692 }
+	{ 0x068e,0x068f,0x0690 },
+	{ 0x0691,0x0692,0x0693 }
 };
 
 unsigned short numbers[10][2][5] = {

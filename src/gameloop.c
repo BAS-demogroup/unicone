@@ -5,6 +5,8 @@
 
 
 #include "chips.h"
+#include "constants.h"
+#include "difficulty.h"
 #include "dma.h"
 #include "dma_jobs.h"
 #include "icecream.h"
@@ -30,10 +32,13 @@ void game_loop() {
 		// bank the tile and attribute maps from $20000-$21fff into $a000-$bfff
 		__asm(" lda #0x00\n"
 			  " tax\n"
-			  " ldy #0x60\n"
+			  " ldy #0x80\n"
 			  " ldz #0x31\n"
 			  " map\n"
 			  " nop");
+
+		// clear the screens
+		run_dma_job((__far char *)&clear_tilemap);
 
 		VIC2.BORDERCOL = 5;
 		
@@ -54,11 +59,11 @@ void game_loop() {
 		
 		draw_falling_icecream();
 
-		VIC2.BORDERCOL = 4;
+		VIC2.BORDERCOL = 10;
 		
 		draw_falling_stacked();
 
-		VIC2.BORDERCOL = 10;
+		VIC2.BORDERCOL = 4;
 		
 		draw_icecream_stack();
 
@@ -67,6 +72,9 @@ void game_loop() {
 		draw_cone();
 		
 		VIC2.BORDERCOL = 3;
+
+		draw_lives();
+		draw_level();
 
 		// this is only necessary when the music is disabled.
 		// it's probably not necessary at all, but just to be on the safe side
@@ -123,71 +131,50 @@ void draw_unicorn() {
 	}
 }
 
-char _last_yoff = 0xff;
 void draw_falling_icecream() {
 	if (!falling_icecream_state) return;
 	
-	char yoff = falling_icecream_y >> 3;
-	char ymod = (~(char)falling_icecream_y & 0x07);
+	unsigned short y_adj = falling_icecream_y;
 	
-	for (char y = 0; y < 5; y++) {
-		falling_icecream_position[0][y + yoff]->YOFF = ymod;
-		falling_icecream_shadow_position[0][y + yoff]->YOFF = ymod;
-
-		if (_last_yoff != yoff) {
-			
-			falling_icecream_shadow_position[0][y + yoff]->XPOS = 
-				falling_icecream_x;
-
-			falling_icecream_position[0][y + yoff]->XPOS = falling_icecream_x;
-
-			falling_icecream_shadow_position[1][y + yoff]->XPOS = 
-				0x280;
-
-			falling_icecream_position[1][y + yoff]->XPOS = 0x280;
-			
-			for (char x = 0; x < 2; x++) {
-				
-				falling_icecream_shadow_tiles[0][x][y + yoff]->TILE = 
-					large_icecream_top_pixie_tiles[1][x][y];
-
-				falling_icecream_tiles[0][x][y + yoff]->TILE = 
-					large_icecream_top_pixie_tiles[0][x][y];
-
-			}
+	char yoff = y_adj >> 3;
+	char last_yoff = yoff;
+	char ymod = (~(char)y_adj & 0x07);
+	
+	for (char y = 0; y < icecream_top_height; y++) {
+		set_icecream_pos(0, falling_icecream_x, y + yoff, ymod);
+		
+		for (char x = 0; x < icecream_top_width; x++) {
+			paint_icecream_top_tile(x, y, yoff);
 		}
 	}
+	
+	y_adj += icecream_top_y_add;
 
+	signed char layer = scale == 0 ? 2 : 4;
+	
 	for (char ribbon = 0; ribbon < 2; ribbon++) {
-		for (char y = 0; y < 3; y++) {
-			
-			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
-				YOFF = ymod;
-			
-			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->YOFF = 
-				ymod;
-
-			if (_last_yoff != yoff) {
-				
-				falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
-					XPOS = falling_icecream_x;
-				
-				falling_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
-					falling_icecream_x;
-			
-				for (char x = 0; x < 2; x++) {
-					
-					falling_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]
-						->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
-					
-					falling_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE =
-						large_icecream_bottom_pixie_tiles[0][x][y];
-				
-				}
-			}
+		char yoff = y_adj >> 3;
+		char ymod = (~(char)y_adj & 0x07);
+		
+		if (yoff != last_yoff) {
+			last_yoff = yoff;
+			layer = scale == 0 ? 2 : 4;
 		}
+	
+		for (char y = 0; y < icecream_bottom_height; y++) {
+			set_icecream_pos(layer, falling_icecream_x, y + yoff, ymod);
+			
+			for (char x = 0; x < icecream_bottom_width; x++) {
+				paint_icecream_bottom_tile(layer, x, y, yoff);
+			}
+			
+			if (--layer < 0) {
+				layer = scale == 0 ? 2 : 4;
+			}		
+		}
+		
+		y_adj += icecream_bottom_y_add;
 	}
-	_last_yoff = yoff;
 }
 
 char _last_stacked_yoff = 0xff;
@@ -260,55 +247,66 @@ void draw_falling_stacked() {
 char _last_stack_size = 0;
 void draw_icecream_stack() {
 	if (stack_size == 0) return;
+
+	unsigned short y_adj = stack_render_top;
 	short last_pos = 0;
 	
-	char yoff = 30 - stack_size;
+	char yoff = y_adj >> 3;
+	char last_yoff = yoff;
+	char ymod = (~(char)y_adj & 0x07);
 	
-	for (char y = 0; y < 5; y++) {
+	
+	for (char y = 0; y < icecream_top_height; y++) {
 		short pos = player_x + stack_offsets[stack_size - 1];
 		if (icecream_swing < 0) {
-			pos -= (short)swing_table[abs(icecream_swing)][stack_size - 1];
+			pos -= (short)(swing_table[abs(icecream_swing)][stack_size - 1]
+				>> scale);
 		} else {
-			pos += (short)swing_table[icecream_swing][stack_size - 1];
+			pos += (short)(swing_table[icecream_swing][stack_size - 1]
+				>> scale);
 		}
 		last_pos = pos;
-			
-		stacked_icecream_shadow_position[0][y + yoff]->XPOS = pos;
-		stacked_icecream_position[0][y + yoff]->XPOS = pos;
 		
-		if (_last_stack_size != stack_size) {
-			for (char x = 0; x < 2; x++) {
-				
-				stacked_icecream_shadow_tiles[0][x][y + yoff]->TILE = 
-					large_icecream_top_pixie_tiles[1][x][y];
-					
-				stacked_icecream_tiles[0][x][y + yoff]->TILE = 
-					large_icecream_top_pixie_tiles[0][x][y];
-					
-			}
+		set_stacked_pos(0, pos, y + yoff, ymod);
+		
+		for (char x = 0; x < icecream_top_width; x++) {
+			paint_stacked_top_tile(x, y, yoff);
 		}
 	}
+	
+	y_adj += icecream_top_y_add;
 
+	signed char layer = scale == 0 ? 2 : 5;
+	
 	for (char ribbon = 0; ribbon < stack_size - 1; ribbon++) {
-		for (char y = 1; y < 3; y++) {
-			
+		yoff = y_adj >> 3;
+		ymod = (~(char)y_adj & 0x07);
+		
+		if (yoff != last_yoff) {
+			last_yoff = yoff;
+			layer = scale == 0 ? 2 : 5;
+		}
+	
+		for (char y = 0; y < icecream_bottom_height; y++) {
 			short pos = player_x + 
 				stack_offsets[stack_size - ribbon - 2];
 				
 			if (icecream_swing < 0) {
 				
-				pos -= (short)swing_table[abs(icecream_swing)]
-					[stack_size - ribbon - 1];
+				pos -= (short)(swing_table[abs(icecream_swing)]
+					[stack_size - ribbon - 1] >> scale);
 					
 			} else {
 				
-				pos += (short)swing_table[icecream_swing]
-					[stack_size - ribbon - 1];
+				pos += (short)(swing_table[icecream_swing]
+					[stack_size - ribbon - 1] >> scale);
 					
 			}
+
+			set_stacked_pos(layer, pos, y + yoff, ymod);
 			
 			// has the top of the stack fallen?
-			if (abs(last_pos - pos) >= 24) {
+			if (y == 0 && abs(last_pos - pos) >= lose_distance) {
 				falling_stacked_x = last_pos;
 				falling_stacked_y = yoff << 3;
 				falling_stacked_state = 2;
@@ -320,50 +318,40 @@ void draw_icecream_stack() {
 				// erase dropped icecream
 				erase_dropped_stack();
 
+				char add = icecream_top_y_add + 
+					(icecream_bottom_y_add << 1);
+					
 				stack_size -= 3;
+				stack_top += add; 
+				stack_render_top += add;
 				
 				return;
 			}
 			
-			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
-				XPOS = pos;
-				
-			stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
-				pos;
-				
-			if (_last_stack_size == stack_size) continue;
-			
-			// this doesn't work right, need to come back to this
-			// for now, the performance gains are enough.
-			//if (ribbon < _last_stack_size - 3) continue;
-			
-			for (char x = 0; x < 2; x++) {
-				
-				stacked_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]
-					->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
-					
-				stacked_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE =
-					large_icecream_bottom_pixie_tiles[0][x][y];
+			for (char x = 0; x < icecream_bottom_width; x++) {
+				paint_stacked_bottom_tile(layer, x, y, yoff);
 			}
+			
+			if (--layer < 0) {
+				layer = scale == 0 ? 2 : 5;
+			}		
 		}
+		
+		y_adj += icecream_bottom_y_add;
 	}
 	_last_stack_size = stack_size;
 }
 
 char _cone_drawn = 0;
 void draw_cone() {
-	for (char y = 0; y < 6; y++) {
-		cone_shadow_position[y]->XPOS = player_x;
-		cone_position[y]->XPOS = player_x;
+	for (char y = 0; y < cone_height; y++) {
+		char ytile = y + 6 - cone_height;
+		cone_shadow_position[ytile]->XPOS = player_x;
+		       cone_position[ytile]->XPOS = player_x;
 		
-		if (!_cone_drawn) {
-			for (char x = 0; x < 2; x++) {
-				
-				cone_shadow_tiles[x][y]->TILE = 
-					large_cone_pixie_tiles[1][x][y];
-					
-				cone_tiles[x][y]->TILE = large_cone_pixie_tiles[0][x][y];
-			}
+		for (char x = 0; x < cone_width; x++) {
+			cone_shadow_tiles[x][ytile]->TILE = get_cone_tile(1, x, y + 1);
+				   cone_tiles[x][ytile]->TILE = get_cone_tile(0, x, y + 1);
 		}
 	}
 	_cone_drawn = 1;
@@ -371,7 +359,6 @@ void draw_cone() {
 
 void reset_level() {
 	// clear the screens
-	run_dma_job((__far char *)&clear_tilemap);
 	run_dma_job((__far char *)&load_attrmap);
 	
 	_last_stack_size = 0;
@@ -408,9 +395,9 @@ void reset_level() {
 	
 	end_of_level_timer = 100;
 	
-	stack_top = 224;
+	stack_top = 281 - cone_height_pix;
+	stack_render_top = stack_top;
 
-	_last_yoff = 0xff;
 	_last_stacked_yoff = 0xff;
 	
 	falling_icecream_x = 304;
@@ -421,76 +408,53 @@ void reset_level() {
 		stack_offsets[i] = 0;
 		stack_x[i] = 0;
 	}
-	
-	draw_lives();
-	draw_level();
 }
 
 void draw_lives() {
-	// this isn't pretty, but there was a compiler error that needed a 
-	// workaround... and this IS fast(ish).
-	if (player_lives > 0) {
-		farpoke(0x22168,0x50);
-		farpoke(0x22224,0x50);
-		farpoke(0x22174,0x50);
-		farpoke(0x22230,0x50);
-	}
-	if (player_lives > 1) {
-		farpoke(0x2216c,0x60);
-		farpoke(0x22228,0x60);
-		farpoke(0x22178,0x60);
-		farpoke(0x22234,0x60);
-	}
-	if (player_lives > 2) {
-		farpoke(0x22170,0x70);
-		farpoke(0x2222c,0x70);
-		farpoke(0x2217c,0x70);
-		farpoke(0x22238,0x70);
+	unsigned short xpos = 0x250;
+
+	for (char x = 0; x < player_lives; x++) {
+		for (char y = 0; y < 2; y++) {
+			lives_shadow_position[x][y]->XPOS = xpos;
+			lives_position[x][y]->XPOS = xpos;
+		}
+			
+		xpos += 0x10;
 	}
 }
 
 void draw_level() {
-	__attribute__((far)) unsigned short *tile = 
-		(__far unsigned short *)0x002215e;
+	char digit_index = 0;
 	
 	if (level > 9) {
 		char tens = level / 10;
 		
 		for (char y = 0; y < 5; y++) {
 			for (char x = 0; x < 2; x++) {
-				*tile = numbers[tens][x][y];
-				++tile;
+				level_number_tiles[digit_index][x][y]->TILE = 
+					numbers[tens][x][y];
 			}
-			tile += 92;
 		}
 		
-		tile = (__far unsigned short *)0x0022164;
+		++digit_index;
 	}
 	
 	char ones = level % 10;
 		
 	for (char y = 0; y < 5; y++) {
 		for (char x = 0; x < 2; x++) {
-			*tile = numbers[ones][x][y];
-			++tile;
+			level_number_tiles[digit_index][x][y]->TILE = numbers[ones][x][y];
 		}
-		tile += 92;
 	}
 	
-	tile = (__far unsigned short *)0x002215c;
 	unsigned short pos = 310;
 	
-	for (char y = 0; y < 5; y++) {
-		*tile = pos;
-		tile += 94;
-	}
-	
-	tile = (__far unsigned short *)0x0022162;
-	pos += 22;
-	
-	for (char y = 0; y < 5; y++) {
-		*tile = pos;
-		tile += 94;
+	for (char digit_index = 0; digit_index < 2; digit_index++) {
+		for (char y = 0; y < 5; y++) {
+			level_number_position[digit_index][y]->XPOS = pos;
+		}
+		
+		pos += 22;
 	}
 }
 

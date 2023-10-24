@@ -4,8 +4,11 @@
 #include <stdlib.h>
 
 
+#include "chips.h"
+#include "difficulty.h"
 #include "gameloop.h"
 #include "player.h"
+#include "pixies.h"
 #include "maps.h"
 
 
@@ -26,7 +29,7 @@ void update_falling_icecream() {
 		case 0:
 			return;
 		case 1:
-			// 224 = top of large cone - if it passes that, then the ice cream 
+			// stack_top = top of cone - if it passes that, then the ice cream 
 			// has either been caught, if it's close enough to the cone, or 
 			// the player has lost a life
 			if (falling_icecream_y < stack_top) {
@@ -41,10 +44,7 @@ void update_falling_icecream() {
 				}
 					
 				// determine if the player caught the ice cream
-				// experiment with whether 24 is a reasonable distance or not
-				if (abs(falling_icecream_x - top_pos) < 24) {
-					// clear the falling cone
-					clear_falling_icecream();
+				if (abs(falling_icecream_x - top_pos) < lose_distance) {
 					// catch the ice cream and add it to the cone
 					for (char i = 0; i < 3; i++) {
 						
@@ -54,14 +54,15 @@ void update_falling_icecream() {
 					}
 					stack_size += 3;
 					++dollops;
-					stack_top -= 24;
+					stack_top -= (icecream_bottom_y_add << 1) + 
+						icecream_bottom_y_add;
+					stack_render_top = falling_icecream_y;
 					
 					if (dollops < level) {
 						falling_icecream_state = 0;
 					} else {
 						falling_icecream_state = 3;
 						next_level = 1;
-						++level;
 					}
 				} else {
 					// if not, then do some failure thing.
@@ -87,22 +88,15 @@ void update_falling_icecream() {
 }
 
 void clear_falling_icecream() {
-	char yoff = falling_icecream_y >> 3;
+	signed char max_layer = scale == 0 ? 3 : 5;
 	
-	for (char y = 0; y < 5; y++) {
-		falling_icecream_shadow_position[0][y + yoff]->XPOS = 0x280;
-		falling_icecream_position[0][y + yoff]->XPOS = 0x280;
-	}
+	unsigned short y_adj = falling_icecream_y;
 	
-	for (char ribbon = 0; ribbon < 2; ribbon++) {
-		for (char y = 0; y < 3; y++) {
-			
-			falling_icecream_shadow_position[2 - y][3 + ribbon + y + yoff]->
-				XPOS = 0x280;
-				
-			falling_icecream_position[2 - y][3 + ribbon + y + yoff]->XPOS = 
-				0x280;
-				
+	char yoff = y_adj >> 3;
+	
+	for (char y = 0; y < 7; y++) {
+		for (char layer = 0; layer < max_layer; layer++) {
+			set_icecream_pos(layer, 0x280, y + yoff, 0);
 		}
 	}
 }
@@ -114,6 +108,7 @@ unsigned short falling_stacked_x      = 0;
 unsigned short falling_stacked_y      = 0;
 char           falling_stacked_state  = 0;
 
-char           stack_top              = 224;
+unsigned short stack_top              = 224;
+unsigned short stack_render_top       = 224;
 
 unsigned short falling_icecream_x     = 304;

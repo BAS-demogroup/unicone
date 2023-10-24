@@ -62,16 +62,16 @@ void setup() {
 	load();
 	
 	// clear the screens
-	run_dma_job((__far char *)&clear_tilemap);
+	//run_dma_job((__far char *)&clear_tilemap);
 	run_dma_job((__far char *)&load_attrmap);
 	
 	// conigure PAL or NTSC
 	if(VIC4.PALNTSC) {
 		VIC4.PALNTSC  = 1;
-		matrix_raster = 0x1be;
+		matrix_raster = 0x1c6;
 	} else {
 		VIC4.PALNTSC  = 0;
-		matrix_raster = 0x1c7;
+		matrix_raster = 0x1f7;
 	}
 	
 	// disable raster interrupts
