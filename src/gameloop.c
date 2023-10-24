@@ -177,74 +177,52 @@ void draw_falling_icecream() {
 	}
 }
 
-char _last_stacked_yoff = 0xff;
 void draw_falling_stacked() {
 	if (!falling_stacked_state) return;
 	
-	char yoff = falling_stacked_y >> 3;
-	char ymod = (~(char)falling_stacked_y & 0x07);
+	unsigned short y_adj = falling_stacked_y;
 	
-	for (char y = 0; y < 5; y++) {
-		falling_icecream_position[0][y + yoff]->YOFF = ymod;
-		falling_icecream_shadow_position[0][y + yoff]->YOFF = ymod;
-
-		if (_last_stacked_yoff != yoff) {
-			
-			falling_icecream_shadow_position[0][y + yoff]->XPOS = 
-				falling_stacked_x;
-
-			falling_icecream_position[0][y + yoff]->XPOS = falling_stacked_x;
-
-			falling_icecream_shadow_position[1][y + yoff]->XPOS = 
-				0x280;
-
-			falling_icecream_position[1][y + yoff]->XPOS = 0x280;
-			
-			for (char x = 0; x < 2; x++) {
-				
-				falling_icecream_shadow_tiles[0][x][y + yoff]->TILE = 
-					large_icecream_top_pixie_tiles[1][x][y];
-
-				falling_icecream_tiles[0][x][y + yoff]->TILE = 
-					large_icecream_top_pixie_tiles[0][x][y];
-
-			}
+	char yoff = y_adj >> 3;
+	char last_yoff = yoff;
+	char ymod = (~(char)y_adj & 0x07);
+	
+	for (char y = 0; y < icecream_top_height; y++) {
+		set_icecream_pos(0, falling_stacked_x, y + yoff, ymod);
+		
+		for (char x = 0; x < icecream_top_width; x++) {
+			paint_icecream_top_tile(x, y, yoff);
 		}
 	}
+	
+	y_adj += icecream_top_y_add;
 
+	signed char layer = scale == 0 ? 2 : 4;
+	
 	for (char ribbon = 0; ribbon < 2; ribbon++) {
-		for (char y = 0; y < 3; y++) {
-			
-			falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
-				YOFF = ymod;
-			
-			falling_icecream_position[2 - y][3 + ribbon + yoff + y]->YOFF = 
-				ymod;
-
-			if (_last_stacked_yoff != yoff) {
-				
-				falling_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
-					XPOS = falling_stacked_x;
-				
-				falling_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
-					falling_stacked_x;
-			
-				for (char x = 0; x < 2; x++) {
-					
-					falling_icecream_shadow_tiles[2 - y][x][3 + ribbon + yoff + y]
-						->TILE = large_icecream_bottom_pixie_tiles[1][x][y];
-					
-					falling_icecream_tiles[2 - y][x][3 + ribbon + yoff + y]->TILE =
-						large_icecream_bottom_pixie_tiles[0][x][y];
-				
-				}
-			}
+		char yoff = y_adj >> 3;
+		char ymod = (~(char)y_adj & 0x07);
+		
+		if (yoff != last_yoff) {
+			last_yoff = yoff;
+			layer = scale == 0 ? 2 : 4;
 		}
+	
+		for (char y = 0; y < icecream_bottom_height; y++) {
+			set_icecream_pos(layer, falling_stacked_x, y + yoff, ymod);
+			
+			for (char x = 0; x < icecream_bottom_width; x++) {
+				paint_icecream_bottom_tile(layer, x, y, yoff);
+			}
+			
+			if (--layer < 0) {
+				layer = scale == 0 ? 2 : 4;
+			}		
+		}
+		
+		y_adj += icecream_bottom_y_add;
 	}
-	_last_stacked_yoff = yoff;
 }
 
-char _last_stack_size = 0;
 void draw_icecream_stack() {
 	if (stack_size == 0) return;
 
@@ -307,8 +285,11 @@ void draw_icecream_stack() {
 			
 			// has the top of the stack fallen?
 			if (y == 0 && abs(last_pos - pos) >= lose_distance) {
+				char add = icecream_top_y_add + 
+					(icecream_bottom_y_add << 1);
+					
 				falling_stacked_x = last_pos;
-				falling_stacked_y = yoff << 3;
+				falling_stacked_y = stack_render_top;
 				falling_stacked_state = 2;
 
 				if (falling_icecream_state == 1) {
@@ -316,12 +297,11 @@ void draw_icecream_stack() {
 				}
 				
 				// erase dropped icecream
-				erase_dropped_stack();
+				//erase_dropped_stack();
 
-				char add = icecream_top_y_add + 
-					(icecream_bottom_y_add << 1);
-					
-				stack_size -= 3;
+				stack_size -= 5;	// It feels like this should be 3, but 5 is
+									// what works.  NFI why.
+				
 				stack_top += add; 
 				stack_render_top += add;
 				
@@ -339,7 +319,6 @@ void draw_icecream_stack() {
 		
 		y_adj += icecream_bottom_y_add;
 	}
-	_last_stack_size = stack_size;
 }
 
 char _cone_drawn = 0;
@@ -361,7 +340,6 @@ void reset_level() {
 	// clear the screens
 	run_dma_job((__far char *)&load_attrmap);
 	
-	_last_stack_size = 0;
 	_cone_drawn = 0;
 
 	falling_icecream_y = 0;
@@ -398,7 +376,7 @@ void reset_level() {
 	stack_top = 281 - cone_height_pix;
 	stack_render_top = stack_top;
 
-	_last_stacked_yoff = 0xff;
+	//_last_stacked_yoff = 0xff;
 	
 	falling_icecream_x = 304;
 	player_x = 304;
@@ -458,29 +436,29 @@ void draw_level() {
 	}
 }
 
-void erase_dropped_stack() {
-	char yoff = 30 - stack_size;
+// void erase_dropped_stack() {
+	// char yoff = 30 - stack_size;
 
-	for (char y = 0; y < 5; y++) {
+	// for (char y = 0; y < 5; y++) {
 
-		stacked_icecream_shadow_position[0][y + yoff]->XPOS = 
-			0x280;
+		// stacked_icecream_shadow_position[0][y + yoff]->XPOS = 
+			// 0x280;
 			
-		stacked_icecream_position[0][y + yoff]->XPOS = 0x280;
-	}
+		// stacked_icecream_position[0][y + yoff]->XPOS = 0x280;
+	// }
 	
-	for (char ribbon = 0; ribbon < 3 && ribbon < stack_size - 1; ribbon++) {
-		for (char y = 1; y < 3; y++) {
+	// for (char ribbon = 0; ribbon < 3 && ribbon < stack_size - 1; ribbon++) {
+		// for (char y = 1; y < 3; y++) {
 			
-			stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
-				XPOS = 0x280;
+			// stacked_icecream_shadow_position[2 - y][3 + ribbon + yoff + y]->
+				// XPOS = 0x280;
 				
-			stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
-				0x280;
+			// stacked_icecream_position[2 - y][3 + ribbon + yoff + y]->XPOS = 
+				// 0x280;
 				
-		}
-	}
-}
+		// }
+	// }
+// }
 
 unsigned short end_of_level_timer;
 char level;

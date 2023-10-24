@@ -14,13 +14,15 @@
 
 void update_falling_icecream() {
 	if (falling_stacked_state == 2) {
-		if (falling_stacked_y < 248) {
+		unsigned short calc_top = 292 - icecream_top_y_add - 
+			(icecream_bottom_y_add << 1);
+		if (falling_stacked_y < calc_top) {
 			falling_stacked_y += 3;
 		} else {
 			// done doing failure state
 			player_dying = 1;
 			--player_lives;
-			falling_stacked_y = 248;
+			falling_stacked_y = calc_top;
 			falling_stacked_state = 3;
 		}
 	}

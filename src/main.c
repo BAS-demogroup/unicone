@@ -16,7 +16,7 @@ void main() {
 		// reset game
 		
 		player_lives = 3;
-		level = 5;
+		level = 1;
 
 		do {
 			// the graphics will scale smaller as the level increases, because

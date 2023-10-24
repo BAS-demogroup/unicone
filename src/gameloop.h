@@ -11,7 +11,7 @@ void draw_cone();
 void reset_level();
 void draw_lives();
 void draw_level();
-void erase_dropped_stack();
+//void erase_dropped_stack();
 
 extern unsigned short matrix_raster;
 
