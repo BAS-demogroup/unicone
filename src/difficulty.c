@@ -7,14 +7,14 @@
 
 void set_level_difficulty() {
 	// set scale values
-	if (level < 8) {
+	if (level < 9) {
 		scale = 0;
 
 		cone_height = 6;
 		cone_height_pix = 60;
 		cone_width = 2;
 
-		lose_distance = 24;
+		lose_distance = 32;
 		
 		icecream_top_height = 5;
 		icecream_top_width = 2;
@@ -31,14 +31,14 @@ void set_level_difficulty() {
 		} else {
 			unicorn_speed = 2;
 		}
-	} else if (level < 16) {
+	} else if (level < 17) {
 		scale = 1;
 
 		cone_height = 3;
 		cone_height_pix = 21;
 		cone_width = 1;
 
-		lose_distance = 12;
+		lose_distance = 16;
 		
 		icecream_top_height = 3;
 		icecream_top_width = 1;
@@ -62,7 +62,7 @@ void set_level_difficulty() {
 		cone_height_pix = 0;
 		cone_width = 1;
 
-		lose_distance = 6;
+		lose_distance = 8;
 		
 		icecream_top_height = 2;
 		icecream_top_width = 1;
