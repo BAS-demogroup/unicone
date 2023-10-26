@@ -35,13 +35,15 @@ cc6502 -O 2 --list-file build/swing.lst --assembly-source build/swing.s --core 4
 cc6502 -o build/swing.o -O 2 --list-file build/swing.lst --core 45gs02 --target MEGA65 src/swing.c
 cc6502 -O 2 --list-file build/difficulty.lst --assembly-source build/difficulty.s --core 45gs02 --target MEGA65 src/difficulty.c
 cc6502 -o build/difficulty.o -O 2 --list-file build/difficulty.lst --core 45gs02 --target MEGA65 src/difficulty.c
+cc6502 --list-file build/audio.lst --assembly-source build/audio.s --core 45gs02 --target MEGA65 src/audio.c
+cc6502 -o build/audio.o --list-file build/audio.lst --core 45gs02 --target MEGA65 src/audio.c
 
 as6502 -o build/irqload.o --list-file build/irqload.lst --core 45gs02 --target MEGA65 src/iffl/irqload.s
 as6502 -o build/decruncher.o --list-file build/decruncher.lst --core 45gs02 --target MEGA65 src/iffl/decruncher.s
 as6502 -o build/iffl.o --list-file build/iffl.lst --core 45gs02 --target MEGA65 src/iffl/iffl.s
 as6502 -o build/rng.o --list-file build/rng.lst --core 45gs02 --target MEGA65 src/rng.s
 
-ln6502 -o build/unicone_full.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o build/pixies.o build/input.o build/player.o build/unicorn.o build/rng.o build/icecream.o build/swing.o build/difficulty.o ./mega65-unicone.scm
+ln6502 -o build/unicone_full.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o build/pixies.o build/input.o build/player.o build/unicorn.o build/rng.o build/icecream.o build/swing.o build/difficulty.o build/audio.o ./mega65-unicone.scm
 
 pause
 
@@ -50,6 +52,7 @@ C:\Users\death\Documents\C65\exomizer-3.1.1\win32\exomizer sfx basic -t 65 -o bu
 C:\Users\death\Documents\C65\acme\acme src\music_swap_stub.asm
 C:\Users\death\Documents\C65\acme\acme src\tilemap.asm
 C:\Users\death\Documents\C65\acme\acme src\attrmap.asm
+C:\Users\death\Documents\C65\acme\acme src\flavors.asm
 
 C:\Users\death\Documents\C65\megatool\megatool -a build/music_swap_stub.bin 0000c000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/sentimental_thing.prg 00010000
@@ -58,6 +61,15 @@ C:\Users\death\Documents\C65\megatool\megatool -a build/tilemap.bin 0001a5c0
 C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 00026000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.clut 00025000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/level_indicator.chrs 00023000
+C:\Users\death\Documents\C65\megatool\megatool -a build/flavors.bin 00025300
+C:\Users\death\Documents\C65\megatool\megatool -a assets/trot.raw 00040000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/falling.raw 00050000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_1.raw 00046200
+C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_2.raw 00049000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_3.raw 0004c000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_1.raw 00040000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_2.raw 00050000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/game_start.raw 00050000
 
 C:\Users\death\Documents\C65\megatool\megatool -c build/music_swap_stub.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/sentimental_thing.prg.addr
@@ -66,8 +78,17 @@ C:\Users\death\Documents\C65\megatool\megatool -c build/tilemap.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c build/attrmap.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/pixies.clut.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/level_indicator.chrs.addr
+C:\Users\death\Documents\C65\megatool\megatool -c build/flavors.bin.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/trot.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/falling.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_1.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_2.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_3.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_1.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_2.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/game_start.raw.addr
 
-C:\Users\death\Documents\C65\megatool\megatool -i build/music_swap_stub.bin.addr.mc assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc build/tilemap.bin.addr.mc build/attrmap.bin.addr.mc assets/pixies.clut.addr.mc assets/level_indicator.chrs.addr.mc assets/+unicone
+C:\Users\death\Documents\C65\megatool\megatool -i build/music_swap_stub.bin.addr.mc assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc build/tilemap.bin.addr.mc build/attrmap.bin.addr.mc assets/pixies.clut.addr.mc assets/level_indicator.chrs.addr.mc build/flavors.bin.addr.mc assets/trot.raw.addr.mc assets/falling.raw.addr.mc assets/splat_1.raw.addr.mc assets/splat_2.raw.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc assets/game_over_2.raw.addr.mc assets/game_start.raw.addr.mc assets/+unicone
 
 C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicone.d81 -delete "unicone" -delete "+unicone" -write "build/unicone.prg" "unicone" -write "assets/+unicone" "+unicone" -list
 

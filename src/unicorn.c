@@ -1,6 +1,7 @@
 #include "unicorn.h"
 
 
+#include "audio.h"
 #include "rng.h"
 #include "icecream.h"
 
@@ -13,13 +14,25 @@ char _vertical_sinus[] = {
 void update_unicorn() {
 	// if (++_test_delay < 10) return;
 	// _test_delay = 0;
-	if (++unicorn_animation_delay > 4) {
+	
+	char last_frame_index = unicorn_frame_index;
+	if (
+		++unicorn_animation_delay > 4) {
 	
 		unicorn_animation_delay = 0;
-		if (++unicorn_frame_index > 6) {
-			unicorn_frame_index = 0;
+		if ((falling_icecream_state != 3 && falling_stacked_state != 3) ||
+			unicorn_frame_index != 0) {
+			if (++unicorn_frame_index > 6) {
+				unicorn_frame_index = 0;
+			}
 		}
 	}
+	
+	if (last_frame_index == 0 && unicorn_frame_index == 1) {
+		// play the sproing sample
+		play_sample(runtime_sample_start[0], runtime_sample_end[0], 1);
+	}
+	
 	
 	// we only move the unicorn for frames 2-6, as for the first two frames,
 	// the unicorn is standing on the ground.
@@ -64,6 +77,9 @@ void update_unicorn() {
 	}
 	
 	if (unicorn_drop_poop) {
+		play_sample(runtime_sample_start[2], runtime_sample_end[2], 1);
+		play_sample(runtime_sample_start[1], runtime_sample_end[1], 1);
+		
 		falling_icecream_state = 1;
 		falling_icecream_x = unicorn_x;
 		falling_icecream_y = 0;

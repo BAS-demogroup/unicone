@@ -22,12 +22,19 @@
 unsigned short matrix_raster;
 
 void game_loop() {
+	if (current_loaded_state != 1) {
+		run_dma_job((__far char *)&load_runtime_samples_1);
+		run_dma_job((__far char *)&load_runtime_samples_2);
+		
+		current_loaded_state = 1;
+	}
+	
 	while (end_of_level_timer > 0) {
 		
 		while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
 			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
 		
-		VIC2.BORDERCOL = 0;
+		// VIC2.BORDERCOL = 0;
 		
 		// bank the tile and attribute maps from $20000-$21fff into $a000-$bfff
 		__asm(" lda #0x00\n"
@@ -40,7 +47,7 @@ void game_loop() {
 		// clear the screens
 		run_dma_job((__far char *)&clear_tilemap);
 
-		VIC2.BORDERCOL = 5;
+		// VIC2.BORDERCOL = 5;
 		
 		update_unicorn();
 		update_falling_icecream();
@@ -51,27 +58,27 @@ void game_loop() {
 		// draw the screen in vertical order, so unicorn first, then falling 
 		// ice cream, then ice cream stack, then cone
 		
-		VIC2.BORDERCOL = 11;
+		// VIC2.BORDERCOL = 11;
 		
 		draw_unicorn();
 		
-		VIC2.BORDERCOL = 14;
+		// VIC2.BORDERCOL = 14;
 		
 		draw_falling_icecream();
 
-		VIC2.BORDERCOL = 10;
+		// VIC2.BORDERCOL = 10;
 		
 		draw_falling_stacked();
 
-		VIC2.BORDERCOL = 4;
+		// VIC2.BORDERCOL = 4;
 		
 		draw_icecream_stack();
 
-		VIC2.BORDERCOL = 13;
+		// VIC2.BORDERCOL = 13;
 		
 		draw_cone();
 		
-		VIC2.BORDERCOL = 3;
+		// VIC2.BORDERCOL = 3;
 
 		draw_lives();
 		draw_level();
@@ -89,7 +96,7 @@ void game_loop() {
 
 		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
 		
-		VIC2.BORDERCOL = 15;
+		// VIC2.BORDERCOL = 15;
 		
 		if (player_dying || next_level) {
 			--end_of_level_timer;
@@ -132,7 +139,7 @@ void draw_unicorn() {
 }
 
 void draw_falling_icecream() {
-	if (falling_icecream_state == 0 || falling_icecream_state == 3) return;
+	if (falling_icecream_state == 0) return;
 	
 	unsigned short y_adj = falling_icecream_y;
 	
@@ -438,3 +445,4 @@ void draw_level() {
 
 unsigned short end_of_level_timer;
 char level;
+char current_loaded_state;

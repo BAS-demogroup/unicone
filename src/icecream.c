@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 
+#include "audio.h"
 #include "chips.h"
 #include "difficulty.h"
 #include "gameloop.h"
@@ -66,6 +67,8 @@ void update_falling_icecream() {
 						falling_icecream_state = 3;
 						next_level = 1;
 					}
+					play_sample(runtime_sample_start[3], 
+						runtime_sample_end[3], 1);
 				} else {
 					// if not, then do some failure thing.
 					falling_icecream_state = 2;
@@ -80,6 +83,8 @@ void update_falling_icecream() {
 				if (falling_icecream_y < calc_top) {
 					falling_icecream_y += (falling_speed << 2);
 				} else {
+					play_sample(runtime_sample_start[4], 
+						runtime_sample_end[4], 1);
 					// done doing failure state
 					if (!player_dying) {
 						--player_lives;

@@ -12,6 +12,7 @@ typedef struct _SID         _SID_t;
 typedef struct _KEYSCAN     _KEYSCAN_t;
 typedef struct _DMA         _DMA_t;
 typedef struct _MATH        _MATH_t;
+typedef struct _AUDIO_DMA   _AUDIO_DMA_t;
 typedef struct _CIA1        _CIA1_t;
 typedef struct _CIA2        _CIA2_t;
 typedef struct _IRQ_VECTORS _IRQ_VECTORS_t;
@@ -403,15 +404,73 @@ struct _DMA {
 
 struct _MATH {
 	union {
-		uint8_t _NA     : 6;
+		uint8_t _NA1    : 6;
 		uint8_t MULBUSY : 1;
 		uint8_t DIVBUSY : 1;
 	};
+	uint8_t     _NA2[88];
 	uint32_t    DIVOUT;
 	uint32_t    DIVOUTFRACT;
 	uint32_t    MATHINA;
 	uint32_t    MATHINB;
 	uint32_t    MULTOUT;
+};
+
+// look into rewriting this so that the different channels are in an indexable
+// array instead of explicitly named
+struct _AUDIO_DMA {
+	uint8_t     CH0RVOL;
+	uint8_t     CH1RVOL;
+	uint8_t     CH2LVOL;
+	uint8_t     CH3LVOL;
+	
+	uint8_t     CH0CONTROL;
+	uint16_t    CH0BADDR;
+	uint8_t     CH0BADDRMB;
+	uint16_t    CH0FREQ;
+	uint8_t     CH0FREQMB;
+	uint16_t    CH0TADDR;
+	uint8_t     CH0VOLUME;
+	uint16_t    CH0CURADDR;
+	uint8_t     CH0CURADDRMB;
+	uint16_t    CH0TMRADDR;
+	uint8_t     CH0TMRADDRMB;
+	
+	uint8_t     CH1CONTROL;
+	uint16_t    CH1BADDR;
+	uint8_t     CH1BADDRMB;
+	uint16_t    CH1FREQ;
+	uint8_t     CH1FREQMB;
+	uint16_t    CH1TADDR;
+	uint8_t     CH1VOLUME;
+	uint16_t    CH1CURADDR;
+	uint8_t     CH1CURADDRMB;
+	uint16_t    CH1TMRADDR;
+	uint8_t     CH1TMRADDRMB;
+	
+	uint8_t     CH2CONTROL;
+	uint16_t    CH2BADDR;
+	uint8_t     CH2BADDRMB;
+	uint16_t    CH2FREQ;
+	uint8_t     CH2FREQMB;
+	uint16_t    CH2TADDR;
+	uint8_t     CH2VOLUME;
+	uint16_t    CH2CURADDR;
+	uint8_t     CH2CURADDRMB;
+	uint16_t    CH2TMRADDR;
+	uint8_t     CH2TMRADDRMB;
+	
+	uint8_t     CH3CONTROL;
+	uint16_t    CH3BADDR;
+	uint8_t     CH3BADDRMB;
+	uint16_t    CH3FREQ;
+	uint8_t     CH3FREQMB;
+	uint16_t    CH3TADDR;
+	uint8_t     CH3VOLUME;
+	uint16_t    CH3CURADDR;
+	uint8_t     CH3CURADDRMB;
+	uint16_t    CH3TMRADDR;
+	uint8_t     CH3TMRADDRMB;
 };
 
 // I can't get the CIA chips to work right.
@@ -499,6 +558,7 @@ struct _IRQ_VECTORS {
 #define KEYSCAN     (* (volatile _KEYSCAN_t *)     0xd613)
 #define DMA         (* (volatile _DMA_t *)         0xd700)
 #define MATH        (* (volatile _MATH_t *)        0xd70f)
+#define AUDIO_DMA   (* (volatile _AUDIO_DMA_t *)   0xd71c)
 #define CIA1        (* (volatile _CIA1_t *)        0xdc00)
 #define CIA2        (* (volatile _CIA2_t *)        0xdd00)
 #define IRQ_VECTORS (* (volatile _IRQ_VECTORS_t *) 0xfffa)

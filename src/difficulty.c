@@ -1,11 +1,22 @@
 #include "difficulty.h"
 
 
+#include "constants.h"
+#include "dma.h"
+#include "dma_jobs.h"
 #include "gameloop.h"
 #include "unicorn.h"
 
 
 void set_level_difficulty() {
+	char cur_level = level > 24 ? 24 : level;
+	load_flavor_red.source = ((FLAVORS_RED + ((cur_level - 1) << 0x04)) & 0xffff);
+	load_flavor_green.source = ((FLAVORS_GREEN + ((cur_level - 1) << 0x04)) & 0xffff);
+	load_flavor_blue.source = ((FLAVORS_BLUE + ((cur_level - 1) << 0x04)) & 0xffff);
+	run_dma_job((__far char *)&load_flavor_red);
+	run_dma_job((__far char *)&load_flavor_green);
+	run_dma_job((__far char *)&load_flavor_blue);
+	
 	// set scale values
 	if (level < 9) {
 		scale = 0;
@@ -26,7 +37,7 @@ void set_level_difficulty() {
 		
 		falling_speed = 2;
 		
-		if (level < 6) {
+		if (level < 7) {
 			unicorn_speed = 1;
 		} else {
 			unicorn_speed = 2;
@@ -50,7 +61,7 @@ void set_level_difficulty() {
 		
 		falling_speed = 2;
 		
-		if (level < 14) {
+		if (level < 15) {
 			unicorn_speed = 1;
 		} else {
 			unicorn_speed = 2;
@@ -74,7 +85,7 @@ void set_level_difficulty() {
 		
 		falling_speed = 3;
 
-		if (level < 22) {
+		if (level < 23) {
 			unicorn_speed = 1;
 		} else {
 			unicorn_speed = 2;

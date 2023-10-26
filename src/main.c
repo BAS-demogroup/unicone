@@ -2,11 +2,16 @@
 //
 // This contains the main method that starts the game.
 
+
+#include "audio.h"
 #include "chips.h"
 #include "difficulty.h"
+#include "dma.h"
+#include "dma_jobs.h"
 #include "setup.h"
 #include "gameloop.h"
 #include "player.h"
+
 
 void main() {
 	setup();
@@ -34,6 +39,53 @@ void main() {
 			}	
 		} while (player_lives > 0);
 		
+		unsigned short timer;
+		unsigned short part_2;
+
+		// load the game over banks
+		if (current_loaded_state != 2) {
+			run_dma_job((__far char *)&load_game_over_samples_1);
+			run_dma_job((__far char *)&load_game_over_samples_2);
+			
+			current_loaded_state = 2;
+		}
+		
+		// second part starts = 1.255s
+		// full length = 5.137s
+		
+		// pal - full length = 257 frames
+		// pal - second part starts = 63 frames
+		if (!VIC4.PALNTSC) {
+			timer = 257;
+			part_2 = 194;
+		// ntsc - full length = 308 frames
+		// ntsc - second part starts = 75 frames
+		} else {
+			timer = 308;
+			part_2 = 233;
+		}		
+		
+		// play first game over sfx
+		play_sample(game_over_sample_start[0], game_over_sample_end[0], 1);
+
+		// this is just to give the CPU something to do that will leave time
+		// for the audio DMA to steal cycles from.  heh
+		unsigned char spinner = 0;
+
+		while (timer > 0) {
+			while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
+				VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8)) {
+					++spinner;
+				}
+			while (VIC4.FNRASTERLSB == (matrix_raster & 0xff)) {
+				++spinner;
+			}
+			if (--timer == part_2) {
+				// play second game over sfx
+				play_sample(game_over_sample_start[1], game_over_sample_end[1], 
+					0);
+			}
+		}
 		// this is just for now, once we have a title screen, then rip this out.
 		VIC2.BORDERCOL = 0;
 		while (1);

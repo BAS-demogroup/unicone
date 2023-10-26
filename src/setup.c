@@ -4,6 +4,7 @@
 #include <calypsi/intrinsics6502.h>
 
 
+#include "audio.h"
 #include "chips.h"
 #include "constants.h"
 #include "dma.h"
@@ -55,9 +56,6 @@ void setup() {
 	// disable RAM protection in banks 2 and 3
 	poke(0xD640, 0x70);		// $d640 = HTRAP00
 	__no_operation();		// clv would be better
-
-	VIC2.BORDERCOL = 15;
-	VIC2.SCREENCOL = 15;
 	
 	load();
 	
@@ -116,8 +114,13 @@ void setup() {
 	
 	// initalize the music
 	musicInit();
+
+	VIC2.BORDERCOL = 23;
+	VIC2.SCREENCOL = 23;
 	
 	muted = 0;
+	next_channel = 0;
+	current_loaded_state = 0;
 }
 
 // load all the data from the IFFL
@@ -127,9 +130,22 @@ void load() {
 	
 	floppy_iffl_fast_load_init("+UNICONE");
 	
-	for (char i = 0; i < 7; i++) {
+	for (char i = 0; i < 13; i++) {
 		floppy_iffl_fast_load();
 	}
+	
+	run_dma_job((__far char *)&backup_runtime_samples_1);
+	run_dma_job((__far char *)&backup_runtime_samples_2);
+	
+	floppy_iffl_fast_load();
+	floppy_iffl_fast_load();
+	
+	run_dma_job((__far char *)&backup_game_over_samples_1);
+	run_dma_job((__far char *)&backup_game_over_samples_2);
+
+	floppy_iffl_fast_load();
+	
+	run_dma_job((__far char *)&backup_game_start_samples);
 	
 	fl_exit();
 }
