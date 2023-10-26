@@ -118,6 +118,8 @@ void setup() {
 	muted = 0;
 	next_channel = 0;
 	current_loaded_state = 0;
+	
+	poke(0xd711,0b10000000);
 }
 
 // load all the data from the IFFL
@@ -127,7 +129,7 @@ void load() {
 	
 	floppy_iffl_fast_load_init("+UNICONE");
 	
-	for (char i = 0; i < 10; i++) {
+	for (char i = 0; i < 11; i++) {
 		floppy_iffl_fast_load();
 	}
 	

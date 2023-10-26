@@ -77,11 +77,14 @@ void update_falling_icecream() {
 			return;
 		case 2:
 			{
-				unsigned short calc_top = 292 - icecream_top_y_add - 
+				unsigned short calc_top = 295 - icecream_top_y_add - 
 					(icecream_bottom_y_add << 1);
 
 				if (falling_icecream_y < calc_top) {
-					falling_icecream_y += (falling_speed << 2);
+					falling_icecream_y += (falling_speed << 3);
+					if (falling_icecream_y > calc_top) {
+						falling_icecream_y = calc_top;
+					}
 				} else {
 					play_sample(runtime_sample_start[5], 
 						runtime_sample_end[5], 1);

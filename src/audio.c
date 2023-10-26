@@ -30,8 +30,8 @@ void play_sample(unsigned long start, unsigned short end, char sixteen_bit) {
 			AUDIO_DMA.CH0FREQMB = 0x00;
 			
 			// max volume, and mono
-			AUDIO_DMA.CH0VOLUME = 0xff;
-			AUDIO_DMA.CH0RVOL = 0xff;
+			AUDIO_DMA.CH0VOLUME = 0x6f;
+			AUDIO_DMA.CH0RVOL = 0x6f;
 
 			// 16-bit signed, start playing
 			if (sixteen_bit) {
@@ -55,8 +55,8 @@ void play_sample(unsigned long start, unsigned short end, char sixteen_bit) {
 			AUDIO_DMA.CH1FREQMB = 0x00;
 			
 			// max volume, and mono
-			AUDIO_DMA.CH1VOLUME = 0xff;
-			AUDIO_DMA.CH1RVOL = 0xff;
+			AUDIO_DMA.CH1VOLUME = 0x6f;
+			AUDIO_DMA.CH1RVOL = 0x6f;
 
 			// 16-bit signed, start playing
 			if (sixteen_bit) {
@@ -80,8 +80,8 @@ void play_sample(unsigned long start, unsigned short end, char sixteen_bit) {
 			AUDIO_DMA.CH2FREQMB = 0x00;
 			
 			// max volume, and mono
-			AUDIO_DMA.CH2VOLUME = 0xff;
-			AUDIO_DMA.CH2LVOL = 0xff;
+			AUDIO_DMA.CH2VOLUME = 0x6f;
+			AUDIO_DMA.CH2LVOL = 0x6f;
 
 			// 16-bit signed, start playing
 			if (sixteen_bit) {
@@ -105,8 +105,8 @@ void play_sample(unsigned long start, unsigned short end, char sixteen_bit) {
 			AUDIO_DMA.CH3FREQMB = 0x00;
 			
 			// max volume, and mono
-			AUDIO_DMA.CH3VOLUME = 0xff;
-			AUDIO_DMA.CH3LVOL = 0xff;
+			AUDIO_DMA.CH3VOLUME = 0x6f;
+			AUDIO_DMA.CH3LVOL = 0x6f;
 
 			// 16-bit signed, start playing
 			if (sixteen_bit) {
