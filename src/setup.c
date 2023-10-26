@@ -111,9 +111,6 @@ void setup() {
 	
 	// disable double-height rrb
 	VIC4.DBLRR = 0;
-	
-	// initalize the music
-	musicInit();
 
 	VIC2.BORDERCOL = 23;
 	VIC2.SCREENCOL = 23;
@@ -130,22 +127,19 @@ void load() {
 	
 	floppy_iffl_fast_load_init("+UNICONE");
 	
-	for (char i = 0; i < 13; i++) {
+	for (char i = 0; i < 10; i++) {
+		floppy_iffl_fast_load();
+	}
+	
+	run_dma_job((__far char *)&backup_game_over_samples_1);
+	run_dma_job((__far char *)&backup_game_over_samples_2);
+	
+	for (char i = 0; i < 6; i++) {
 		floppy_iffl_fast_load();
 	}
 	
 	run_dma_job((__far char *)&backup_runtime_samples_1);
 	run_dma_job((__far char *)&backup_runtime_samples_2);
-	
-	floppy_iffl_fast_load();
-	floppy_iffl_fast_load();
-	
-	run_dma_job((__far char *)&backup_game_over_samples_1);
-	run_dma_job((__far char *)&backup_game_over_samples_2);
-
-	floppy_iffl_fast_load();
-	
-	run_dma_job((__far char *)&backup_game_start_samples);
 	
 	fl_exit();
 }

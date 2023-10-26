@@ -62,14 +62,14 @@ C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 00026000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.clut 00025000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/level_indicator.chrs 00023000
 C:\Users\death\Documents\C65\megatool\megatool -a build/flavors.bin 00025300
-C:\Users\death\Documents\C65\megatool\megatool -a assets/trot.raw 00040000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/falling.raw 00050000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_1.raw 00046200
-C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_2.raw 00049000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_3.raw 0004c000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_1.raw 00040000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_2.raw 00050000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/game_start.raw 00050000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/game_start.raw 00040000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/trot.raw 00050000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/falling.raw 00051b00
+C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_1.raw 00046600
+C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_2.raw 00049400
+C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_3.raw 0004c300
 
 C:\Users\death\Documents\C65\megatool\megatool -c build/music_swap_stub.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/sentimental_thing.prg.addr
@@ -79,16 +79,16 @@ C:\Users\death\Documents\C65\megatool\megatool -c build/attrmap.bin.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/pixies.clut.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/level_indicator.chrs.addr
 C:\Users\death\Documents\C65\megatool\megatool -c build/flavors.bin.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_1.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_2.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/game_start.raw.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/trot.raw.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/falling.raw.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_1.raw.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_2.raw.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_3.raw.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_1.raw.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_2.raw.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/game_start.raw.addr
 
-C:\Users\death\Documents\C65\megatool\megatool -i build/music_swap_stub.bin.addr.mc assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc build/tilemap.bin.addr.mc build/attrmap.bin.addr.mc assets/pixies.clut.addr.mc assets/level_indicator.chrs.addr.mc build/flavors.bin.addr.mc assets/trot.raw.addr.mc assets/falling.raw.addr.mc assets/splat_1.raw.addr.mc assets/splat_2.raw.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc assets/game_over_2.raw.addr.mc assets/game_start.raw.addr.mc assets/+unicone
+C:\Users\death\Documents\C65\megatool\megatool -i build/music_swap_stub.bin.addr.mc assets/sentimental_thing.prg.addr.mc assets/pixies.chrs.addr.mc build/tilemap.bin.addr.mc build/attrmap.bin.addr.mc assets/pixies.clut.addr.mc assets/level_indicator.chrs.addr.mc build/flavors.bin.addr.mc assets/game_over_1.raw.addr.mc assets/game_over_2.raw.addr.mc assets/game_start.raw.addr.mc assets/trot.raw.addr.mc assets/falling.raw.addr.mc assets/splat_1.raw.addr.mc assets/splat_2.raw.addr.mc assets/splat_3.raw.addr.mc assets/+unicone
 
 C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicone.d81 -delete "unicone" -delete "+unicone" -write "build/unicone.prg" "unicone" -write "assets/+unicone" "+unicone" -list
 

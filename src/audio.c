@@ -125,30 +125,22 @@ void play_sample(unsigned long start, unsigned short end, char sixteen_bit) {
 
 char next_channel;
 
-unsigned long game_start_sample_start[1] = {
-	0x050000
-};
-
-unsigned short game_start_sample_end[1] = {
-	0x6548
-
-};
-
-
-unsigned long runtime_sample_start[5] = {
+unsigned long runtime_sample_start[6] = {
 	0x040000,
 	0x050000,
-	0x046200,
-	0x049000,
-	0x04c000
+	0x051b00,
+	0x046600,
+	0x049400,
+	0x04c300
 };
 
-unsigned short runtime_sample_end[5] = {
+unsigned short runtime_sample_end[6] = {
+	0x6548,
 	0x1a22,
-	0xb6a4,
-	0x8fea,
-	0xbe1a,
-	0xfc3c
+	0xd1a4,
+	0x93ea,
+	0xc21a,
+	0xff3c
 };
 
 

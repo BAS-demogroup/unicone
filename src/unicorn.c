@@ -30,7 +30,7 @@ void update_unicorn() {
 	
 	if (last_frame_index == 0 && unicorn_frame_index == 1) {
 		// play the sproing sample
-		play_sample(runtime_sample_start[0], runtime_sample_end[0], 1);
+		play_sample(runtime_sample_start[1], runtime_sample_end[1], 1);
 	}
 	
 	
@@ -77,8 +77,8 @@ void update_unicorn() {
 	}
 	
 	if (unicorn_drop_poop) {
+		play_sample(runtime_sample_start[3], runtime_sample_end[3], 1);
 		play_sample(runtime_sample_start[2], runtime_sample_end[2], 1);
-		play_sample(runtime_sample_start[1], runtime_sample_end[1], 1);
 		
 		falling_icecream_state = 1;
 		falling_icecream_x = unicorn_x;

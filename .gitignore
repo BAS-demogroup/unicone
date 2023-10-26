@@ -450,3 +450,52 @@ FodyWeavers.xsd
 /assets/pixies.info
 /assets/pixies.map
 /build/difficulty.s
+/assets/falling.raw.addr
+/assets/falling.raw.addr.mc
+/assets/falling.raw.sfk
+/assets/flavor_palette_a.clut
+/assets/flavor_palette_b.clut
+/assets/game over 2.raw.bak
+/assets/game over 2.raw.sfk
+/assets/game_over_1.raw.addr
+/assets/game_over_1.raw.addr.mc
+/assets/game_over_1.raw.sfk
+/assets/game_over_2.raw.addr
+/assets/game_over_2.raw.addr.mc
+/assets/game_over_2.raw.sfk
+/assets/game_start.raw.addr
+/assets/game_start.raw.addr.mc
+/assets/splat_1.raw.addr
+/assets/splat_1.raw.addr.mc
+/assets/splat_1.raw.sfk
+/assets/splat_2.raw.addr
+/assets/splat_2.raw.addr.mc
+/assets/splat_3.raw.addr
+/assets/splat_3.raw.addr.mc
+/assets/trot.raw.addr
+/assets/trot.raw.addr.mc
+/assets/trot.raw.bak
+/assets/working/falling.wav
+/assets/working/game over 1.sfk
+/assets/working/game over 1.wav
+/assets/working/game over 2.sfk
+/assets/working/game over 2.wav
+/assets/working/game start 1.wav
+/assets/working/sfx preview.mp3
+/assets/working/splat 1.sfk
+/assets/working/splat 1.wav
+/assets/working/splat 2.wav
+/assets/working/splat 3.wav
+/assets/working/sproing 1.sfk
+/assets/working/sproing 1.wav
+/assets/working/sproing 1.wav.bak
+/assets/working/trot.psd
+/assets/working/trot.wav
+/build/audio.s
+/build/flavors.bin
+/build/flavors.bin.addr
+/build/flavors.bin.addr.mc
+/reference/effect_macros.asm
+/reference/macros.asm
+/assets/game_over_2.raw.bak
+/assets/game_start.raw.sfk

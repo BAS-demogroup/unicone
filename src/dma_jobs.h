@@ -17,12 +17,10 @@ extern dma_copy_job_huge_destination_t backup_runtime_samples_1;
 extern dma_copy_job_huge_destination_t backup_runtime_samples_2;
 extern dma_copy_job_huge_destination_t backup_game_over_samples_1;
 extern dma_copy_job_huge_destination_t backup_game_over_samples_2;
-extern dma_copy_job_huge_destination_t backup_game_start_samples;
 
 extern dma_copy_job_huge_source_t load_runtime_samples_1;
 extern dma_copy_job_huge_source_t load_runtime_samples_2;
 extern dma_copy_job_huge_source_t load_game_over_samples_1;
 extern dma_copy_job_huge_source_t load_game_over_samples_2;
-extern dma_copy_job_huge_source_t load_game_start_samples;
 
 #endif

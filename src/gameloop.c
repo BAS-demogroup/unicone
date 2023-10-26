@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 
+#include "audio.h"
 #include "chips.h"
 #include "constants.h"
 #include "difficulty.h"
@@ -22,11 +23,25 @@
 unsigned short matrix_raster;
 
 void game_loop() {
-	if (current_loaded_state != 1) {
+	if (current_loaded_state != 0) {
 		run_dma_job((__far char *)&load_runtime_samples_1);
 		run_dma_job((__far char *)&load_runtime_samples_2);
 		
-		current_loaded_state = 1;
+		current_loaded_state = 0;
+	}
+	
+	if (level == 1 && player_lives == 3) {
+		// 1.175s
+		// pal = 59 frames
+		// ntsc = 71 frames
+		play_sample(runtime_sample_start[0], runtime_sample_end[0], 1);
+		if (!VIC4.PALNTSC) {
+			new_game_counter = 59;
+		} else {
+			new_game_counter = 71;
+		}
+		
+		falling_icecream_state = 3;
 	}
 	
 	while (end_of_level_timer > 0) {
@@ -85,14 +100,16 @@ void game_loop() {
 
 		// this is only necessary when the music is disabled.
 		// it's probably not necessary at all, but just to be on the safe side
-		__asm(" lda #0x00\n"
-			  " tax\n"
-			  " tay\n"
-			  " taz\n"
-			  " map\n"
-			  " nop");
+		// __asm(" lda #0x00\n"
+			  // " tax\n"
+			  // " tay\n"
+			  // " taz\n"
+			  // " map\n"
+			  // " nop");
 
-		// musicPlay();
+		if (new_game_counter == 0) {
+			musicPlay();
+		}
 
 		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
 		
@@ -100,6 +117,10 @@ void game_loop() {
 		
 		if (player_dying || next_level) {
 			--end_of_level_timer;
+		}
+		
+		if (new_game_counter > 0 && --new_game_counter == 0) {
+			falling_icecream_state = 0;
 		}
 	};
 }
@@ -139,7 +160,7 @@ void draw_unicorn() {
 }
 
 void draw_falling_icecream() {
-	if (falling_icecream_state == 0) return;
+	if (falling_icecream_state == 0 || new_game_counter > 0) return;
 	
 	unsigned short y_adj = falling_icecream_y;
 	
@@ -347,6 +368,7 @@ void reset_level() {
 	// clear the screens
 	run_dma_job((__far char *)&load_attrmap);
 	
+	new_game_counter = 0;
 	_cone_drawn = 0;
 
 	falling_icecream_y = 0;
@@ -446,3 +468,4 @@ void draw_level() {
 unsigned short end_of_level_timer;
 char level;
 char current_loaded_state;
+char new_game_counter;

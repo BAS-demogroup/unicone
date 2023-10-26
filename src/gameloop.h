@@ -19,5 +19,6 @@ extern unsigned short matrix_raster;
 extern unsigned short end_of_level_timer;
 extern char level;
 extern char current_loaded_state;
+extern char new_game_counter;
 
 #endif

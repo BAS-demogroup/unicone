@@ -8,6 +8,7 @@
 #include "difficulty.h"
 #include "dma.h"
 #include "dma_jobs.h"
+#include "macros.h"
 #include "setup.h"
 #include "gameloop.h"
 #include "player.h"
@@ -22,6 +23,9 @@ void main() {
 		
 		player_lives = 3;
 		level = 1;
+	
+		// initalize the music
+		musicInit();
 
 		do {
 			// the graphics will scale smaller as the level increases, because
@@ -39,15 +43,20 @@ void main() {
 			}	
 		} while (player_lives > 0);
 		
+		SID1.VOLUME_FTYPE = 0x60;
+		SID2.VOLUME_FTYPE = 0x60;
+		SID3.VOLUME_FTYPE = 0x20;
+		SID4.VOLUME_FTYPE = 0x30;
+		
 		unsigned short timer;
 		unsigned short part_2;
 
 		// load the game over banks
-		if (current_loaded_state != 2) {
+		if (current_loaded_state != 1) {
 			run_dma_job((__far char *)&load_game_over_samples_1);
 			run_dma_job((__far char *)&load_game_over_samples_2);
 			
-			current_loaded_state = 2;
+			current_loaded_state = 1;
 		}
 		
 		// second part starts = 1.255s
@@ -68,18 +77,12 @@ void main() {
 		// play first game over sfx
 		play_sample(game_over_sample_start[0], game_over_sample_end[0], 1);
 
-		// this is just to give the CPU something to do that will leave time
-		// for the audio DMA to steal cycles from.  heh
-		unsigned char spinner = 0;
-
 		while (timer > 0) {
 			while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
-				VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8)) {
-					++spinner;
-				}
-			while (VIC4.FNRASTERLSB == (matrix_raster & 0xff)) {
-				++spinner;
-			}
+				VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
+				
+			while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
+			
 			if (--timer == part_2) {
 				// play second game over sfx
 				play_sample(game_over_sample_start[1], game_over_sample_end[1], 
