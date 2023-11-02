@@ -1,4 +1,4 @@
-!to "sentimental_thing.prg", cbm
+!to "sentimental_thing.prg", plain
 !cpu m65
 
 !set title = "sentimental thing"
@@ -160,8 +160,8 @@ init:
 	; properly on real hardware.  If you are still seeing this after the fix is
 	; in, you can change the value to $0f to switch to 8580s and remind me to
 	; fix it in the exporter.
-	lda #$00
-	tsb $d63c
+	lda #$01
+	sta $d63c
 	
 	lda #$01
 	sta pattern_delays, x

@@ -23,12 +23,12 @@
 unsigned short matrix_raster;
 
 void game_loop() {
-	if (current_loaded_state != 0) {
-		run_dma_job((__far char *)&load_runtime_samples_1);
-		run_dma_job((__far char *)&load_runtime_samples_2);
+	// if (current_loaded_state != 0) {
+		// run_dma_job((__far char *)&load_runtime_samples_1);
+		// run_dma_job((__far char *)&load_runtime_samples_2);
 		
-		current_loaded_state = 0;
-	}
+		// current_loaded_state = 0;
+	// }
 	
 	if (level == 1 && player_lives == 3) {
 		// 1.175s
@@ -60,7 +60,7 @@ void game_loop() {
 			  " nop");
 
 		// clear the screens
-		run_dma_job((__far char *)&clear_tilemap);
+		run_dma_job((__far char *)&clear_ingame_tilemap);
 
 		// VIC2.BORDERCOL = 5;
 		
@@ -160,7 +160,8 @@ void draw_unicorn() {
 }
 
 void draw_falling_icecream() {
-	if (falling_icecream_state == 0 || new_game_counter > 0) return;
+	if (falling_icecream_state == 0 || new_game_counter > 0 || next_level) 
+		return;
 	
 	unsigned short y_adj = falling_icecream_y;
 	
@@ -366,7 +367,7 @@ void draw_cone() {
 
 void reset_level() {
 	// clear the screens
-	run_dma_job((__far char *)&load_attrmap);
+	run_dma_job((__far char *)&load_ingame_attrmap);
 	
 	new_game_counter = 0;
 	_cone_drawn = 0;

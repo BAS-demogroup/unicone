@@ -15,10 +15,15 @@
 
 
 void main() {
-	setup();
+	run_loader();
 	
 	while (1) {
 		// title screen
+		title_setup();
+		// need a title loop
+		
+		while(1);
+		
 		// reset game
 		
 		player_lives = 3;
@@ -51,13 +56,14 @@ void main() {
 		unsigned short timer;
 		unsigned short part_2;
 
+		// this needs to be replaced with the full bank loading
 		// load the game over banks
-		if (current_loaded_state != 1) {
-			run_dma_job((__far char *)&load_game_over_samples_1);
-			run_dma_job((__far char *)&load_game_over_samples_2);
+		// if (current_loaded_state != 1) {
+			// run_dma_job((__far char *)&load_game_over_samples_1);
+			// run_dma_job((__far char *)&load_game_over_samples_2);
 			
-			current_loaded_state = 1;
-		}
+			// current_loaded_state = 1;
+		// }
 		
 		// second part starts = 1.255s
 		// full length = 5.137s

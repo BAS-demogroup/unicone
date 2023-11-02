@@ -40,10 +40,11 @@ struct _VIC2 {
 	uint8_t     S7X;
 	uint8_t     S7Y;
 	uint8_t     SXMSB;
+	//uint8_t     CONTROL1;
 	union {
 		uint8_t YSCL : 3;
 		uint8_t RSEL : 1;
-		uint8_t BLNK : 1;
+		uint8_t DEN  : 1;
 		uint8_t BMM  : 1;
 		uint8_t ECM  : 1;
 		uint8_t RC8  : 1;
