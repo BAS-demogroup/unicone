@@ -23,13 +23,6 @@
 unsigned short matrix_raster;
 
 void game_loop() {
-	// if (current_loaded_state != 0) {
-		// run_dma_job((__far char *)&load_runtime_samples_1);
-		// run_dma_job((__far char *)&load_runtime_samples_2);
-		
-		// current_loaded_state = 0;
-	// }
-	
 	if (level == 1 && player_lives == 3) {
 		// 1.175s
 		// pal = 59 frames

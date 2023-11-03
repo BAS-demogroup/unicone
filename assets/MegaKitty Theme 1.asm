@@ -147,10 +147,6 @@ init:
 	lda pattern_lookup_hi, y
 	sta current_patterns_hi, x
 	
-	; set SIDs to 6581
-	lda #$01
-	sta $d63c
-	
 	lda #$01
 	sta pattern_delays, x
 	sta hard_restarting, x

@@ -12,31 +12,39 @@
 #include "setup.h"
 #include "gameloop.h"
 #include "player.h"
+#include "titleloop.h"
 
 
 void main() {
 	run_loader();
-	
+
 	while (1) {
 		// title screen
 		title_setup();
 		// need a title loop
+		title_loop();
 		
-		while(1);
+		SID1.CONTROL_1    = 0x00;
+		SID1.CONTROL_2    = 0x00;
+		SID1.CONTROL_3    = 0x00;
+		SID2.CONTROL_1    = 0x00;
+		SID2.CONTROL_2    = 0x00;
+		SID2.CONTROL_3    = 0x00;
+		SID3.CONTROL_1    = 0x00;
+		SID3.CONTROL_2    = 0x00;
+		SID3.CONTROL_3    = 0x00;
+		SID4.CONTROL_1    = 0x00;
+		SID4.CONTROL_2    = 0x00;
+		SID4.CONTROL_3    = 0x00;
 		
 		// reset game
-		
 		player_lives = 3;
 		level = 1;
-	
-		// initalize the music
-		musicInit();
-
+		
+		// switch to ingame mode
+		ingame_setup();
+		
 		do {
-			// the graphics will scale smaller as the level increases, because
-			// we can only fit about 10 ice cream stacks on the screen at the
-			// initial resolution.  The graphics are already drawn, and my guess
-			// is that the first scale change should happen after level 6.
 			set_level_difficulty();
 
 			reset_level();
@@ -48,23 +56,24 @@ void main() {
 			}	
 		} while (player_lives > 0);
 		
-		SID1.VOLUME_FTYPE = 0x60;
-		SID2.VOLUME_FTYPE = 0x60;
-		SID3.VOLUME_FTYPE = 0x20;
-		SID4.VOLUME_FTYPE = 0x30;
+		SID1.CONTROL_1    = 0x00;
+		SID1.CONTROL_2    = 0x00;
+		SID1.CONTROL_3    = 0x00;
+		SID2.CONTROL_1    = 0x00;
+		SID2.CONTROL_2    = 0x00;
+		SID2.CONTROL_3    = 0x00;
+		SID3.CONTROL_1    = 0x00;
+		SID3.CONTROL_2    = 0x00;
+		SID3.CONTROL_3    = 0x00;
+		SID4.CONTROL_1    = 0x00;
+		SID4.CONTROL_2    = 0x00;
+		SID4.CONTROL_3    = 0x00;
+				
+		gameover_setup();
 		
 		unsigned short timer;
 		unsigned short part_2;
 
-		// this needs to be replaced with the full bank loading
-		// load the game over banks
-		// if (current_loaded_state != 1) {
-			// run_dma_job((__far char *)&load_game_over_samples_1);
-			// run_dma_job((__far char *)&load_game_over_samples_2);
-			
-			// current_loaded_state = 1;
-		// }
-		
 		// second part starts = 1.255s
 		// full length = 5.137s
 		
@@ -95,8 +104,5 @@ void main() {
 					0);
 			}
 		}
-		// this is just for now, once we have a title screen, then rip this out.
-		VIC2.BORDERCOL = 0;
-		while (1);
 	};
 }

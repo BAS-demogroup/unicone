@@ -13,7 +13,7 @@ extern dma_copy_job_t                  clear_ingame_tilemap;
 extern dma_copy_job_t                  load_flavor_red;
 extern dma_copy_job_t                  load_flavor_green;
 extern dma_copy_job_t                  load_flavor_blue;
-extern dma_copy_job_huge_destination_t load_ingame_attrmap;
+extern dma_copy_job_huge_addresses_t   load_ingame_attrmap;
 
 
 // loader jobs - global

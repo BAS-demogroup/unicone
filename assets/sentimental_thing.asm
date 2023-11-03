@@ -155,14 +155,6 @@ init:
 	lda pattern_lookup_hi, y
 	sta current_patterns_hi, x
 	
-	; set SIDs to 6581
-	; The 8580 is the preferred sound chip, but at this time, it is not working
-	; properly on real hardware.  If you are still seeing this after the fix is
-	; in, you can change the value to $0f to switch to 8580s and remind me to
-	; fix it in the exporter.
-	lda #$01
-	sta $d63c
-	
 	lda #$01
 	sta pattern_delays, x
 	;sta hard_restarting, x

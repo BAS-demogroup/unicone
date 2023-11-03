@@ -29,7 +29,7 @@ void update_unicorn() {
 	}
 	
 	if (last_frame_index == 0 && unicorn_frame_index == 1) {
-		// play the sproing sample
+		// play the trot sample
 		play_sample(runtime_sample_start[1], runtime_sample_end[1], 1);
 	}
 	

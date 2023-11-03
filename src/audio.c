@@ -126,30 +126,30 @@ void play_sample(unsigned long start, unsigned short end, char sixteen_bit) {
 char next_channel;
 
 unsigned long runtime_sample_start[6] = {
-	0x040000,
-	0x050000,
-	0x051b00,
-	0x046600,
-	0x049400,
-	0x04c300
+	0x022b00,	// game start 1
+	0x029100,	// trot
+	0x030000,	// falling
+	0x02ac00,	// splat 1
+	0x03b700,	// splat 2
+	0x057c00	// splat 3
 };
 
 unsigned short runtime_sample_end[6] = {
-	0x6548,
-	0x1a22,
-	0xd1a4,
-	0x93ea,
-	0xc21a,
-	0xff3c
+	0x9048,
+	0xab22,
+	0xb6a4,
+	0xd9ea,
+	0xe51a,
+	0xb83c
 };
 
 
 unsigned long game_over_sample_start[2] = {
-	0x040000,
-	0x050000
+	0x022b00,	// game over 1
+	0x030000	// game over 2
 };
 
 unsigned short game_over_sample_end[2] = {
-	0x8630,
+	0xb130,
 	0xa730
 };
