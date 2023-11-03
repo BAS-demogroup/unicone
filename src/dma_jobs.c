@@ -296,16 +296,30 @@ dma_copy_job_huge_destination_t backup_ingame_bank_3 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_ingame_bank_4 = {
+dma_copy_job_huge_destination_t backup_ingame_bank_4a = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
 	.end_options		= 0x00,
 	.command			= 0x00,
-	.count				= 0x0000,
+	.count				= 0x8000,
 	.source				= 0x0000,
 	.source_bank		= 0x01,
 	.destination		= 0x0000,
+	.destination_bank	= 0x07,
+	.modulo				= 0x0
+};
+
+dma_copy_job_huge_destination_t backup_ingame_bank_4b = {
+	.type				= 0x0b,
+	.dbank_token		= 0x81,
+	.dbank				= 0x80,
+	.end_options		= 0x00,
+	.command			= 0x00,
+	.count				= 0x8000,
+	.source				= 0x0000,
+	.source_bank		= 0x01,
+	.destination		= 0x8000,
 	.destination_bank	= 0x07,
 	.modulo				= 0x0
 };

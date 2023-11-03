@@ -115,7 +115,7 @@ C:\Users\death\Documents\C65\megatool\megatool -a assets/falling.raw 00010000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_2.raw 0001b700
 
 C:\Users\death\Documents\C65\megatool\megatool -a assets/background_0.chrs 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/background_1.chrs 00018000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/background_1.chrs 00010000
 
 C:\Users\death\Documents\C65\megatool\megatool -a assets/background_2.chrs 00010000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_3.raw 00017c00

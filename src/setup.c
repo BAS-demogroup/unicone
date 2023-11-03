@@ -354,8 +354,9 @@ void load_rest() {
 	run_dma_job((__far char *)&clear_bank_1);
 	// load the in-game backdrop tileset part 1 of 2
 	floppy_iffl_fast_load();
+	run_dma_job((__far char *)&backup_ingame_bank_4a);
 	floppy_iffl_fast_load();
-	run_dma_job((__far char *)&backup_ingame_bank_4);
+	run_dma_job((__far char *)&backup_ingame_bank_4b);
 	
 	run_dma_job((__far char *)&clear_bank_1);
 	// load the in-game backdrop tileset part 2 of 2 and sound effect splat 3

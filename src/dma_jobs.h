@@ -38,10 +38,8 @@ extern dma_copy_job_huge_destination_t backup_ingame_bank_1;
 extern dma_copy_job_huge_destination_t backup_ingame_bank_2a;
 extern dma_copy_job_huge_destination_t backup_ingame_bank_2b;
 extern dma_copy_job_huge_destination_t backup_ingame_bank_3;
-extern dma_copy_job_huge_destination_t backup_ingame_bank_3;
-extern dma_copy_job_huge_destination_t backup_ingame_bank_4;
-extern dma_copy_job_huge_destination_t backup_ingame_bank_4;
-extern dma_copy_job_huge_destination_t backup_ingame_bank_5;
+extern dma_copy_job_huge_destination_t backup_ingame_bank_4a;
+extern dma_copy_job_huge_destination_t backup_ingame_bank_4b;
 extern dma_copy_job_huge_destination_t backup_ingame_bank_5;
 
 // loader jobs - game over data
