@@ -2,6 +2,7 @@
 
 
 #include "chips.h"
+#include "gameloop.h"
 
 
 void process_input() {
@@ -10,15 +11,29 @@ void process_input() {
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x04)) == 0) {
 		if (!key_down) {
 			if (muted) {
-				SID1.VOLUME_FTYPE = 0x6f;
-				SID2.VOLUME_FTYPE = 0x6a;
-				SID3.VOLUME_FTYPE = 0x2b;
-				SID4.VOLUME_FTYPE = 0x3b;
+				if (current_loaded_state == 0) {
+					SID1.VOLUME_FTYPE = 0x3f;
+					SID2.VOLUME_FTYPE = 0x74;
+					SID3.VOLUME_FTYPE = 0x7f;
+					SID4.VOLUME_FTYPE = 0x2f;
+				} else {
+					SID1.VOLUME_FTYPE = 0x6f;
+					SID2.VOLUME_FTYPE = 0x6a;
+					SID3.VOLUME_FTYPE = 0x2b;
+					SID4.VOLUME_FTYPE = 0x3b;
+				}
 			} else {
-				SID1.VOLUME_FTYPE = 0x60;
-				SID2.VOLUME_FTYPE = 0x60;
-				SID3.VOLUME_FTYPE = 0x20;
-				SID4.VOLUME_FTYPE = 0x30;
+				if (current_loaded_state == 0) {
+					SID1.VOLUME_FTYPE = 0x30;
+					SID2.VOLUME_FTYPE = 0x70;
+					SID3.VOLUME_FTYPE = 0x70;
+					SID4.VOLUME_FTYPE = 0x20;
+				} else {
+					SID1.VOLUME_FTYPE = 0x60;
+					SID2.VOLUME_FTYPE = 0x60;
+					SID3.VOLUME_FTYPE = 0x20;
+					SID4.VOLUME_FTYPE = 0x30;
+				}
 			}
 			muted = ~muted;
 			key_down = 1;
@@ -69,4 +84,4 @@ void process_input() {
 
 char player_input = 0;
 char key_down     = 0;
-char muted        = 0;
+char muted;

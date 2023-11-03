@@ -191,6 +191,8 @@ void title_setup() {
 	VIC2.BORDERCOL = 28;
 	VIC2.SCREENCOL = 28;
 	
+	VIC2.DEN = 1;
+		
 	// initalize the music
 	musicInit();
 }

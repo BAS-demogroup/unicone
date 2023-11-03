@@ -102,6 +102,18 @@ void game_loop() {
 
 		if (new_game_counter == 0) {
 			musicPlay();
+
+			if (!muted) {
+				SID1.VOLUME_FTYPE = 0x6f;
+				SID2.VOLUME_FTYPE = 0x6a;
+				SID3.VOLUME_FTYPE = 0x2b;
+				SID4.VOLUME_FTYPE = 0x3b;
+			} else {
+				SID1.VOLUME_FTYPE = 0x60;
+				SID2.VOLUME_FTYPE = 0x60;
+				SID3.VOLUME_FTYPE = 0x20;
+				SID4.VOLUME_FTYPE = 0x30;
+			}
 		}
 
 		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));

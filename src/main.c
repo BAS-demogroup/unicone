@@ -8,6 +8,7 @@
 #include "difficulty.h"
 #include "dma.h"
 #include "dma_jobs.h"
+#include "input.h"
 #include "macros.h"
 #include "setup.h"
 #include "gameloop.h"
@@ -21,6 +22,7 @@ void main() {
 	while (1) {
 		// title screen
 		title_setup();
+
 		// need a title loop
 		title_loop();
 		
@@ -43,7 +45,7 @@ void main() {
 		
 		// switch to ingame mode
 		ingame_setup();
-		
+
 		do {
 			set_level_difficulty();
 
