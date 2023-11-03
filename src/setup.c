@@ -90,14 +90,23 @@ void run_loader() {
 	VIC2.MCM = 1;
 	
 	// set 480 vertical resolution
-	// TODO: This needs NTSC fixing
-	VIC4.TBDRPOSLSB  = 0x40;	// defaults to $68/104
-	VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
-	VIC4.BBDRPOSLSB  = 0x20;	// defaults to $f8/248
-	VIC4.BBDRPOSMSB  = 0x2;	    // defaults to $01/1		(i.e. 504)
-	
-	VIC4.TEXTYPOSLSB = 0x40;
-	VIC4.TEXTYPOSMSB = 0;
+	if (VIC4.PALNTSC) {
+		VIC4.TBDRPOSLSB  = 0x0f;	// defaults to $37/55
+		VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
+		VIC4.BBDRPOSLSB  = 0xef;	// defaults to $c7/199
+		VIC4.BBDRPOSMSB  = 0x1;	    // defaults to $01/1		(i.e. 455)
+		
+		VIC4.TEXTYPOSLSB = 0x0f;
+		VIC4.TEXTYPOSMSB = 0;
+	} else {
+		VIC4.TBDRPOSLSB  = 0x40;	// defaults to $68/104
+		VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
+		VIC4.BBDRPOSLSB  = 0x20;	// defaults to $f8/248
+		VIC4.BBDRPOSMSB  = 0x2;	    // defaults to $01/1		(i.e. 504)
+		
+		VIC4.TEXTYPOSLSB = 0x40;
+		VIC4.TEXTYPOSMSB = 0;
+	}
 	
 	// configure screen row length
 	VIC4.LINESTEP    = LOADER_LINE_LENGTH << 1;
@@ -148,14 +157,23 @@ void title_setup() {
 	current_loaded_state = 0;
 
 	// set 480 vertical resolution
-	// TODO: This needs NTSC fixing
-	VIC4.TBDRPOSLSB  = 0x40;	// defaults to $68/104
-	VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
-	VIC4.BBDRPOSLSB  = 0x20;	// defaults to $f8/248
-	VIC4.BBDRPOSMSB  = 0x2;	    // defaults to $01/1		(i.e. 504)
-	
-	VIC4.TEXTYPOSLSB = 0x40;
-	VIC4.TEXTYPOSMSB = 0;
+	if (VIC4.PALNTSC) {
+		VIC4.TBDRPOSLSB  = 0x0f;	// defaults to $37/55
+		VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
+		VIC4.BBDRPOSLSB  = 0xef;	// defaults to $c7/199
+		VIC4.BBDRPOSMSB  = 0x1;	    // defaults to $01/1		(i.e. 455)
+		
+		VIC4.TEXTYPOSLSB = 0x0f;
+		VIC4.TEXTYPOSMSB = 0;
+	} else {
+		VIC4.TBDRPOSLSB  = 0x40;	// defaults to $68/104
+		VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
+		VIC4.BBDRPOSLSB  = 0x20;	// defaults to $f8/248
+		VIC4.BBDRPOSMSB  = 0x2;	    // defaults to $01/1		(i.e. 504)
+		
+		VIC4.TEXTYPOSLSB = 0x40;
+		VIC4.TEXTYPOSMSB = 0;
+	}
 	
 	// configure screen row length
 	VIC4.LINESTEP    = TITLE_LINE_LENGTH << 1;
@@ -188,15 +206,24 @@ void ingame_setup() {
 
 	current_loaded_state = 1;
 
-	// set 480 vertical resolution
-	// TODO: This needs NTSC fixing
-	VIC4.TBDRPOSLSB  = 0x68;	// defaults to $68/104
-	VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
-	VIC4.BBDRPOSLSB  = 0xf8;	// defaults to $f8/248
-	VIC4.BBDRPOSMSB  = 0x1;	    // defaults to $01/1		(i.e. 504)
-	
-	VIC4.TEXTYPOSLSB = 0x68;
-	VIC4.TEXTYPOSMSB = 0;
+	// set 400 vertical resolution
+	if (VIC4.PALNTSC) {
+		VIC4.TBDRPOSLSB  = 0x37;	// defaults to $37/55
+		VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
+		VIC4.BBDRPOSLSB  = 0xc7;	// defaults to $c7/199
+		VIC4.BBDRPOSMSB  = 0x1;	    // defaults to $01/1		(i.e. 455)
+		
+		VIC4.TEXTYPOSLSB = 0x37;
+		VIC4.TEXTYPOSMSB = 0;
+	} else {
+		VIC4.TBDRPOSLSB  = 0x68;	// defaults to $68/104
+		VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
+		VIC4.BBDRPOSLSB  = 0xf8;	// defaults to $f8/248
+		VIC4.BBDRPOSMSB  = 0x1;	    // defaults to $01/1		(i.e. 504)
+		
+		VIC4.TEXTYPOSLSB = 0x68;
+		VIC4.TEXTYPOSMSB = 0;
+	}
 
 	// configure screen row length
 	VIC4.LINESTEP    = INGAME_LINE_LENGTH << 1;
