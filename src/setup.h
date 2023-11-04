@@ -2,7 +2,6 @@
 /// 
 /// \brief	This file is the header file for the code responsible for loading 
 /// 		and setup of the game
-/// \author deathy (AKA Clifford A. Anderson)
 ///
 /// This header file defines the procedures that load all of the data at 
 /// startup, as well as the code that is called for switching between the 3

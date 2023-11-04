@@ -5,7 +5,7 @@
 
 
 // running jobs - title screen functional
-dma_copy_job_huge_addresses_t load_title_attrmap = {
+dma_job_far_addresses_t load_title_attrmap = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= (TITLE_ATTR_MAP & 0xff00000) >> 20,
@@ -22,7 +22,7 @@ dma_copy_job_huge_addresses_t load_title_attrmap = {
 };
 
 // running jobs - in game functional
-dma_copy_job_t clear_ingame_tilemap = {
+dma_job_t clear_ingame_tilemap = {
 	.type				= 0x0b,
 	.end_options		= 0x00,
 	.command			= 0x00,
@@ -34,7 +34,7 @@ dma_copy_job_t clear_ingame_tilemap = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_t load_flavor_red = {
+dma_job_t load_flavor_red = {
 	.type				= 0x0b,
 	.end_options		= 0x00,
 	.command			= 0x00,
@@ -46,7 +46,7 @@ dma_copy_job_t load_flavor_red = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_t load_flavor_green = {
+dma_job_t load_flavor_green = {
 	.type				= 0x0b,
 	.end_options		= 0x00,
 	.command			= 0x00,
@@ -58,7 +58,7 @@ dma_copy_job_t load_flavor_green = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_t load_flavor_blue = {
+dma_job_t load_flavor_blue = {
 	.type				= 0x0b,
 	.end_options		= 0x00,
 	.command			= 0x00,
@@ -70,7 +70,7 @@ dma_copy_job_t load_flavor_blue = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_addresses_t load_ingame_attrmap = {
+dma_job_far_addresses_t load_ingame_attrmap = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= (INGAME_ATTR_MAP_BAK & 0xff00000) >> 20,
@@ -87,21 +87,8 @@ dma_copy_job_huge_addresses_t load_ingame_attrmap = {
 };
 
 
-// loader jobs - global
-dma_fill_job_t clear_bank_1 = {
-	.type				= 0x0b,
-	.end_options		= 0x00,
-	.command			= 0x03,
-	.count				= 0x0000,
-	.source             = 0x0000,
-	.source_bank        = 0x00,
-	.destination        = 0x0000,
-	.destination_bank   = 0x01,
-	.modulo             = 0x0
-};
-
 // loader jobs - loader screen data
-dma_copy_job_t load_palette = {
+dma_job_t load_palette = {
 	.type				= 0x0b,
 	.end_options		= 0x00,
 	.command			= 0x00,
@@ -113,7 +100,7 @@ dma_copy_job_t load_palette = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t load_loader_attrmap = {
+dma_job_far_destination_t load_loader_attrmap = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0xff,
@@ -127,7 +114,7 @@ dma_copy_job_huge_destination_t load_loader_attrmap = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_t move_tilemap_3b = {
+dma_job_t move_tilemap_3b = {
 	.type				= 0x0b,
 	.end_options		= 0x00,
 	.command			= 0x00,
@@ -139,7 +126,7 @@ dma_copy_job_t move_tilemap_3b = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_t move_tilemap_4b = {
+dma_job_t move_tilemap_4b = {
 	.type				= 0x0b,
 	.end_options		= 0x00,
 	.command			= 0x00,
@@ -153,7 +140,7 @@ dma_copy_job_t move_tilemap_4b = {
 
 
 // loader jobs - title screen data
-dma_copy_job_huge_destination_t backup_title_bank_1 = {
+dma_job_far_destination_t backup_title_bank_1 = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -167,7 +154,7 @@ dma_copy_job_huge_destination_t backup_title_bank_1 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_title_bank_3a = {
+dma_job_far_destination_t backup_title_bank_3a = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -181,7 +168,7 @@ dma_copy_job_huge_destination_t backup_title_bank_3a = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_title_bank_3b = {
+dma_job_far_destination_t backup_title_bank_3b = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -195,7 +182,7 @@ dma_copy_job_huge_destination_t backup_title_bank_3b = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_title_bank_4a = {
+dma_job_far_destination_t backup_title_bank_4a = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -209,7 +196,7 @@ dma_copy_job_huge_destination_t backup_title_bank_4a = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_title_bank_4b = {
+dma_job_far_destination_t backup_title_bank_4b = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -223,7 +210,7 @@ dma_copy_job_huge_destination_t backup_title_bank_4b = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_title_bank_5 = {
+dma_job_far_destination_t backup_title_bank_5 = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -239,7 +226,7 @@ dma_copy_job_huge_destination_t backup_title_bank_5 = {
 
 
 // loader jobs - in-game data
-dma_copy_job_huge_destination_t backup_ingame_bank_1 = {
+dma_job_far_destination_t backup_ingame_bank_1 = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -253,7 +240,7 @@ dma_copy_job_huge_destination_t backup_ingame_bank_1 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_ingame_bank_2a = {
+dma_job_far_destination_t backup_ingame_bank_2a = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -268,7 +255,7 @@ dma_copy_job_huge_destination_t backup_ingame_bank_2a = {
 };
 
 // remove
-dma_copy_job_huge_destination_t backup_ingame_bank_2b = {
+dma_job_far_destination_t backup_ingame_bank_2b = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -282,7 +269,7 @@ dma_copy_job_huge_destination_t backup_ingame_bank_2b = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_ingame_bank_3 = {
+dma_job_far_destination_t backup_ingame_bank_3 = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -296,7 +283,7 @@ dma_copy_job_huge_destination_t backup_ingame_bank_3 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_ingame_bank_4a = {
+dma_job_far_destination_t backup_ingame_bank_4a = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -310,7 +297,7 @@ dma_copy_job_huge_destination_t backup_ingame_bank_4a = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_ingame_bank_4b = {
+dma_job_far_destination_t backup_ingame_bank_4b = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -324,7 +311,7 @@ dma_copy_job_huge_destination_t backup_ingame_bank_4b = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_ingame_bank_5 = {
+dma_job_far_destination_t backup_ingame_bank_5 = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -340,7 +327,7 @@ dma_copy_job_huge_destination_t backup_ingame_bank_5 = {
 
 
 // loader jobs - game over data
-dma_copy_job_huge_destination_t backup_game_over_bank_2 = {
+dma_job_far_destination_t backup_game_over_bank_2 = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -354,7 +341,7 @@ dma_copy_job_huge_destination_t backup_game_over_bank_2 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_destination_t backup_game_over_bank_3 = {
+dma_job_far_destination_t backup_game_over_bank_3 = {
 	.type				= 0x0b,
 	.dbank_token		= 0x81,
 	.dbank				= 0x80,
@@ -370,7 +357,7 @@ dma_copy_job_huge_destination_t backup_game_over_bank_3 = {
 
 
 // running jobs - title screen data
-dma_copy_job_huge_source_t load_title_bank_1 = {
+dma_job_far_source_t load_title_bank_1 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -384,7 +371,7 @@ dma_copy_job_huge_source_t load_title_bank_1 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_source_t load_title_bank_3 = {
+dma_job_far_source_t load_title_bank_3 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -398,7 +385,7 @@ dma_copy_job_huge_source_t load_title_bank_3 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_source_t load_title_bank_4 = {
+dma_job_far_source_t load_title_bank_4 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -412,7 +399,7 @@ dma_copy_job_huge_source_t load_title_bank_4 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_source_t load_title_bank_5 = {
+dma_job_far_source_t load_title_bank_5 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -428,7 +415,7 @@ dma_copy_job_huge_source_t load_title_bank_5 = {
 
 
 // running jobs - in-game data
-dma_copy_job_huge_source_t load_ingame_bank_1 = {
+dma_job_far_source_t load_ingame_bank_1 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -442,7 +429,7 @@ dma_copy_job_huge_source_t load_ingame_bank_1 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_source_t load_ingame_bank_2 = {
+dma_job_far_source_t load_ingame_bank_2 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -456,7 +443,7 @@ dma_copy_job_huge_source_t load_ingame_bank_2 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_source_t load_ingame_bank_3 = {
+dma_job_far_source_t load_ingame_bank_3 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -470,7 +457,7 @@ dma_copy_job_huge_source_t load_ingame_bank_3 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_source_t load_ingame_bank_4 = {
+dma_job_far_source_t load_ingame_bank_4 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -484,7 +471,7 @@ dma_copy_job_huge_source_t load_ingame_bank_4 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_source_t load_ingame_bank_5 = {
+dma_job_far_source_t load_ingame_bank_5 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -500,7 +487,7 @@ dma_copy_job_huge_source_t load_ingame_bank_5 = {
 
 
 // running jobs - game over data
-dma_copy_job_huge_source_t load_game_over_bank_2 = {
+dma_job_far_source_t load_game_over_bank_2 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,
@@ -514,7 +501,7 @@ dma_copy_job_huge_source_t load_game_over_bank_2 = {
 	.modulo				= 0x0
 };
 
-dma_copy_job_huge_source_t load_game_over_bank_3 = {
+dma_job_far_source_t load_game_over_bank_3 = {
 	.type				= 0x0b,
 	.sbank_token		= 0x80,
 	.sbank				= 0x80,

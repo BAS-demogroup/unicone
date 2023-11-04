@@ -1,7 +1,6 @@
 /// \file	main.c
 /// 
 /// \brief	This file contains the entry point for Unicone.
-/// \author deathy (AKA Clifford A. Anderson)
 ///
 /// The entry point for Unicone.  This is also where the very top level loop 
 /// runs, first loading all the game data, then looping between the title 
