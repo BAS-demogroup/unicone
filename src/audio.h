@@ -2,6 +2,7 @@
 #define __AUDIO_H
 
 void play_sample(unsigned long start, unsigned short end, char sixteen_bit);
+void stop_all_SID_voices();
 
 extern char next_channel;
 

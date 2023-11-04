@@ -1,6 +1,15 @@
-// UniCone main
-//
-// This contains the main method that starts the game.
+/// \file	main.c
+/// 
+/// \brief	This file contains the entry point for Unicone.
+/// \author deathy (AKA Clifford A. Anderson)
+///
+/// The entry point for Unicone.  This is also where the very top level loop 
+/// runs, first loading all the game data, then looping between the title 
+/// screen, the in-game levels, and then the game over state, before returning
+/// to the title screen.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 
 
 #include "audio.h"
@@ -8,6 +17,7 @@
 #include "difficulty.h"
 #include "dma.h"
 #include "dma_jobs.h"
+#include "gameoverloop.h"
 #include "input.h"
 #include "macros.h"
 #include "setup.h"
@@ -16,95 +26,62 @@
 #include "titleloop.h"
 
 
+/// \brief	This is the main entry point, and the top level loop, for the game.
+///
+/// This procedure is the main entry point for the game.  It first loads all of
+/// the assets for the game, and then enters an infinite loop that cycles
+/// between the display of the title screen, the main gameplay loop and level
+/// advancement in the game, and the end game state, before returning back to
+/// the title screen.
 void main() {
+	// load all of the assets off of disk and put them in the attic
 	run_loader();
 
 	while (1) {
-		// title screen
+		// show the title screen
 		title_setup();
 
-		// need a title loop
+		// loop waiting for the player to start the game
 		title_loop();
 		
-		SID1.CONTROL_1    = 0x00;
-		SID1.CONTROL_2    = 0x00;
-		SID1.CONTROL_3    = 0x00;
-		SID2.CONTROL_1    = 0x00;
-		SID2.CONTROL_2    = 0x00;
-		SID2.CONTROL_3    = 0x00;
-		SID3.CONTROL_1    = 0x00;
-		SID3.CONTROL_2    = 0x00;
-		SID3.CONTROL_3    = 0x00;
-		SID4.CONTROL_1    = 0x00;
-		SID4.CONTROL_2    = 0x00;
-		SID4.CONTROL_3    = 0x00;
+		// stop all the music voices so we can change tunes without noticable
+		// audio artifacts audible to the user.
+		stop_all_SID_voices();
 		
-		// reset game
+		// reset the game
 		player_lives = 3;
 		level = 1;
 		
-		// switch to ingame mode
+		// load the assets for the ingame loop, and configure the registers
 		ingame_setup();
 
 		do {
+			// configure the various difficulty settings
 			set_level_difficulty();
 
+			// reset all of the global variables used in-game.  these are all
+			// variables that need to be reset every time the level is 
+			// refreshed or advanced.
 			reset_level();
 			
+			// start the inner game loop
 			game_loop();
 			
+			// advance to the next level (the inner loop can exit for multiple
+			// reasons, so we can't just assume the level advanced)
 			if (next_level) {
 				++level;
-			}	
+			}
+		// continue to run the in-game loop until the player runs out of lives
 		} while (player_lives > 0);
 		
-		SID1.CONTROL_1    = 0x00;
-		SID1.CONTROL_2    = 0x00;
-		SID1.CONTROL_3    = 0x00;
-		SID2.CONTROL_1    = 0x00;
-		SID2.CONTROL_2    = 0x00;
-		SID2.CONTROL_3    = 0x00;
-		SID3.CONTROL_1    = 0x00;
-		SID3.CONTROL_2    = 0x00;
-		SID3.CONTROL_3    = 0x00;
-		SID4.CONTROL_1    = 0x00;
-		SID4.CONTROL_2    = 0x00;
-		SID4.CONTROL_3    = 0x00;
-				
+		// again, stop all sid sounds
+		stop_all_SID_voices();
+		
+		// load the assets to do the game over.
 		gameover_setup();
 		
-		unsigned short timer;
-		unsigned short part_2;
-
-		// second part starts = 1.255s
-		// full length = 5.137s
-		
-		// pal - full length = 257 frames
-		// pal - second part starts = 63 frames
-		if (!VIC4.PALNTSC) {
-			timer = 257;
-			part_2 = 194;
-		// ntsc - full length = 308 frames
-		// ntsc - second part starts = 75 frames
-		} else {
-			timer = 308;
-			part_2 = 233;
-		}		
-		
-		// play first game over sfx
-		play_sample(game_over_sample_start[0], game_over_sample_end[0], 1);
-
-		while (timer > 0) {
-			while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
-				VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
-				
-			while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
-			
-			if (--timer == part_2) {
-				// play second game over sfx
-				play_sample(game_over_sample_start[1], game_over_sample_end[1], 
-					0);
-			}
-		}
+		// run the game over loop
+		gameover_loop();
 	};
 }

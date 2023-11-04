@@ -53,13 +53,15 @@ cc6502 --list-file build/audio.lst --assembly-source build/audio.s --core 45gs02
 cc6502 -o build/audio.o --list-file build/audio.lst --core 45gs02 --target MEGA65 src/audio.c
 cc6502 --list-file build/titleloop.lst --assembly-source build/titleloop.s --core 45gs02 --target MEGA65 src/titleloop.c
 cc6502 -o build/titleloop.o --list-file build/titleloop.lst --core 45gs02 --target MEGA65 src/titleloop.c
+cc6502 --list-file build/gameoverloop.lst --assembly-source build/gameoverloop.s --core 45gs02 --target MEGA65 src/gameoverloop.c
+cc6502 -o build/gameoverloop.o --list-file build/gameoverloop.lst --core 45gs02 --target MEGA65 src/gameoverloop.c
 
 as6502 -o build/irqload.o --list-file build/irqload.lst --core 45gs02 --target MEGA65 src/iffl/irqload.s
 as6502 -o build/decruncher.o --list-file build/decruncher.lst --core 45gs02 --target MEGA65 src/iffl/decruncher.s
 as6502 -o build/iffl.o --list-file build/iffl.lst --core 45gs02 --target MEGA65 src/iffl/iffl.s
 as6502 -o build/rng.o --list-file build/rng.lst --core 45gs02 --target MEGA65 src/rng.s
 
-ln6502 -o build/unicone_full.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o build/pixies.o build/input.o build/player.o build/unicorn.o build/rng.o build/icecream.o build/swing.o build/difficulty.o build/audio.o build/titleloop.o ./mega65-unicone.scm
+ln6502 -o build/unicone_full.prg --list-file build/unicone.lst --verbose --output-format prg --core 45gs02 --target mega65 build/main.o build/setup.o build/dma.o build/dma_jobs.o build/irqload.o build/decruncher.o build/iffl.o build/interrupt.o build/gameloop.o build/maps.o build/pixies.o build/input.o build/player.o build/unicorn.o build/rng.o build/icecream.o build/swing.o build/difficulty.o build/audio.o build/titleloop.o build/gameoverloop.o ./mega65-unicone.scm
 
 echo %time%
 

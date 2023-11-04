@@ -123,6 +123,21 @@ void play_sample(unsigned long start, unsigned short end, char sixteen_bit) {
 	}
 }
 
+void stop_all_SID_voices() {
+	SID1.CONTROL_1    = 0x00;
+	SID1.CONTROL_2    = 0x00;
+	SID1.CONTROL_3    = 0x00;
+	SID2.CONTROL_1    = 0x00;
+	SID2.CONTROL_2    = 0x00;
+	SID2.CONTROL_3    = 0x00;
+	SID3.CONTROL_1    = 0x00;
+	SID3.CONTROL_2    = 0x00;
+	SID3.CONTROL_3    = 0x00;
+	SID4.CONTROL_1    = 0x00;
+	SID4.CONTROL_2    = 0x00;
+	SID4.CONTROL_3    = 0x00;
+}
+
 char next_channel;
 
 unsigned long runtime_sample_start[6] = {
