@@ -35,7 +35,7 @@
 /// the title screen.
 void main() {
 	// load all of the assets off of disk and put them in the attic
-	run_loader();
+	loader();
 
 	while (1) {
 		// show the title screen

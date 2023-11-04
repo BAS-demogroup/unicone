@@ -16,11 +16,10 @@
 #include "maps.h"
 #include "pixies.h"
 #include "player.h"
+#include "setup.h"
 #include "swing.h"
 #include "unicorn.h"
 
-
-unsigned short matrix_raster;
 
 void game_loop() {
 	if (level == 1 && player_lives == 3) {
@@ -39,8 +38,8 @@ void game_loop() {
 	
 	while (end_of_level_timer > 0) {
 		
-		while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
-			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
+		while (VIC4.FNRASTERLSB != (update_raster & 0xff) || 
+			VIC4.FNRASTERMSB != ((update_raster & 0x0f00) >> 8));
 		
 		// VIC2.BORDERCOL = 0;
 		
@@ -116,7 +115,7 @@ void game_loop() {
 			}
 		}
 
-		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
+		while (VIC4.FNRASTERLSB == (update_raster & 0xff));
 		
 		// VIC2.BORDERCOL = 15;
 		

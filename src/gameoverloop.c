@@ -3,7 +3,7 @@
 
 #include "audio.h"
 #include "chips.h"
-#include "gameloop.h"
+#include "setup.h"
 
 
 void gameover_loop() {
@@ -29,10 +29,10 @@ void gameover_loop() {
 	play_sample(game_over_sample_start[0], game_over_sample_end[0], 1);
 
 	while (timer > 0) {
-		while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
-			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
+		while (VIC4.FNRASTERLSB != (update_raster & 0xff) || 
+			VIC4.FNRASTERMSB != ((update_raster & 0x0f00) >> 8));
 			
-		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
+		while (VIC4.FNRASTERLSB == (update_raster & 0xff));
 		
 		if (--timer == part_2) {
 			// play second game over sfx

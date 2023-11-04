@@ -2,16 +2,16 @@
 
 
 #include "chips.h"
-#include "gameloop.h"
 #include "input.h"
 #include "macros.h"
 #include "rng.h"
+#include "setup.h"
 
 
 void title_loop() {
 	while (!(player_input & 0b00010000)) {
-		while (VIC4.FNRASTERLSB != (matrix_raster & 0xff) || 
-			VIC4.FNRASTERMSB != ((matrix_raster & 0x0f00) >> 8));
+		while (VIC4.FNRASTERLSB != (update_raster & 0xff) || 
+			VIC4.FNRASTERMSB != ((update_raster & 0x0f00) >> 8));
 	
 		process_input();
 		musicPlay();
@@ -30,6 +30,6 @@ void title_loop() {
 
 		random();
 		
-		while (VIC4.FNRASTERLSB == (matrix_raster & 0xff));
+		while (VIC4.FNRASTERLSB == (update_raster & 0xff));
 	}
 }
