@@ -1,3 +1,14 @@
+/// \file	setup.c
+/// 
+/// \brief	This file contains the code responsible for loading and setup of 
+/// 		the game
+///
+/// This C file contains all the code that loads all of the data at startup, as 
+/// well as the code that is called for switching between the 3 modes of the 
+/// game - title screen, in-game loop, and game over.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #include "setup.h"
 
 
