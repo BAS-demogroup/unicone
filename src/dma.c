@@ -17,7 +17,7 @@
 ///
 /// This procedure is called to execute a DMA job.
 ///
-/// \param	A pointer to the job to execute.
+/// \param	ptr	A pointer to the job to execute.
 void run_dma_job(__far char *ptr) {
 	// set the MB
 	DMA.ADDRMB   = 0;

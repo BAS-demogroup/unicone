@@ -3,19 +3,21 @@
 
 #include <stdint.h>
 
-typedef struct _CPU         _CPU_t;
-typedef struct _VIC2        _VIC2_t;
-typedef struct _VIC3        _VIC3_t;
-typedef struct _VIC4        _VIC4_t;
-typedef struct _FDC         _FDC_t;
-typedef struct _SID         _SID_t;
-typedef struct _KEYSCAN     _KEYSCAN_t;
-typedef struct _DMA         _DMA_t;
-typedef struct _MATH        _MATH_t;
-typedef struct _AUDIO_DMA   _AUDIO_DMA_t;
-typedef struct _CIA1        _CIA1_t;
-typedef struct _CIA2        _CIA2_t;
-typedef struct _IRQ_VECTORS _IRQ_VECTORS_t;
+typedef struct _CPU           _CPU_t;
+typedef struct _VIC2          _VIC2_t;
+typedef struct _VIC3          _VIC3_t;
+typedef struct _VIC4          _VIC4_t;
+typedef struct _FDC           _FDC_t;
+typedef struct _SID           _SID_t;
+typedef struct _SID_VOICE     _SID_VOICE_t;
+typedef struct _KEYSCAN       _KEYSCAN_t;
+typedef struct _DMA           _DMA_t;
+typedef struct _MATH          _MATH_t;
+typedef struct _AUDIO_DMA     _AUDIO_DMA_t;
+typedef struct _AUDIO_CHANNEL _AUDIO_CHANNEL_t;
+typedef struct _CIA1          _CIA1_t;
+typedef struct _CIA2          _CIA2_t;
+typedef struct _IRQ_VECTORS   _IRQ_VECTORS_t;
 
 struct _CPU {
 	uint8_t     PORTDDR;
@@ -40,7 +42,6 @@ struct _VIC2 {
 	uint8_t     S7X;
 	uint8_t     S7Y;
 	uint8_t     SXMSB;
-	//uint8_t     CONTROL1;
 	union {
 		uint8_t YSCL : 3;
 		uint8_t RSEL : 1;
@@ -361,29 +362,22 @@ struct _FDC {
 	uint8_t     PCODE;
 };
 
+struct _SID_VOICE {
+	uint16_t    FREQUENCY;
+	uint16_t    PULSE_WIDTH;
+	uint8_t     CONTROL;		// Choosing to not expand all the bits, as you 
+     				   			// can't use TRB/TSB with SID chips.
+	uint8_t     ATTACKDECAY;
+	uint8_t     SUSTAINRELEASE;
+};
+
 struct _SID {
-	uint16_t    FREQUENCY_1;
-	uint16_t    PULSE_WIDTH_1;
-	uint8_t     CONTROL_1;		// Choosing to not expand all the bits, as you 
-				   			// can't use TRB/TSB with SID chips.
-	uint8_t     ATTACKDECAY_1;
-	uint8_t     SUSTAINRELEASE_1;
-	uint16_t    FREQUENCY_2;
-	uint16_t    PULSE_WIDTH_2;
-	uint8_t     CONTROL_2;		// Choosing to not expand all the bits, as you 
-				   			// can't use TRB/TSB with SID chips.
-	uint8_t     ATTACKDECAY_2;
-	uint8_t     SUSTAINRELEASE_2;
-	uint16_t    FREQUENCY_3;
-	uint16_t    PULSE_WIDTH_3;
-	uint8_t     CONTROL_3;		// Choosing to not expand all the bits, as you 
-				   			// can't use TRB/TSB with SID chips.
-	uint8_t     ATTACKDECAY_3;
-	uint8_t     SUSTAINRELEASE_3;
-	uint8_t     CUTOFF_LSB;
-	uint8_t     CUTOFF_MSB;
-	uint8_t     RESONANCE_ROUTING;
-	uint8_t     VOLUME_FTYPE;
+	_SID_VOICE_t VOICE[3];
+
+	uint8_t      CUTOFF_LSB;
+	uint8_t      CUTOFF_MSB;
+	uint8_t      RESONANCE_ROUTING;
+	uint8_t      VOLUME_FTYPE;
 };
 
 struct _KEYSCAN {
@@ -417,61 +411,27 @@ struct _MATH {
 	uint32_t    MULTOUT;
 };
 
-// look into rewriting this so that the different channels are in an indexable
-// array instead of explicitly named
+struct _AUDIO_CHANNEL {
+	uint8_t     CONTROL;
+	uint16_t    BADDR;
+	uint8_t     BADDRMB;
+	uint16_t    FREQ;
+	uint8_t     FREQMB;
+	uint16_t    TADDR;
+	uint8_t     VOLUME;
+	uint16_t    CURADDR;
+	uint8_t     CURADDRMB;
+	uint16_t    TMRADDR;
+	uint8_t     TMRADDRMB;
+};
+
 struct _AUDIO_DMA {
-	uint8_t     CH0RVOL;
-	uint8_t     CH1RVOL;
-	uint8_t     CH2LVOL;
-	uint8_t     CH3LVOL;
+	uint8_t          CH0RVOL;
+	uint8_t          CH1RVOL;
+	uint8_t          CH2LVOL;
+	uint8_t          CH3LVOL;
 	
-	uint8_t     CH0CONTROL;
-	uint16_t    CH0BADDR;
-	uint8_t     CH0BADDRMB;
-	uint16_t    CH0FREQ;
-	uint8_t     CH0FREQMB;
-	uint16_t    CH0TADDR;
-	uint8_t     CH0VOLUME;
-	uint16_t    CH0CURADDR;
-	uint8_t     CH0CURADDRMB;
-	uint16_t    CH0TMRADDR;
-	uint8_t     CH0TMRADDRMB;
-	
-	uint8_t     CH1CONTROL;
-	uint16_t    CH1BADDR;
-	uint8_t     CH1BADDRMB;
-	uint16_t    CH1FREQ;
-	uint8_t     CH1FREQMB;
-	uint16_t    CH1TADDR;
-	uint8_t     CH1VOLUME;
-	uint16_t    CH1CURADDR;
-	uint8_t     CH1CURADDRMB;
-	uint16_t    CH1TMRADDR;
-	uint8_t     CH1TMRADDRMB;
-	
-	uint8_t     CH2CONTROL;
-	uint16_t    CH2BADDR;
-	uint8_t     CH2BADDRMB;
-	uint16_t    CH2FREQ;
-	uint8_t     CH2FREQMB;
-	uint16_t    CH2TADDR;
-	uint8_t     CH2VOLUME;
-	uint16_t    CH2CURADDR;
-	uint8_t     CH2CURADDRMB;
-	uint16_t    CH2TMRADDR;
-	uint8_t     CH2TMRADDRMB;
-	
-	uint8_t     CH3CONTROL;
-	uint16_t    CH3BADDR;
-	uint8_t     CH3BADDRMB;
-	uint16_t    CH3FREQ;
-	uint8_t     CH3FREQMB;
-	uint16_t    CH3TADDR;
-	uint8_t     CH3VOLUME;
-	uint16_t    CH3CURADDR;
-	uint8_t     CH3CURADDRMB;
-	uint16_t    CH3TMRADDR;
-	uint8_t     CH3TMRADDRMB;
+	_AUDIO_CHANNEL_t CHANNELS[4];
 };
 
 // I can't get the CIA chips to work right.

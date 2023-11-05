@@ -1,3 +1,12 @@
+/// \file	audio.h
+/// 
+/// \brief	This file is the header file that declares most of the audio code
+///
+/// This header file declares the procedures and structures that handle most of
+/// the audio samples and hard stopping the SID audio.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #ifndef __AUDIO_H
 #define __AUDIO_H
 
