@@ -1,3 +1,14 @@
+/// \file	difficulty.h
+/// 
+/// \brief	This file is the header file that declares the code and variables 
+///			that define the difficulty
+///
+/// This header file declares the code and all of the variables that are used
+/// to describe the difficulty curve of the game, although the swing of the
+/// stack is also a part of the difficulty and is defined in a file of its own.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #ifndef __DIFFICULTY_H
 #define __DIFFICULTY_H
 
