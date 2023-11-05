@@ -172,10 +172,7 @@ void title_setup() {
 	VIC2.DEN = 0;
 
 	// load all of the title screen data from attic RAM into fast RAM
-	run_dma_job((__far char *)&load_title_bank_1);
-	run_dma_job((__far char *)&load_title_bank_3);
-	run_dma_job((__far char *)&load_title_bank_4);
-	run_dma_job((__far char *)&load_title_bank_5);
+	run_dma_job((__far char *)&load_title_banks);
 	
 	// set the current_loaded_state to 0, which is used elsewhere to determine
 	// which state the game is in for a few things
@@ -219,11 +216,7 @@ void ingame_setup() {
 	VIC2.DEN = 0;
 
 	// load all of the in-game data from the attic into the fast RAM
-	run_dma_job((__far char *)&load_ingame_bank_1);
-	run_dma_job((__far char *)&load_ingame_bank_2);
-	run_dma_job((__far char *)&load_ingame_bank_3);
-	run_dma_job((__far char *)&load_ingame_bank_4);
-	run_dma_job((__far char *)&load_ingame_bank_5);
+	run_dma_job((__far char *)&load_ingame_banks);
 
 	// set current_loaded_state to 1 so other parts of the game know we're
 	// in "in-game" mode.
@@ -265,8 +258,7 @@ void ingame_setup() {
 /// couple of samples that were too big to fit in the fast RAM during in-game
 void gameover_setup() {
 	// load the game over sound effects
-	run_dma_job((__far char *)&load_game_over_bank_2);
-	run_dma_job((__far char *)&load_game_over_bank_3);
+	run_dma_job((__far char *)&load_game_over_banks);
 	
 	// and set the current_loaded_state to game over, which is not explicitly
 	// tested for anywhere, but distinguishes itself from the title screen and
@@ -305,9 +297,9 @@ void load_loader() {
 	
 	// move part 1 into the correct location
 	// the job name suggests it is multipart, but its true purpose is because
-	// the tile map needs to be multipart, and it is more effective to load the
+	// the tile set needs to be multipart, and it is more effective to load the
 	// second half into bank 1 first, and then copy it into $0038000.
-	run_dma_job((__far char *)&move_tilemap_3b);
+	run_dma_job((__far char *)&move_tileset_3b);
 	
 	// load "loading" screen tilemap parts 2 and 3
 	for (char i = 0; i < 2; i++) {
@@ -316,7 +308,7 @@ void load_loader() {
 	
 	// move parts 2 and 3 into the correct location
 	// see above for why there's only a "b" job.
-	run_dma_job((__far char *)&move_tilemap_4b);
+	run_dma_job((__far char *)&move_tileset_4b);
 	
 	// load "loading" screen tilemap part 4, tile map and attribute map
 	for (char i = 0; i < 3; i++) {
@@ -378,7 +370,7 @@ void load_rest() {
 	for (char i = 0; i < 3; i++) {
 		floppy_iffl_fast_load();
 	}
-	run_dma_job((__far char *)&backup_ingame_bank_2a);
+	run_dma_job((__far char *)&backup_ingame_bank_2);
 	
 	// load the in-game sound effects for falling and splat 2
 	floppy_iffl_fast_load();

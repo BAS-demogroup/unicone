@@ -10,12 +10,12 @@
 
 void set_level_difficulty() {
 	char cur_level = level > 24 ? 24 : level;
-	load_flavor_red.source = ((FLAVORS_RED + ((cur_level - 1) << 0x04)) & 0xffff);
-	load_flavor_green.source = ((FLAVORS_GREEN + ((cur_level - 1) << 0x04)) & 0xffff);
-	load_flavor_blue.source = ((FLAVORS_BLUE + ((cur_level - 1) << 0x04)) & 0xffff);
-	run_dma_job((__far char *)&load_flavor_red);
-	run_dma_job((__far char *)&load_flavor_green);
-	run_dma_job((__far char *)&load_flavor_blue);
+
+	load_flavor[0].source = ((FLAVORS_RED   + ((cur_level - 1) << 0x04)) & 0xffff);
+	load_flavor[1].source = ((FLAVORS_GREEN + ((cur_level - 1) << 0x04)) & 0xffff);
+	load_flavor[2].source = ((FLAVORS_BLUE  + ((cur_level - 1) << 0x04)) & 0xffff);
+
+	run_dma_job((__far char *)&load_flavor);
 	
 	// set scale values
 	if (level < 9) {
