@@ -325,6 +325,7 @@ void load_loader() {
 void load_rest() {
 	// load the music switchboard
 	floppy_iffl_fast_load();
+
 	
 	// ------------------------
 	// TITLE SCREEN DATA LOADER
@@ -355,6 +356,7 @@ void load_rest() {
 	
 	// and open the second of two data files.  see above for why
 	floppy_iffl_fast_load_init("+UNICONE1");
+
 	
 	// -------------------
 	// IN-GAME DATA LOADER
@@ -364,6 +366,18 @@ void load_rest() {
 	for (char i = 0; i < 4; i++) {
 		floppy_iffl_fast_load();
 	}
+
+	// load the titlescreen attribute map to $ff80000 - we have to do this
+	// again, because there's some bug that stomps on the attribute map data,
+	// causing the very top of the "d" in "loading" to flip horizontally.
+	//
+	// for future use - $001f800 is an area of memory which cannot be used.  In
+	// this case, I don't fully get what's happening as I'm not actually
+	// touching that memory, but I think that maybe the IFFL loader might be
+	// writing values there, as the bug triggers during a call to
+	// floppy_iffl_fast_load.
+	run_dma_job((__far char *)&load_loader_attrmap);
+
 	run_dma_job((__far char *)&backup_ingame_bank_1);
 	
 	// load the in-game sound effects for game start, trot and splat 1
@@ -387,6 +401,7 @@ void load_rest() {
 	floppy_iffl_fast_load();
 	floppy_iffl_fast_load();
 	run_dma_job((__far char *)&backup_ingame_bank_5);
+
 	
 	// ---------------------
 	// GAME OVER DATA LOADER
