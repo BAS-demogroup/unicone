@@ -1,3 +1,12 @@
+/// \file	gameloop.c
+/// 
+/// \brief	This C file contains the main loop code for the game.
+///
+/// This C file contains the code and some of the variables for the main loop 
+/// of the game.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #include "gameloop.h"
 
 
@@ -41,9 +50,7 @@ void game_loop() {
 		while (VIC4.FNRASTERLSB != (update_raster & 0xff) || 
 			VIC4.FNRASTERMSB != ((update_raster & 0x0f00) >> 8));
 		
-		// VIC2.BORDERCOL = 0;
-		
-		// bank the tile and attribute maps from $20000-$21fff into $a000-$bfff
+		// bank the tile map from $20000-$21fff into $a000-$bfff
 		__asm(" lda #0x00\n"
 			  " tax\n"
 			  " ldy #0x80\n"
@@ -54,8 +61,6 @@ void game_loop() {
 		// clear the screens
 		run_dma_job((__far char *)&clear_ingame_tilemap);
 
-		// VIC2.BORDERCOL = 5;
-		
 		update_unicorn();
 		update_falling_icecream();
 
@@ -63,41 +68,17 @@ void game_loop() {
 		update_player();
 		
 		// draw the screen in vertical order, so unicorn first, then falling 
-		// ice cream, then ice cream stack, then cone
-		
-		// VIC2.BORDERCOL = 11;
+		// ice cream, then ice cream stack, then cone.  this is done to make
+		// sure we stay ahead of the raster "beam."
 		
 		draw_unicorn();
-		
-		// VIC2.BORDERCOL = 14;
-		
 		draw_falling_icecream();
-
-		// VIC2.BORDERCOL = 10;
-		
 		draw_falling_stacked();
-
-		// VIC2.BORDERCOL = 4;
-		
 		draw_icecream_stack();
-
-		// VIC2.BORDERCOL = 13;
-		
 		draw_cone();
-		
-		// VIC2.BORDERCOL = 3;
 
 		draw_lives();
 		draw_level();
-
-		// this is only necessary when the music is disabled.
-		// it's probably not necessary at all, but just to be on the safe side
-		// __asm(" lda #0x00\n"
-			  // " tax\n"
-			  // " tay\n"
-			  // " taz\n"
-			  // " map\n"
-			  // " nop");
 
 		if (new_game_counter == 0) {
 			musicPlay();
@@ -116,8 +97,6 @@ void game_loop() {
 		}
 
 		while (VIC4.FNRASTERLSB == (update_raster & 0xff));
-		
-		// VIC2.BORDERCOL = 15;
 		
 		if (player_dying || next_level) {
 			--end_of_level_timer;
@@ -329,9 +308,6 @@ void draw_icecream_stack() {
 					falling_icecream_state = 2;
 				}
 				
-				// erase dropped icecream
-				//erase_dropped_stack();
-
 				stack_size -= 5;	// It feels like this should be 3, but 5 is
 									// what works.  NFI why.
 				
@@ -403,14 +379,10 @@ void reset_level() {
 	
 	acceleration = 1;
 	
-	//unicorn_speed = 1;
-	
 	end_of_level_timer = 100;
 	
 	stack_top = 281 - cone_height_pix;
 	stack_render_top = stack_top;
-
-	//_last_stacked_yoff = 0xff;
 	
 	falling_icecream_x = 304;
 	player_x = 304;
@@ -470,7 +442,7 @@ void draw_level() {
 	}
 }
 
-unsigned short end_of_level_timer;
+char end_of_level_timer;
 char level;
 char current_loaded_state;
 char new_game_counter;

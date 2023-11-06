@@ -413,12 +413,12 @@ void load_rest() {
 void set_480() {
 	// set 480 vertical resolution - this is video standard dependent.
 	if (VIC4.PALNTSC) {
-		VIC4.TBDRPOSLSB  = 0x0f;	// defaults to $37/55
+		VIC4.TBDRPOSLSB  = 0x00;	// defaults to $37/55
 		VIC4.TBDRPOSMSB  = 0;	    // defaults to $00/0
-		VIC4.BBDRPOSLSB  = 0xef;	// defaults to $c7/199
+		VIC4.BBDRPOSLSB  = 0xe0;	// defaults to $c7/199
 		VIC4.BBDRPOSMSB  = 0x1;	    // defaults to $01/1		(i.e. 455)
 		
-		VIC4.TEXTYPOSLSB = 0x0f;
+		VIC4.TEXTYPOSLSB = 0x00;
 		VIC4.TEXTYPOSMSB = 0;
 	} else {
 		VIC4.TBDRPOSLSB  = 0x40;	// defaults to $68/104

@@ -614,3 +614,5 @@ FodyWeavers.xsd
 /assets/working/background_palette.png
 /build/titleloop.s
 /build/gameoverloop.s
+/assets/background.chrs.addr
+/assets/background.chrs.addr.mc

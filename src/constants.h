@@ -8,16 +8,16 @@
 #define LOADER_LINE_COUNT     60
 #define LOADER_MAP_LENGTH     0x2580
 						      
-#define LOADER_TILE_MAP       0x0058f00
-#define LOADER_ATTR_MAP       0x005b500
+#define LOADER_TILE_MAP       0x0059200
+#define LOADER_ATTR_MAP       0x005b800
 
 
 #define TITLE_LINE_LENGTH     80
 #define TITLE_LINE_COUNT      60
 #define TITLE_MAP_LENGTH      0x2580
 						      
-#define TITLE_TILE_MAP        0x0058f00
-#define TITLE_ATTR_MAP        0x803b500
+#define TITLE_TILE_MAP        0x0059400
+#define TITLE_ATTR_MAP        0x803ba00
 
 
 #define INGAME_LINE_LENGTH    108

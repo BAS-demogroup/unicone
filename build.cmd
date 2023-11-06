@@ -84,8 +84,8 @@ C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain_2.c
 C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain_3.chrs 00010000
 
 C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain_4.chrs 00050000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain.map 00058f00
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain.atr 0005b500
+C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain.map 00059200
+C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain.atr 0005b800
 
 REM Title Screen Data
 C:\Users\death\Documents\C65\megatool\megatool -a build/music_swap_stub.bin 0000c000
@@ -100,8 +100,8 @@ C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_3
 
 C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_4.chrs 00010000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_5.chrs 00018000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits.map 00018f00
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits.atr 0001b500
+C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits.map 00019400
+C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits.atr 0001ba00
 
 REM In Game Data
 C:\Users\death\Documents\C65\megatool\megatool -a assets/sentimental_thing.prg 00010000

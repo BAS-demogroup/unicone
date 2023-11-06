@@ -1,3 +1,13 @@
+/// \file	gameloop.h
+/// 
+/// \brief	This file is the header file that declares the main loop code for
+///			the game.
+///
+/// This header file declares the code and variables for the main loop of the
+/// game.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #ifndef __GAMELOOP_H
 #define __GAMELOOP_H
 
@@ -11,10 +21,8 @@ void draw_cone();
 void reset_level();
 void draw_lives();
 void draw_level();
-//void erase_dropped_stack();
 
-// this might fit in a char
-extern unsigned short end_of_level_timer;
+extern char end_of_level_timer;
 extern char level;
 extern char current_loaded_state;
 extern char new_game_counter;
