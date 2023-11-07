@@ -41,6 +41,13 @@ void set_level_difficulty() {
 	// and load the flavor
 	run_dma_job((__far char *)&load_flavor);
 	
+	// there are variables in place to vary the random behavior of the unicorn,
+	// but at this time, it's the same throughout the game.
+	random_poop_mask    = 0x000001ff; // $1ff < $1
+	random_poop_value   = 0x00000001;
+	random_facing_mask  = 0x0007fe00; // $7fe00 < $1
+	random_facing_value = 0x00000001;
+	
 	// at this time, there are really only 3 major divisions in difficulty,
 	// after 8 and after 16, so these blocks select each o those.
 	if (level < 9) {

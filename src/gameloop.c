@@ -552,7 +552,6 @@ void reset_level() {
 	unicorn_facing          = 0;
 	unicorn_frame_index     = 0;
 	unicorn_pooping         = 0;
-	unicorn_drop_poop       = 0;
 	unicorn_animation_delay = 0;
 	vertical_sinus_index    = 0;
 	unicorn_countdown       = 0;
