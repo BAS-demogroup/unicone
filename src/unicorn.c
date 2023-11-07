@@ -125,6 +125,9 @@ void update_unicorn() {
 		}
 	}
 	
+	// grab another random number from the pseudo-RNG.
+	rng = random();
+	
 	// Now check to see if the RNG has determined that it's time for the 
 	// unicorn to swap horizontal direction;
 	if ((rng & random_facing_mask) < random_facing_value) {
