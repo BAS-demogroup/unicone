@@ -376,6 +376,17 @@ void load_rest() {
 	// touching that memory, but I think that maybe the IFFL loader might be
 	// writing values there, as the bug triggers during a call to
 	// floppy_iffl_fast_load.
+	//
+	// this can be fixed using COLPTR and setting the offset to $0800, but this
+	// would also offset the attribute map at $ff8000, and since this 
+	// workaround fixed the issue, I would rather not risk any potential
+	// cascading errors that might be caused by offset $ff8000 since that is
+	// a very core part of the game, and I have no idea what all could break
+	// from moving that.
+	//
+	// in the future, though, it may be desirable to set COLPTR to $0800 and 
+	// sacrifice that 2KiB of the real attribute map, since 32KiB is literally
+	// more than we can possibly use for maps.
 	run_dma_job((__far char *)&load_loader_attrmap);
 
 	run_dma_job((__far char *)&backup_ingame_bank_1);

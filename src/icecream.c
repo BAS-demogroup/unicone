@@ -20,8 +20,10 @@ void update_falling_icecream() {
 		if (falling_stacked_y < calc_top) {
 			falling_stacked_y += (falling_speed << 2);
 		} else {
+			play_sample(runtime_sample_start[5], runtime_sample_end[5], 1);
 			// done doing failure state
 			player_dying = 1;
+			next_level = 0;
 			--player_lives;
 			falling_stacked_y = calc_top;
 			falling_stacked_state = 3;
@@ -93,6 +95,7 @@ void update_falling_icecream() {
 						--player_lives;
 					}
 					player_dying = 1;
+					next_level = 0;
 					falling_icecream_y = calc_top;
 					falling_icecream_state = 3;
 				}
