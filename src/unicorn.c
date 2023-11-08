@@ -32,9 +32,9 @@ void update_unicorn() {
 	// sample
 	char last_frame_index = unicorn_frame_index;
 	
-	// we only change animation frames every 4 video frames at the fastest,
-	// so start by running that counter
-	if (++unicorn_animation_delay > 4) {
+	// we only change animation frames every unicorn_frame_rate video frames at 
+	// the fastest, so start by running that counter
+	if (++unicorn_animation_delay > unicorn_frame_rate) {
 		// reset the delay when it has completed
 		unicorn_animation_delay = 0;
 		
@@ -184,6 +184,9 @@ char           unicorn_countdown       = 0;
 
 /// \brief	How many pixels horizontally the unicorn moves each frame.
 char           unicorn_speed           = 1;
+
+/// \brief	How many vertical retraces are there per unicorn animation update
+char		   unicorn_frame_rate	   = 4;
 
 /// \brief	The unicorn's current horizontal position.
 unsigned short unicorn_x               = 304;
