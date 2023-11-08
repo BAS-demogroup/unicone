@@ -104,13 +104,17 @@ void update_unicorn() {
 	// already started pooping, then check to see if the RNG indicates that it
 	// should trigger a new poop
 	if (!falling_icecream_state && !unicorn_pooping && !falling_stacked_state 
-		&& (rng & random_poop_mask) < random_poop_value) {
+		&& (
+			(rng & random_poop_mask) < random_poop_value) || 
+			--cur_poop_delay == 0
+		) {
 		
 		// and if so, then flag that the unicorn is in the middle of pooping, 
 		// and set the frame counter for how long the tail will be lifted 
 		// before the unicorn poops.
 		unicorn_pooping = 1;
 		unicorn_countdown = 50;
+		cur_poop_delay = max_poop_delay;
 	
 	// if the unicorn hasn't just started pooping...
 	} else {
@@ -130,8 +134,10 @@ void update_unicorn() {
 	
 	// Now check to see if the RNG has determined that it's time for the 
 	// unicorn to swap horizontal direction;
-	if ((rng & random_facing_mask) < random_facing_value) {
+	if ((rng & random_facing_mask) < random_facing_value || 
+		--cur_facing_delay == 0) {
 		unicorn_facing = unicorn_facing ? 0 : 1;
+		cur_facing_delay = max_facing_delay;
 	}
 	
 	// If it's time to drop the ice cream dollop
@@ -205,6 +211,14 @@ unsigned long random_poop_mask;	// $1ff < $1
 ///			to trigger pooping.
 unsigned long random_poop_value;
 
+/// \brief	This counter is used to avoid random chance causing it to take a
+///			long time to poop
+unsigned short cur_poop_delay;
+
+/// \brief	This is the maximum time to wait for a random poop before forcing 
+/// 		it
+unsigned short max_poop_delay;
+
 /// \brief	This is the mask used to isolate the relevant number of bits we use
 ///			to determine if it's time for the unicorn to change direction
 unsigned long random_facing_mask; // $7fe00 < $1
@@ -212,3 +226,11 @@ unsigned long random_facing_mask; // $7fe00 < $1
 /// \brief	This is the value that the masked random number must be less than
 ///			to trigger changing direction.
 unsigned long random_facing_value;
+
+/// \brief	This counter is used to avoid random chance causing a direction
+///			change to not happen.
+unsigned short cur_facing_delay;
+
+/// \brief	This is the maximum time to wait for a direction change before
+///			forcing one
+unsigned short max_facing_delay;

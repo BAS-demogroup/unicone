@@ -14,19 +14,23 @@
 void update_unicorn();
 
 extern unsigned short unicorn_x;
-extern char unicorn_y;
-extern char unicorn_facing;
-extern char unicorn_frame_lookup[7];
-extern char unicorn_frame_index;
-extern char unicorn_frame_rate;
-extern char unicorn_speed;
-extern char unicorn_pooping;
-extern char unicorn_animation_delay;
-extern char vertical_sinus_index;
-extern char unicorn_countdown;
-extern unsigned long random_poop_mask;
-extern unsigned long random_poop_value;
-extern unsigned long random_facing_mask;
-extern unsigned long random_facing_value;
+extern char           unicorn_y;
+extern char           unicorn_facing;
+extern char           unicorn_frame_lookup[7];
+extern char           unicorn_frame_index;
+extern char           unicorn_frame_rate;
+extern char           unicorn_speed;
+extern char           unicorn_pooping;
+extern char           unicorn_animation_delay;
+extern char           vertical_sinus_index;
+extern char           unicorn_countdown;
+extern unsigned long  random_poop_mask;
+extern unsigned long  random_poop_value;
+extern unsigned short cur_poop_delay;
+extern unsigned short max_poop_delay;
+extern unsigned long  random_facing_mask;
+extern unsigned long  random_facing_value;
+extern unsigned short cur_facing_delay;
+extern unsigned short max_facing_delay;
 
 #endif

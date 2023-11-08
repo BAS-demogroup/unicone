@@ -45,10 +45,16 @@ void set_level_difficulty() {
 	// this time, it's the same throughout the game.
 	random_poop_mask    = 0x000001ff; // $1ff < $1
 	random_poop_value   = 0x00000001;
-	random_facing_mask  = 0x0007fe00; // $7fe00 < $1
-	random_facing_value = 0x00000001;
+	random_facing_mask  = 0x000003ff; // $3ff < $2
+	random_facing_value = 0x00000002;
 	
 	unicorn_frame_rate = 4;
+	
+	max_poop_delay = 511;
+	cur_poop_delay = max_poop_delay;
+	
+	max_facing_delay = 1023;
+	cur_facing_delay = max_facing_delay;
 	
 	// at this time, there are really only 3 major divisions in difficulty,
 	// after 8 and after 16, so these blocks select each o those.
