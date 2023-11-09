@@ -18,6 +18,7 @@ void loader();
 
 void title_setup();
 void ingame_setup();
+void levelcomplete_setup();
 void gameover_setup();
 
 

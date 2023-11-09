@@ -93,9 +93,11 @@ void loader() {
 	if(VIC4.PALNTSC) {
 		VIC4.PALNTSC  = 1;
 		update_raster = 0x1c6;
+		end_of_level_timer_start = 200;
 	} else {
 		VIC4.PALNTSC  = 0;
 		update_raster = 0x1f7;
+		end_of_level_timer_start = 240;
 	}
 	
 	// disable raster interrupts
@@ -212,6 +214,8 @@ void title_setup() {
 /// sets all of the register values for the in-game screen, clears the screen,
 /// unblanks the screen, and initalizes the music.
 void ingame_setup() {
+	if (current_loaded_state == 1) return;
+	
 	// blank the screen
 	VIC2.DEN = 0;
 
@@ -250,6 +254,11 @@ void ingame_setup() {
 	
 	// initalize the music
 	musicInit();
+}
+
+void levelcomplete_setup() {
+	// load all of the in-game data from the attic into the fast RAM
+	run_dma_job((__far char *)&load_level_complete_bank[0]);
 }
 
 /// \brief	This procedure is called to setup for game over

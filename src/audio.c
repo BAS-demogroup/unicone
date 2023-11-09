@@ -109,6 +109,19 @@ unsigned short runtime_sample_end[6] = {
 };
 
 
+/// \brief	This array holds the address of the start of the level complete 
+///			sound effects
+unsigned long level_complete_sample_start[1] = {
+	0x030000	// level end
+};
+
+/// \brief	This array holds the address of the end of the level complete sound 
+///			effects
+unsigned short level_complete_sample_end[1] = {
+	0xd756  	// level end
+};
+
+
 /// \brief	This array holds the addresses of the start of each of the game 
 ///			over sound effects
 unsigned long game_over_sample_start[2] = {

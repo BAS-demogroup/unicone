@@ -51,10 +51,10 @@ void main() {
 		player_lives = 3;
 		level = 1;
 		
-		// load the assets for the ingame loop, and configure the registers
-		ingame_setup();
-
 		do {
+			// load the assets for the ingame loop, and configure the registers
+			ingame_setup();
+
 			// configure the various difficulty settings
 			set_level_difficulty();
 

@@ -65,7 +65,7 @@ extern dma_job_far_source_t load_ingame_banks[5];
 extern dma_job_far_source_t load_game_over_banks[2];
 
 // running jobs - level complete data
-extern dma_job_far_source_t load_level_complete_banks[1];
+extern dma_job_far_source_t load_level_complete_bank[1];
 
 
 #endif

@@ -18,6 +18,9 @@ extern char next_channel;
 extern unsigned long runtime_sample_start[6];
 extern unsigned short runtime_sample_end[6];
 
+extern unsigned long level_complete_sample_start[1];
+extern unsigned short level_complete_sample_end[1];
+
 extern unsigned long game_over_sample_start[2];
 extern unsigned short game_over_sample_end[2];
 

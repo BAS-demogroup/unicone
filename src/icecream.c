@@ -17,6 +17,8 @@
 #include "audio.h"
 #include "chips.h"
 #include "difficulty.h"
+#include "dma.h"
+#include "dma_jobs.h"
 #include "gameloop.h"
 #include "player.h"
 #include "pixies.h"
@@ -105,7 +107,7 @@ void update_falling_icecream() {
 					stack_render_top = falling_icecream_y;
 					
 					// if we haven't completed the level yet
-					if (dollops < level) {
+					if (dollops < level && dollops < 25) {
 						// then return to the default state and let the game
 						// carry on
 						falling_icecream_state = 0;

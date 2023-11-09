@@ -145,6 +145,16 @@ void game_loop() {
 		// player has time to register what has happened.
 		if (player_dying || next_level) {
 			--end_of_level_timer;
+			if (end_of_level_timer_start - end_of_level_timer == 33) {
+				// load the level complete sound effect
+				run_dma_job(
+					(__far char *)&load_level_complete_bank[0]);
+				current_loaded_state = 3;
+				// play the sound effect
+				play_sample(level_complete_sample_start[0], 
+					level_complete_sample_end[0], 1);
+				
+			}
 		}
 		
 		// if the game start sample has finished playing, then we can get the
@@ -439,9 +449,9 @@ void draw_icecream_stack() {
 			set_stacked_pos(layer, pos, y + y_tile, y_pix);
 			
 			// we need to determine distance between the two ribbons
-			char d = abs(last_x_pos > pos ? 
-						 last_x_pos - pos : 
-						 pos - last_x_pos);
+			char d = last_x_pos >= pos ? 
+					 last_x_pos - pos : 
+					  pos - last_x_pos;
 			// has the top of the stack fallen?
 			if (y == 0 && d >= lose_distance) {
 				// calculate the number of pixels to move the top of the stack
@@ -562,7 +572,7 @@ void reset_level() {
 	
 	acceleration = 1;
 	
-	end_of_level_timer = 100;
+	end_of_level_timer = end_of_level_timer_start;
 	
 	stack_top        = 281 - cone_height_pix;
 	stack_render_top = stack_top;
@@ -662,8 +672,8 @@ char level;
 
 /// \brief	The currently loaded data for the game
 ///
-/// The currently loaded data for the game.  0 = title screen, 1 = in-game, and
-/// 2 = game over.
+/// The currently loaded data for the game.  0 = title screen, 1 = in-game, 
+/// 2 = game over, 3 = level complete.
 char current_loaded_state;
 
 /// \brief	This variable is as a minor delay when a new game is first started
@@ -672,3 +682,6 @@ char current_loaded_state;
 /// from in order to allow the game startup sound effect to play before the
 /// game actually starts moving, or plays music.
 char new_game_counter;
+
+/// \brief	This is the amount of time we take to end the level, NTSC/PAL fixed
+char end_of_level_timer_start;

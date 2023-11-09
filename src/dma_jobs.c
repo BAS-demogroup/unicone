@@ -664,7 +664,7 @@ dma_job_far_source_t load_game_over_banks[2] = {
 ///
 /// This job loads the level complete sample out of the attic and into the fast 
 /// RAM banks, from 0x80b0000 to 0x0030000.
-dma_job_far_source_t load_level_complete_banks[1] = {
+dma_job_far_source_t load_level_complete_bank[1] = {
 	{
 		.type				= 0x0a,
 		.sbank_token		= 0x80,
