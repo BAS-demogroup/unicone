@@ -351,6 +351,9 @@ void load_rest() {
 	}
 	run_dma_job((__far char *)&backup_title_bank_5);
 	
+	floppy_iffl_fast_load();
+	run_dma_job((__far char *)&backup_level_complete_bank_3);
+	
 	// end of first data file, close it
 	fl_exit();
 	

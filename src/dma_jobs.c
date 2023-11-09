@@ -308,6 +308,27 @@ dma_job_far_destination_t backup_title_bank_5 = {
 };
 
 
+// loader jobs - level complete data
+
+/// \brief	This job stores level complete bank 5 data to the attic
+///
+/// This job copies the loaded data for the level complete sound effects from 
+/// $0010000 to the attic RAM, at $80b0000, copying $d756 bytes of data.
+dma_job_far_destination_t backup_level_complete_bank_3 = {
+	.type				= 0x0a,
+	.dbank_token		= 0x81,
+	.dbank				= 0x80,
+	.end_options		= 0x00,
+	.command			= 0x00,
+	.count				= 0xd756,
+	.source				= 0x0000,
+	.source_bank		= 0x01,
+	.destination		= 0x0000,
+	.destination_bank	= 0x0b,
+	.modulo				= 0x0000
+};
+
+
 // loader jobs - in-game data
 
 /// \brief	This job stores in game bank 1 data to the attic
@@ -631,6 +652,28 @@ dma_job_far_source_t load_game_over_banks[2] = {
 		.count				= 0xa730,
 		.source				= 0x0000,
 		.source_bank		= 0x0a,
+		.destination		= 0x0000,
+		.destination_bank	= 0x03,
+		.modulo				= 0x0000
+	}
+};
+
+// running jobs - level complete data
+
+/// \brief	This job loads the level complete sample from the attic
+///
+/// This job loads the level complete sample out of the attic and into the fast 
+/// RAM banks, from 0x80b0000 to 0x0030000.
+dma_job_far_source_t load_level_complete_banks[1] = {
+	{
+		.type				= 0x0a,
+		.sbank_token		= 0x80,
+		.sbank				= 0x80,
+		.end_options		= 0x00,
+		.command			= 0x00,
+		.count				= 0xd756,
+		.source				= 0x0000,
+		.source_bank		= 0x0b,
 		.destination		= 0x0000,
 		.destination_bank	= 0x03,
 		.modulo				= 0x0000

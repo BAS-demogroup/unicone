@@ -69,7 +69,9 @@ void main() {
 			// advance to the next level (the inner loop can exit for multiple
 			// reasons, so we can't just assume the level advanced)
 			if (next_level) {
-				++level;
+				if (++level > 99) {
+					level = 99;
+				}
 			}
 		// continue to run the in-game loop until the player runs out of lives
 		} while (player_lives > 0);

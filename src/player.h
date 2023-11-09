@@ -1,3 +1,13 @@
+/// \file	player.h
+/// 
+/// \brief	This file is the header file that declares the code and variables 
+///			for managing the player state
+///
+/// This header file declares the code and variables for that are used to 
+///	manage the cone and the stack of ice cream on top
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #ifndef __PLAYER_H
 #define __PLAYER_H
 

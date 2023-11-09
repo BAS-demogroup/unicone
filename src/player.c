@@ -1,3 +1,13 @@
+/// \file	player.c
+/// 
+/// \brief	This file contains the code and variables for managing the player 
+///			state
+///
+/// This C file contains the code and variables for that are used to manage the 
+/// cone and the stack of ice cream on top
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #include "player.h"
 
 
@@ -9,14 +19,15 @@
 #include "input.h"
 
 
+/// \brief	This procedure manages the player state
+///
+/// This procedure manages the state of the player and the ice cream stack on
+/// top of the cone, including calculating the swing of the stack.
 void update_player() {
 	for (char i = stack_size; i > 0; i--) {
-		if (i > 49) {
-			VIC2.BORDERCOL = 5;
-			while (1);
-		}
 		stack_x[i] = stack_x[i - 1];
 	}
+	
 	stack_x[0] = player_x;
 
 	if (falling_icecream_state < 2 && falling_stacked_state < 2) {

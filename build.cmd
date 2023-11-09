@@ -128,6 +128,9 @@ C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 0001b200
 
 C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_2.raw 00010000
 
+REM Level Complete Data
+C:\Users\death\Documents\C65\megatool\megatool -a assets/level_end.raw 00010000
+
 
 REM Loading Screen Data
 C:\Users\death\Documents\C65\megatool\megatool -c assets/pixies.clut.addr
@@ -183,8 +186,11 @@ C:\Users\death\Documents\C65\megatool\megatool -c build/attrmap.bin.addr
 
 C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_2.raw.addr
 
+REM Level Complete Data
+C:\Users\death\Documents\C65\megatool\megatool -c assets/level_end.raw.addr
 
-C:\Users\death\Documents\C65\megatool\megatool -i assets/pixies.clut.addr.mc assets/unicorn_title_plain_0.chrs.addr.mc assets/unicorn_title_plain_1.chrs.addr.mc assets/unicorn_title_plain_2.chrs.addr.mc assets/unicorn_title_plain_3.chrs.addr.mc assets/unicorn_title_plain_4.chrs.addr.mc assets/unicorn_title_plain.map.addr.mc assets/unicorn_title_plain.atr.addr.mc build/music_swap_stub.bin.addr.mc assets/megakitty_theme_1.prg.addr.mc assets/unicorn_title_credits_0.chrs.addr.mc assets/unicorn_title_credits_1.chrs.addr.mc assets/unicorn_title_credits_2.chrs.addr.mc assets/unicorn_title_credits_3.chrs.addr.mc assets/unicorn_title_credits_4.chrs.addr.mc assets/unicorn_title_credits_5.chrs.addr.mc assets/unicorn_title_credits.map.addr.mc assets/unicorn_title_credits.atr.addr.mc assets/unicone0
+
+C:\Users\death\Documents\C65\megatool\megatool -i assets/pixies.clut.addr.mc assets/unicorn_title_plain_0.chrs.addr.mc assets/unicorn_title_plain_1.chrs.addr.mc assets/unicorn_title_plain_2.chrs.addr.mc assets/unicorn_title_plain_3.chrs.addr.mc assets/unicorn_title_plain_4.chrs.addr.mc assets/unicorn_title_plain.map.addr.mc assets/unicorn_title_plain.atr.addr.mc build/music_swap_stub.bin.addr.mc assets/megakitty_theme_1.prg.addr.mc assets/unicorn_title_credits_0.chrs.addr.mc assets/unicorn_title_credits_1.chrs.addr.mc assets/unicorn_title_credits_2.chrs.addr.mc assets/unicorn_title_credits_3.chrs.addr.mc assets/unicorn_title_credits_4.chrs.addr.mc assets/unicorn_title_credits_5.chrs.addr.mc assets/unicorn_title_credits.map.addr.mc assets/unicorn_title_credits.atr.addr.mc assets/level_end.raw.addr.mc assets/unicone0
 
 C:\Users\death\Documents\C65\megatool\megatool -i assets/sentimental_thing.prg.addr.mc assets/tileset.chrs.addr.mc build/tilemap.bin.addr.mc build/flavors.bin.addr.mc assets/game_start.raw.addr.mc assets/trot.raw.addr.mc assets/splat_1.raw.addr.mc assets/falling.raw.addr.mc assets/splat_2.raw.addr.mc assets/background_0.chrs.addr.mc assets/background_1.chrs.addr.mc assets/background_2.chrs.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc build/attrmap.bin.addr.mc assets/game_over_2.raw.addr.mc assets/unicone1
 

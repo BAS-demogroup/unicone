@@ -39,6 +39,9 @@ extern dma_job_far_destination_t backup_title_bank_4a;
 extern dma_job_far_destination_t backup_title_bank_4b;
 extern dma_job_far_destination_t backup_title_bank_5;
 
+// loader jobs - level complete data
+extern dma_job_far_destination_t backup_level_complete_bank_3;
+
 // loader jobs - in-game data
 extern dma_job_far_destination_t backup_ingame_bank_1;
 extern dma_job_far_destination_t backup_ingame_bank_2;
@@ -60,5 +63,9 @@ extern dma_job_far_source_t load_ingame_banks[5];
 
 // running jobs - game over data
 extern dma_job_far_source_t load_game_over_banks[2];
+
+// running jobs - level complete data
+extern dma_job_far_source_t load_level_complete_banks[1];
+
 
 #endif

@@ -438,8 +438,12 @@ void draw_icecream_stack() {
 			// set the position for this row of the top dollop on the stack
 			set_stacked_pos(layer, pos, y + y_tile, y_pix);
 			
+			// we need to determine distance between the two ribbons
+			char d = abs(last_x_pos > pos ? 
+						 last_x_pos - pos : 
+						 pos - last_x_pos);
 			// has the top of the stack fallen?
-			if (y == 0 && abs(last_x_pos - pos) >= lose_distance) {
+			if (y == 0 && d >= lose_distance) {
 				// calculate the number of pixels to move the top of the stack
 				// by - the height of a top dollop and two bottom ribbon layers
 				char add = icecream_top_y_add + 
