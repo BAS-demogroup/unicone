@@ -145,7 +145,9 @@ void game_loop() {
 		// player has time to register what has happened.
 		if (player_dying || next_level) {
 			--end_of_level_timer;
-			if (end_of_level_timer_start - end_of_level_timer == 33) {
+			if (!player_dying && next_level && 
+				end_of_level_timer_start - end_of_level_timer == 33) {
+					
 				// load the level complete sound effect
 				run_dma_job(
 					(__far char *)&load_level_complete_bank[0]);
