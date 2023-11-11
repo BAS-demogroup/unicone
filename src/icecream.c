@@ -83,9 +83,12 @@ void update_falling_icecream() {
 					calc_x = stack_x[stack_size - 1] +
 						stack_offsets[stack_size - 1];
 				}
-					
+				
+				short val = falling_icecream_x > calc_x ?
+							falling_icecream_x - calc_x :
+							calc_x - falling_icecream_x;
 				// determine if the player caught the ice cream
-				if (abs(falling_icecream_x - calc_x) < lose_distance) {
+				if (val < lose_distance) {
 					// catch the ice cream and add it to the cone
 					for (char i = 0; i < 3; i++) {
 						// by setting the offset of the new top piece

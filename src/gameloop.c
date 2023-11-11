@@ -677,12 +677,12 @@ void draw_level() {
 		if (_level_swing_counter < 200) {
 			pos += level_swing[_level_swing_counter];
 		}
-		if (next_level && end_of_level_timer < 200) {
-			pos += level_swing[end_of_level_timer];
-		}
-		if (++_level_swing_counter > 200) {
-			_level_swing_counter = 200;
-		}
+	}
+	if (next_level && end_of_level_timer < 200) {
+		pos += level_swing[end_of_level_timer];
+	}
+	if (++_level_swing_counter > 200) {
+		_level_swing_counter = 200;
 	}
 	
 	// and then, for each digit
