@@ -17,8 +17,10 @@
 
 /// \brief	This array contains a simple sinus for the vertical movement of the
 ///			unicorn while it trots
-char _vertical_sinus[] = {
-	0,1,2,3,3,4,5,5,6,6,7,7,7,7,7,7,6,6,5,5,4,3,3,2,1
+char vertical_sinus[25] = {
+	0,1,2,3,3,4,5,5,6,6,
+	7,7,7,7,7,7,6,6,5,5,
+	4,3,3,2,1
 };
 
 /// \brief	This procedure updates the unicorn's state every frame
@@ -83,7 +85,7 @@ void update_unicorn() {
 		
 		// and set the unicorn's vertical position based on the sinus we use
 		// to give a nice curve to its vertical movement when trotting
-		unicorn_y = _vertical_sinus[vertical_sinus_index++];
+		unicorn_y = vertical_sinus[vertical_sinus_index++];
 	// or, if we're in the first two frames
 	} else {
 		// it does not move vertically, so reset both its y position and its

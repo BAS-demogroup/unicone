@@ -10,6 +10,7 @@ cd assets
 C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b4 -m=1a640 -o=level_indicator -t="level_marker.png"
 C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b4 -m=1b900 -o=unicorn_background -t="unicorn_background.png"
 C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b4 -m=40000 -o=background -t="background.png"
+..\..\tilemizer_nopack.py -b4 -m=3a800 -o=game_over_logo -t="game_over_logo.png"
 
 copy /b pixies.chrs+level_indicator.chrs+unicorn_background.chrs tileset.chrs
 
@@ -127,6 +128,7 @@ C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_1.raw 00012b0
 C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 0001b200
 
 C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_2.raw 00010000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_logo.chrs 0001a800
 
 REM Level Complete Data
 C:\Users\death\Documents\C65\megatool\megatool -a assets/level_end.raw 00010000
@@ -185,6 +187,7 @@ C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_1.raw.addr
 C:\Users\death\Documents\C65\megatool\megatool -c build/attrmap.bin.addr
 
 C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_2.raw.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_logo.chrs.addr 
 
 REM Level Complete Data
 C:\Users\death\Documents\C65\megatool\megatool -c assets/level_end.raw.addr
@@ -192,7 +195,7 @@ C:\Users\death\Documents\C65\megatool\megatool -c assets/level_end.raw.addr
 
 C:\Users\death\Documents\C65\megatool\megatool -i assets/pixies.clut.addr.mc assets/unicorn_title_plain_0.chrs.addr.mc assets/unicorn_title_plain_1.chrs.addr.mc assets/unicorn_title_plain_2.chrs.addr.mc assets/unicorn_title_plain_3.chrs.addr.mc assets/unicorn_title_plain_4.chrs.addr.mc assets/unicorn_title_plain.map.addr.mc assets/unicorn_title_plain.atr.addr.mc build/music_swap_stub.bin.addr.mc assets/megakitty_theme_1.prg.addr.mc assets/unicorn_title_credits_0.chrs.addr.mc assets/unicorn_title_credits_1.chrs.addr.mc assets/unicorn_title_credits_2.chrs.addr.mc assets/unicorn_title_credits_3.chrs.addr.mc assets/unicorn_title_credits_4.chrs.addr.mc assets/unicorn_title_credits_5.chrs.addr.mc assets/unicorn_title_credits.map.addr.mc assets/unicorn_title_credits.atr.addr.mc assets/level_end.raw.addr.mc assets/unicone0
 
-C:\Users\death\Documents\C65\megatool\megatool -i assets/sentimental_thing.prg.addr.mc assets/tileset.chrs.addr.mc build/tilemap.bin.addr.mc build/flavors.bin.addr.mc assets/game_start.raw.addr.mc assets/trot.raw.addr.mc assets/splat_1.raw.addr.mc assets/falling.raw.addr.mc assets/splat_2.raw.addr.mc assets/background_0.chrs.addr.mc assets/background_1.chrs.addr.mc assets/background_2.chrs.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc build/attrmap.bin.addr.mc assets/game_over_2.raw.addr.mc assets/unicone1
+C:\Users\death\Documents\C65\megatool\megatool -i assets/sentimental_thing.prg.addr.mc assets/tileset.chrs.addr.mc build/tilemap.bin.addr.mc build/flavors.bin.addr.mc assets/game_start.raw.addr.mc assets/trot.raw.addr.mc assets/splat_1.raw.addr.mc assets/falling.raw.addr.mc assets/splat_2.raw.addr.mc assets/background_0.chrs.addr.mc assets/background_1.chrs.addr.mc assets/background_2.chrs.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc build/attrmap.bin.addr.mc assets/game_over_2.raw.addr.mc assets/game_over_logo.chrs.addr.mc assets/unicone1
 
 
 C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicone.d81 -delete "unicone     /bas" -delete "+unicone0" -delete "+unicone1" -write "build/unicone.prg" "unicone     /bas" -write "assets/unicone0" "+unicone0" -write "assets/unicone1" "+unicone1" -list

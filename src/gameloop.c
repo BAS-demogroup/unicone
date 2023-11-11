@@ -30,6 +30,7 @@
 #include "unicorn.h"
 
 
+char _player_pressed_fire;
 /// \brief	This procedure runs the main in-game loop.
 ///
 /// This procedure is the main driver for the in-game loop.  It basically 
@@ -85,7 +86,16 @@ void game_loop() {
 
 		// process joystick and keyboard input
 		process_input();
+		//end_of_level_timer > 0
+		// if (player_lives > 0 && end_of_level_timer == 0) return;
 		
+		// if ((player_input & 0b00010000) && end_of_level_timer == 0) {
+			// _player_pressed_fire = 1;
+		// } else if (_player_pressed_fire && (player_input & 0b00010000) && 
+			// end_of_level_timer == 0) {
+				
+			// return;
+		// }
 		// update the player variables for this frame
 		update_player();
 		
@@ -95,6 +105,9 @@ void game_loop() {
 		
 		// draw the unicorn
 		draw_unicorn();
+		
+		// if necessary, the game over logo
+		//draw_gameover();
 		
 		// if there is a falling ice cream at the moment, then draw it
 		draw_falling_pooped();
@@ -156,6 +169,12 @@ void game_loop() {
 				play_sample(level_complete_sample_start[0], 
 					level_complete_sample_end[0], 1);
 				
+			}
+			
+			if (player_dying && player_lives == 0 && 
+				end_of_level_timer_start - end_of_level_timer == 33) {
+					
+				return;
 			}
 		}
 		
@@ -532,6 +551,7 @@ void draw_cone() {
 	}
 }
 
+char           _level_swing_counter;
 /// \brief	This procedure resets all of the level variables
 ///
 /// This function is necessary to reset all of the variables to their initial
@@ -547,6 +567,9 @@ void reset_level() {
 	run_dma_job((__far char *)&load_ingame_attrmap);
 	
 	new_game_counter = 0;
+	_level_swing_counter = 0;
+	// _gameover_facing = 0;
+	_player_pressed_fire = 0;
 
 	falling_icecream_y     = 0;
 	falling_icecream_state = 0;
@@ -582,6 +605,8 @@ void reset_level() {
 	falling_icecream_x = 304;
 	player_x           = 304;
 	unicorn_x          = 304;
+
+	//_gameover_x_pos = 640;
 	
 	for (char i = 0; i < 50; i++) {
 		stack_offsets[i] = 0;
@@ -647,7 +672,16 @@ void draw_level() {
 	}
 	
 	// set the left most x position of the first digit
-	unsigned short pos = 310;
+	signed short pos = 310;
+	if (_level_swing_counter < 200) {
+		pos += level_swing[_level_swing_counter];
+	}
+	if (next_level && end_of_level_timer < 200) {
+		pos += level_swing[end_of_level_timer];
+	}
+	if (++_level_swing_counter > 200) {
+		_level_swing_counter = 200;
+	}
 	
 	// and then, for each digit
 	for (char digit_index = 0; digit_index < 2; digit_index++) {

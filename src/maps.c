@@ -13,6 +13,24 @@
 #define TAIL_TILE                          44
 #define MANE_POSITION                      45
 #define MANE_TILE                          46
+#define G_POSITION						   47
+#define G_TILE                             48
+#define A_POSITION                         49
+#define A_TILE                             50
+#define M_POSITION                         51
+#define M_TILE                             52
+#define E1_POSITION                        53
+#define E1_TILE                            54
+#define SPACE_POSITION                     55
+#define SPACE_TILE                         56
+#define O_POSITION                         57
+#define O_TILE                             58
+#define V_POSITION                         59
+#define V_TILE                             60
+#define E2_POSITION                        61
+#define E2_TILE                            62
+#define R_POSITION                         63
+#define R_TILE                             64
 									       
 								           
 // Lines 6 - 37                            
@@ -2889,5 +2907,62 @@ RRB_TILE_NORMAL_t *level_number_tiles[2][2][5] = {
 			(RRB_TILE_NORMAL_t *)(TILE_MAP + (LEVEL_NUMBER_TILE_2_R * 2) + (INGAME_LINE_LENGTH * 2) * 48),
 			(RRB_TILE_NORMAL_t *)(TILE_MAP + (LEVEL_NUMBER_TILE_2_R * 2) + (INGAME_LINE_LENGTH * 2) * 49)
 		}
+	}
+};
+
+RRB_TILE_GOTOX_t  *gameover_logo_position[9][4] = {
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (G_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (G_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (G_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (G_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
+	},	
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (A_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (A_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (A_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (A_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
+	},	
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (M_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (M_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (M_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (M_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
+	},	
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (E1_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (E1_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (E1_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (E1_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
+	},	
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (SPACE_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (SPACE_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (SPACE_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (SPACE_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
+	},	
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (O_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (O_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (O_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (O_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
+	},	
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (V_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (V_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (V_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (V_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
+	},	
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (E2_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (E2_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (E2_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (E2_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
+	},	
+	{
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (R_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (R_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (R_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
+		(RRB_TILE_GOTOX_t *)(TILE_MAP + (R_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4)
 	}
 };

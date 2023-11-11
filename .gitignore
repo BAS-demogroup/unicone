@@ -622,3 +622,10 @@ FodyWeavers.xsd
 /assets/working/samples/68 Cartoon,Applause Small Group Applauding.ogg
 /assets/working/samples/68 Cartoon,Applause Small Group Applauding.ogg.sfk
 /assets/*.sfk
+/assets/game_over_logo.atr
+/assets/game_over_logo.chrs
+/assets/game_over_logo.chrs.addr
+/assets/game_over_logo.chrs.addr.mc
+/assets/game_over_logo.clut
+/assets/game_over_logo.info
+/assets/game_over_logo.map

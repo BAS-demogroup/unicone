@@ -51,10 +51,10 @@ void main() {
 		player_lives = 3;
 		level = 1;
 		
-		do {
-			// load the assets for the ingame loop, and configure the registers
-			ingame_setup();
+		// load the assets for the ingame loop, and configure the registers
+		ingame_setup();
 
+		do {
 			// configure the various difficulty settings
 			set_level_difficulty();
 
@@ -73,6 +73,8 @@ void main() {
 					level = 99;
 				}
 			}
+			// reload bank 3
+			run_dma_job((__far char *)&load_ingame_banks[4]);
 		// continue to run the in-game loop until the player runs out of lives
 		} while (player_lives > 0);
 		

@@ -257,8 +257,12 @@ void ingame_setup() {
 }
 
 void levelcomplete_setup() {
+	if (current_loaded_state == 3) return;
+	
 	// load all of the in-game data from the attic into the fast RAM
 	run_dma_job((__far char *)&load_level_complete_bank[0]);
+	
+	current_loaded_state = 3;
 }
 
 /// \brief	This procedure is called to setup for game over
@@ -266,6 +270,8 @@ void levelcomplete_setup() {
 /// This simple procedure only loads the data for game over, which is just a
 /// couple of samples that were too big to fit in the fast RAM during in-game
 void gameover_setup() {
+	if (current_loaded_state == 2) return;
+	
 	// load the game over sound effects
 	run_dma_job((__far char *)&load_game_over_banks);
 	
@@ -436,7 +442,8 @@ void load_rest() {
 	floppy_iffl_fast_load();
 	run_dma_job((__far char *)&backup_game_over_bank_2);
 	
-	// load the game over sound effects for game over 2
+	// load the game over sound effects for game over 2 and the game over logo
+	floppy_iffl_fast_load();
 	floppy_iffl_fast_load();
 	run_dma_job((__far char *)&backup_game_over_bank_3);
 	

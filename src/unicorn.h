@@ -13,6 +13,7 @@
 
 void update_unicorn();
 
+extern char 		  vertical_sinus[25];
 extern unsigned short unicorn_x;
 extern char           unicorn_y;
 extern char           unicorn_facing;

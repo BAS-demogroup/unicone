@@ -69,4 +69,6 @@ extern       RRB_TILE_GOTOX_t  *lives_position[3][2];
 extern		 RRB_TILE_GOTOX_t  *level_number_position[2][5];
 extern       RRB_TILE_NORMAL_t *level_number_tiles[2][2][5];
 
+extern		 RRB_TILE_GOTOX_t  *gameover_logo_position[9][4];
+
 #endif
