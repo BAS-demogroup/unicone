@@ -49,6 +49,7 @@ void main() {
 		
 		// reset the game
 		player_lives = 3;
+		last_level = 0;
 		level = 1;
 		
 		// load the assets for the ingame loop, and configure the registers
@@ -68,9 +69,10 @@ void main() {
 			
 			// advance to the next level (the inner loop can exit for multiple
 			// reasons, so we can't just assume the level advanced)
+			last_level = level;
 			if (next_level) {
-				if (++level > 99) {
-					level = 99;
+				if (++level > 24) {
+					level = 24;
 				}
 			}
 			// reload bank 3

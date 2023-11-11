@@ -673,14 +673,16 @@ void draw_level() {
 	
 	// set the left most x position of the first digit
 	signed short pos = 310;
-	if (_level_swing_counter < 200) {
-		pos += level_swing[_level_swing_counter];
-	}
-	if (next_level && end_of_level_timer < 200) {
-		pos += level_swing[end_of_level_timer];
-	}
-	if (++_level_swing_counter > 200) {
-		_level_swing_counter = 200;
+	if (last_level != level) {
+		if (_level_swing_counter < 200) {
+			pos += level_swing[_level_swing_counter];
+		}
+		if (next_level && end_of_level_timer < 200) {
+			pos += level_swing[end_of_level_timer];
+		}
+		if (++_level_swing_counter > 200) {
+			_level_swing_counter = 200;
+		}
 	}
 	
 	// and then, for each digit
@@ -705,6 +707,9 @@ char end_of_level_timer;
 
 /// \brief	The current level of the game
 char level;
+
+/// \brief	The last level of the game
+char last_level;
 
 /// \brief	The currently loaded data for the game
 ///

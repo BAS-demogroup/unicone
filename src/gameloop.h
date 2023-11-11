@@ -26,6 +26,7 @@ void draw_level();
 extern char end_of_level_timer;
 extern char end_of_level_timer_start;
 extern char level;
+extern char last_level;
 extern char current_loaded_state;
 extern char new_game_counter;
 
