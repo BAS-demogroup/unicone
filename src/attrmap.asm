@@ -119,7 +119,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -131,7 +131,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -153,7 +153,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -165,7 +165,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -187,7 +187,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -199,7 +199,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -221,7 +221,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -233,7 +233,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -255,7 +255,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -267,7 +267,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -289,7 +289,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -301,7 +301,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -323,7 +323,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -335,7 +335,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -357,7 +357,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -369,7 +369,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -391,7 +391,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -403,7 +403,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -425,7 +425,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -437,7 +437,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -459,7 +459,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -471,7 +471,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -493,7 +493,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -505,7 +505,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -527,7 +527,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -539,7 +539,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -561,7 +561,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -573,7 +573,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -595,7 +595,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -607,7 +607,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -629,7 +629,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -641,7 +641,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -663,7 +663,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -675,7 +675,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -697,7 +697,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -709,7 +709,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -731,7 +731,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -743,7 +743,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -765,7 +765,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -777,7 +777,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -799,7 +799,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -811,7 +811,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -833,7 +833,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -845,7 +845,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -867,7 +867,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -879,7 +879,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -901,7 +901,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -913,7 +913,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -935,7 +935,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -947,7 +947,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -969,7 +969,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -981,7 +981,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -1003,7 +1003,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1015,7 +1015,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -1037,7 +1037,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1049,7 +1049,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -1071,7 +1071,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1083,7 +1083,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -1105,7 +1105,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1117,7 +1117,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -1139,7 +1139,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1151,7 +1151,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -1173,7 +1173,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1185,7 +1185,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 !word	$0090,$0f08,$0090,$0f08,$0090,$0f08
@@ -1209,7 +1209,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1221,7 +1221,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 
@@ -1244,7 +1244,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1256,7 +1256,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 
@@ -1279,7 +1279,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1291,7 +1291,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 
@@ -1314,7 +1314,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1326,7 +1326,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 
@@ -1349,7 +1349,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1361,7 +1361,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 
@@ -1384,7 +1384,7 @@
 !word	$0090,$0f08			// small falling ice cream shadow a
 !word	$0090,$0f08			// small falling ice cream shadow b
 !word	$0090,$0f08			// effect shadow a
-!word	$0090,$0f08			// effect shadow b
+!word	$0090,$1f08			// effect shadow b
 !word	$0090,$0f08,$0f08	// stacked ice cream 1 
 !word	$0090,$0f08,$0f08	// stacked ice cream 2 
 !word	$0090,$0f08,$0f08	// stacked ice cream 3
@@ -1396,7 +1396,7 @@
 !word	$0090,$0f08			// small falling ice cream a
 !word	$0090,$0f08			// small falling ice cream b
 !word	$0090,$0f08			// effect a
-!word	$0090,$0f08			// effect b
+!word	$0090,$1f08			// effect b
 
 !word	$0090,$0f08
 

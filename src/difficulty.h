@@ -21,6 +21,7 @@ extern char cone_height_pix;
 extern char cone_width;
 
 extern char lose_distance;
+extern char warn_distance;
 
 extern char icecream_top_height;
 extern char icecream_top_width;

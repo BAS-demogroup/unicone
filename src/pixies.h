@@ -32,5 +32,6 @@ extern unsigned short large_cone_pixie_tiles[2][2][7];
 extern unsigned short medium_cone_pixie_tiles[2][4];
 extern unsigned short small_cone_pixie_tiles[2][3];
 extern unsigned short numbers[10][2][5];
+extern unsigned short splash_pixie_tiles[3][2];
 
 #endif

@@ -120,6 +120,8 @@ void update_falling_icecream() {
 						next_level = 1;
 					}
 					
+					catch_timer = 50;
+					
 					// and play the sound effect for the dollop landing on the
 					// stack
 					play_sample(runtime_sample_start[4], runtime_sample_end[4], 

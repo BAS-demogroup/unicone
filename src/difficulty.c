@@ -70,6 +70,7 @@ void set_level_difficulty() {
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
 		lose_distance = 32;
+		warn_distance = 24;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 5;
@@ -102,6 +103,7 @@ void set_level_difficulty() {
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
 		lose_distance = 16;
+		warn_distance = 12;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 3;
@@ -134,6 +136,7 @@ void set_level_difficulty() {
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
 		lose_distance = 8;
+		warn_distance = 6;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 2;
@@ -195,6 +198,12 @@ char cone_width;
 /// piece below it.
 char lose_distance;
 
+/// \brief	This variable is the distance at which the game warns the player
+///         they risk slipping
+///
+/// This is the distance at which the game will show slippage warnings on the
+/// screen.
+char warn_distance;
 
 /// \brief	This variable is the height of the top dollop of the ice cream at
 ///			the current scale, in tiles.

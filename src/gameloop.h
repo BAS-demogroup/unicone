@@ -29,5 +29,7 @@ extern char level;
 extern char last_level;
 extern char current_loaded_state;
 extern char new_game_counter;
+extern char warn_timer;
+extern char catch_timer;
 
 #endif

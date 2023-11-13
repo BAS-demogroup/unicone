@@ -47,6 +47,7 @@ void paint_icecream_top_tile(char x_tile, char y_tile, char y_offset) {
 				
 			small_icecream_tiles[0][y_tile + y_offset]->TILE =
 				get_icecream_top_tile(0, x_tile, y_tile);
+
 			break;
 			
 		default:
@@ -73,6 +74,7 @@ void paint_icecream_bottom_tile(char layer, char x_tile, char y_tile,
 				small_icecream_tiles[layer][y_tile + y_offset]->TILE =
 					get_icecream_bottom_tile(0, x_tile, y_tile);
 					
+					
 			} else {
 				falling_icecream_shadow_tiles[layer - 2][x_tile]
 					[y_tile + y_offset]->TILE = 
@@ -80,6 +82,7 @@ void paint_icecream_bottom_tile(char layer, char x_tile, char y_tile,
 
 				falling_icecream_tiles[layer - 2][x_tile][y_tile + y_offset]->
 					TILE = get_icecream_bottom_tile(0, x_tile, y_tile);
+					
 			}
 			break;
 			
@@ -89,6 +92,7 @@ void paint_icecream_bottom_tile(char layer, char x_tile, char y_tile,
 
 			falling_icecream_tiles[layer][x_tile][y_tile + y_offset]->TILE = 
 				get_icecream_bottom_tile(0, x_tile, y_tile);
+				
 			break;
 	}
 }
@@ -416,5 +420,17 @@ unsigned short numbers[10][2][5] = {
 		{
 			0x06ad,0x06b0,0x06cc,0x06bb,0x06c1
 		}
+	}
+};
+
+unsigned short splash_pixie_tiles[3][2] = {
+	{
+		0x0673,0x067a
+	},
+	{
+		0x0781,0x0788
+	},
+	{
+		0x078c,0x0790
 	}
 };

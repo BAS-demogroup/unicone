@@ -50,7 +50,7 @@ void main() {
 		// reset the game
 		player_lives = 3;
 		last_level = 0;
-		level = 1;
+		level = 7;
 		
 		// load the assets for the ingame loop, and configure the registers
 		ingame_setup();

@@ -382,6 +382,7 @@ void draw_icecream_stack() {
 	
 	// the current vertical tile position of the row we're drawing
 	char y_tile = y_adj >> 3;
+	char top_tile = y_tile;
 
 	// we use this last_y_tile so we know when we have changed rows, and can
 	// stop rotating through the different reserved RRB spaces we use to get
@@ -470,11 +471,36 @@ void draw_icecream_stack() {
 			set_stacked_pos(layer, pos, y + y_tile, y_pix);
 			
 			// we need to determine distance between the two ribbons
-			char d = last_x_pos >= pos ? 
-					 last_x_pos - pos : 
-					  pos - last_x_pos;
+			// if that distance is within warning distance, we should a little
+			// splash graphic to warn the player.
+			char d;
+			if (last_x_pos >= pos) {
+				d = last_x_pos - pos;
+				
+			} else {
+				d = pos - last_x_pos;
+				
+			}
+			if (d >= warn_distance) {
+				warn_timer = 75;
+			}
+			if (warn_timer > 0) {
+				effects_position[0][top_tile + icecream_top_height]->XPOS = 
+					last_x_pos - 24;
+				
+				effects_tiles[0][top_tile + icecream_top_height]->TILE = 
+					splash_pixie_tiles[scale][0];
+
+				effects_position[1][top_tile + icecream_top_height]->XPOS = 
+					last_x_pos + 40;
+				
+				effects_tiles[1][top_tile + icecream_top_height]->TILE =
+					splash_pixie_tiles[scale][1];
+				
+				warn_timer--;
+			}
 			// has the top of the stack fallen?
-			if (y == 0 && d >= lose_distance) {
+			if (y == 0 && catch_timer == 0 &&  d >= lose_distance) {
 				// calculate the number of pixels to move the top of the stack
 				// by - the height of a top dollop and two bottom ribbon layers
 				char add = icecream_top_y_add + 
@@ -527,6 +553,10 @@ void draw_icecream_stack() {
 		// position
 		y_adj += icecream_bottom_y_add;
 	}
+	
+	if (catch_timer > 0) {
+		--catch_timer;
+	}
 }
 
 /// \brief	This procedure draws the cone
@@ -570,6 +600,8 @@ void reset_level() {
 	_level_swing_counter = 0;
 	// _gameover_facing = 0;
 	_player_pressed_fire = 0;
+	warn_timer = 0;
+	catch_timer = 0;
 
 	falling_icecream_y     = 0;
 	falling_icecream_state = 0;
@@ -674,15 +706,17 @@ void draw_level() {
 	// set the left most x position of the first digit
 	signed short pos = 310;
 	if (last_level != level) {
-		if (_level_swing_counter < 200) {
+		if (_level_swing_counter < 50) {
 			pos += level_swing[_level_swing_counter];
 		}
 	}
-	if (next_level && end_of_level_timer < 200) {
-		pos += level_swing[end_of_level_timer];
+	if (next_level && end_of_level_timer <= 150) {
+		pos = 640;
+	} else if (next_level && end_of_level_timer < 200 && end_of_level_timer > 150) {
+		pos += level_swing[end_of_level_timer - 150];
 	}
-	if (++_level_swing_counter > 200) {
-		_level_swing_counter = 200;
+	if (++_level_swing_counter > 50) {
+		_level_swing_counter = 50;
 	}
 	
 	// and then, for each digit
@@ -726,3 +760,10 @@ char new_game_counter;
 
 /// \brief	This is the amount of time we take to end the level, NTSC/PAL fixed
 char end_of_level_timer_start;
+
+/// \brief	This timer is used to make the warning stay on screen longer
+char warn_timer;
+
+/// \brief	This timer is used to keep ice cream from slipping off right after
+///			it's caught
+char catch_timer;

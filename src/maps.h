@@ -44,9 +44,6 @@ extern       RRB_TILE_NORMAL_t *falling_icecream_shadow_tiles[3][2][38];
 extern       RRB_TILE_GOTOX_t  *small_icecream_shadow_position[2][38];
 extern       RRB_TILE_NORMAL_t *small_icecream_shadow_tiles[2][38];
 	         
-extern       RRB_TILE_GOTOX_t  *effect_shadow_position[38];
-extern       RRB_TILE_NORMAL_t *effect_shadow_tiles[38];
-	         
 extern       RRB_TILE_GOTOX_t  *stacked_icecream_position[3][38];
 extern       RRB_TILE_NORMAL_t *stacked_icecream_tiles[3][2][38];
 	         
@@ -59,8 +56,8 @@ extern       RRB_TILE_NORMAL_t *falling_icecream_tiles[3][2][38];
 extern       RRB_TILE_GOTOX_t  *small_icecream_position[2][38];
 extern       RRB_TILE_NORMAL_t *small_icecream_tiles[2][38];
 	         
-extern       RRB_TILE_GOTOX_t  *effect_position[38];
-extern       RRB_TILE_NORMAL_t *effect_tiles[38];
+extern       RRB_TILE_GOTOX_t  *effects_position[2][38];
+extern       RRB_TILE_NORMAL_t *effects_tiles[2][38];
 
 // stats tiles
 extern       RRB_TILE_GOTOX_t  *lives_shadow_position[3][2];
