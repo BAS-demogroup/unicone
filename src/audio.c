@@ -69,6 +69,17 @@ void play_sample(unsigned long start, unsigned short end, char sixteen_bit) {
 	}
 }
 
+/// \brief	This procedure stops all samples that are currently playing
+///
+/// This procedure stops all samples that are currently playing.  This is to
+/// avoid noise when loading other segments of the app.
+void stop_all_samples() {
+	for (char c = 0; c < 4; c++) {
+		// stop the channel
+		AUDIO_DMA.CHANNELS[c].CONTROL = 0b00000000;
+	}
+}
+
 /// \brief	This procedure turns off the gates on all of the voices.
 ///
 /// This procedure sets all the voice gates off so that we can switch between

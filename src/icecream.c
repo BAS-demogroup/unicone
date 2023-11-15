@@ -23,6 +23,7 @@
 #include "player.h"
 #include "pixies.h"
 #include "maps.h"
+#include "swing.h"
 
 
 /// \brief	This procedure does all the updating of the ice cream
@@ -83,7 +84,18 @@ void update_falling_icecream() {
 					calc_x = stack_x[stack_size - 1] +
 						stack_offsets[stack_size - 1];
 				}
-				
+				// then, we add or subtract the value we look up on the swing table
+				// based on which direction the stack is swinging, shifted right to
+				// reduce the swing for the scale differences
+				if (icecream_swing < 0) {
+					calc_x -= (short)(swing_table[abs(icecream_swing)]
+						[stack_size - 1] >> scale);
+					
+				} else {
+					calc_x += (short)(swing_table[icecream_swing]
+						[stack_size - 1] >> scale);
+				}
+
 				short val = falling_icecream_x > calc_x ?
 							falling_icecream_x - calc_x :
 							calc_x - falling_icecream_x;

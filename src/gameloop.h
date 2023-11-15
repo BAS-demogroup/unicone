@@ -13,7 +13,7 @@
 
 void game_loop();
 void draw_unicorn();
-void draw_falling_icecream(unsigned short ytop);
+void draw_falling_icecream(unsigned short xleft, unsigned short ytop);
 void draw_falling_pooped();
 void draw_falling_stacked();
 void draw_icecream_stack();

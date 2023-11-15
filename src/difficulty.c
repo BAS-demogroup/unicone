@@ -48,13 +48,14 @@ void set_level_difficulty() {
 	random_facing_mask  = 0x000003ff; // $3ff < $2
 	random_facing_value = 0x00000002;
 	
-	unicorn_frame_rate = 4;
-	
 	max_poop_delay = 511;
 	cur_poop_delay = max_poop_delay;
 	
 	max_facing_delay = 1023;
 	cur_facing_delay = max_facing_delay;
+	
+	// this is the other way to change the unicorn's speed per level
+	unicorn_frame_rate = unicorn_frame_rates[level - 1];
 	
 	// at this time, there are really only 3 major divisions in difficulty,
 	// after 8 and after 16, so these blocks select each o those.
@@ -69,8 +70,8 @@ void set_level_difficulty() {
 
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
-		lose_distance = 32;
-		warn_distance = 24;
+		lose_distance = 24;//16;
+		warn_distance = 16;//12;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 5;
@@ -102,8 +103,8 @@ void set_level_difficulty() {
 
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
-		lose_distance = 16;
-		warn_distance = 12;
+		lose_distance = 12;
+		warn_distance = 8;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 3;
@@ -135,8 +136,8 @@ void set_level_difficulty() {
 
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
-		lose_distance = 8;
-		warn_distance = 6;
+		lose_distance = 6;
+		warn_distance = 4;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 2;
@@ -205,6 +206,19 @@ char lose_distance;
 /// screen.
 char warn_distance;
 
+/// \brief	These are the offsets for the warning splashes for each level
+signed char splash_offset[3][2] = {
+	{
+		-24, 40
+	},
+	{
+		-16, 16
+	},
+	{
+		-8,	0
+	}
+};
+
 /// \brief	This variable is the height of the top dollop of the ice cream at
 ///			the current scale, in tiles.
 char icecream_top_height;
@@ -246,3 +260,10 @@ char icecream_bottom_y_add;
 /// missed, or if the stack slips, then this speed is used as the basis but
 /// multiplied.
 char falling_speed;
+
+/// \brief	This is a level table for unicorn frame rates
+char unicorn_frame_rates[24] = {
+	4,4,3,4,3,3,4,3,
+	4,4,3,3,2,2,3,2,
+	3,3,2,2,1,1,2,1
+};

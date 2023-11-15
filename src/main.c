@@ -50,7 +50,7 @@ void main() {
 		// reset the game
 		player_lives = 3;
 		last_level = 0;
-		level = 7;
+		level = 9;
 		
 		// load the assets for the ingame loop, and configure the registers
 		ingame_setup();
@@ -82,6 +82,9 @@ void main() {
 		
 		// again, stop all sid sounds
 		stop_all_SID_voices();
+		
+		// and all samples
+		stop_all_samples();
 		
 		// load the assets to do the game over.
 		gameover_setup();

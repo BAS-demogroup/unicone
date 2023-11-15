@@ -161,6 +161,7 @@ void game_loop() {
 			if (!player_dying && next_level && 
 				end_of_level_timer_start - end_of_level_timer == 33) {
 					
+				stop_all_samples();
 				// load the level complete sound effect
 				run_dma_job(
 					(__far char *)&load_level_complete_bank[0]);
@@ -259,8 +260,9 @@ void draw_unicorn() {
 /// unicorn, as well as the one that slips off the top of the stack if it tips
 /// too far.
 ///
+/// \param xleft	The leftmost position of the ice cream
 /// \param	ytop	The vertical top of the cone that we start rendering from
-void draw_falling_icecream(unsigned short ytop) {
+void draw_falling_icecream(unsigned short xleft, unsigned short ytop) {
 	// y_adj is the top of what we're drawing, adjusted for the current layer
 	// of the dollop we're drawing.  Here, we set it to the passed starting top
 	unsigned short y_adj = ytop;
@@ -279,7 +281,7 @@ void draw_falling_icecream(unsigned short ytop) {
 	// look and height from the bottom layers
 	for (char y = 0; y < icecream_top_height; y++) {
 		// set the position of the row
-		set_icecream_pos(0, falling_icecream_x, y + y_tile, y_pix);
+		set_icecream_pos(0, xleft, y + y_tile, y_pix);
 		
 		// and the tile(s) for the row
 		for (char x = 0; x < icecream_top_width; x++) {
@@ -315,7 +317,7 @@ void draw_falling_icecream(unsigned short ytop) {
 		// for each row that our bottom layer can take up
 		for (char y = 0; y < icecream_bottom_height; y++) {
 			// set its position
-			set_icecream_pos(layer, falling_icecream_x, y + y_tile, y_pix);
+			set_icecream_pos(layer, xleft, y + y_tile, y_pix);
 			
 			// and tile(s)
 			for (char x = 0; x < icecream_bottom_width; x++) {
@@ -343,10 +345,12 @@ void draw_falling_pooped() {
 	// skip drawing if the state is wrong, if we are still in the middle of
 	// playing the game startup sound, or if we are in the middle of changing
 	// level
-	if (falling_icecream_state == 0 || new_game_counter > 0 || next_level) 
+	if (falling_icecream_state == 0 || new_game_counter > 0 || next_level) {
+		
 		return;
+	}
 	
-	draw_falling_icecream(falling_icecream_y);
+	draw_falling_icecream(falling_icecream_x, falling_icecream_y);
 }
 
 /// \brief	This procedure handles the animation of falling ice cream that has 
@@ -360,7 +364,7 @@ void draw_falling_stacked() {
 	// stack
 	if (!falling_stacked_state) return;
 	
-	draw_falling_icecream(falling_stacked_y);
+	draw_falling_icecream(falling_stacked_x, falling_stacked_y);
 }
 
 /// \brief	This procedure draws the ice cream stacked on top of the cone
@@ -439,7 +443,7 @@ void draw_icecream_stack() {
 		// and the pixel offset
 		y_pix = (~(char)y_adj & 0x07);
 		
-		// if we have moved to a new row of the tile map
+		// if we have moved to a new row of the tile map	
 		if (y_tile != last_y_tile) {
 			// setup for the next loop through
 			last_y_tile = y_tile;
@@ -482,22 +486,20 @@ void draw_icecream_stack() {
 				
 			}
 			if (d >= warn_distance) {
-				warn_timer = 75;
+				warn_timer = 25;
 			}
 			if (warn_timer > 0) {
 				effects_position[0][top_tile + icecream_top_height]->XPOS = 
-					last_x_pos - 24;
+					pos + splash_offset[scale][0];
 				
 				effects_tiles[0][top_tile + icecream_top_height]->TILE = 
 					splash_pixie_tiles[scale][0];
 
 				effects_position[1][top_tile + icecream_top_height]->XPOS = 
-					last_x_pos + 40;
+					pos + splash_offset[scale][1];
 				
 				effects_tiles[1][top_tile + icecream_top_height]->TILE =
 					splash_pixie_tiles[scale][1];
-				
-				warn_timer--;
 			}
 			// has the top of the stack fallen?
 			if (y == 0 && catch_timer == 0 &&  d >= lose_distance) {
@@ -506,7 +508,7 @@ void draw_icecream_stack() {
 				char add = icecream_top_y_add + 
 					(icecream_bottom_y_add << 1);
 					
-				// the x position of the new falling dollop is the last_x_pos
+				// the x position of the new falling dollop is the pos
 				// calculated above and used to determine the slip
 				falling_stacked_x = last_x_pos;
 				
@@ -537,6 +539,7 @@ void draw_icecream_stack() {
 				return;
 			}
 			
+			last_x_pos = pos;
 			// having gotten this far, paint the tile(s) for the current ribbon
 			// layer of the stack
 			for (char x = 0; x < icecream_bottom_width; x++) {
@@ -552,6 +555,10 @@ void draw_icecream_stack() {
 		// add the height of the bottom ribbon graphic to the next rendering
 		// position
 		y_adj += icecream_bottom_y_add;
+	}
+
+	if (warn_timer > 0) {
+		--warn_timer;
 	}
 	
 	if (catch_timer > 0) {
