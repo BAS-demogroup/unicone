@@ -48,6 +48,7 @@ void process_input() {
 	// the order of how the keys are processed is to avoid changing the fields
 	// more than necessary.
 	
+	char shift = 0;
 	// is W pressed?  set the up bit
 	KEYSCAN.MATRIXPEEK = 0x01;
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x01)) == 0) {
@@ -67,6 +68,7 @@ void process_input() {
 	// is left shift pressed? set the fire bit
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x07)) == 0) {
 		player_input |= 0b00010000;
+		shift = 1;
 	}
 
 	// is D pressed?  set the right bit
@@ -79,6 +81,17 @@ void process_input() {
 	KEYSCAN.MATRIXPEEK = 0x06;
 	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x04)) == 0) {
 		player_input |= 0b00010000;
+		shift = 1;
+	}
+	
+	// is right arrow pressed?  set the right bit
+	KEYSCAN.MATRIXPEEK = 0x00;
+	if ((KEYSCAN.CRTACSCNT & (0x01 << 0x02)) == 0) {
+		if (shift) {
+			player_input |= 0b00000100;
+		} else {
+			player_input |= 0b00001000;
+		}
 	}
 }
 
