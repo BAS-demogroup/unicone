@@ -19,7 +19,7 @@ C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b8 -m=30000 -o=uni
 
 split unicorn_title_plain.chrs 32768
 split unicorn_title_credits.chrs 32768
-split background.chrs 32768
+REM split background.chrs 32768
 split game_over_2.raw 32768
 
 cd ..
@@ -117,10 +117,11 @@ C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_1.raw 0001ac00
 C:\Users\death\Documents\C65\megatool\megatool -a assets/falling.raw 00010000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_2.raw 0001b700
 
-C:\Users\death\Documents\C65\megatool\megatool -a assets/background_0.chrs 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/background_1.chrs 00010000
+C:\Users\death\Documents\C65\megatool\megatool -a assets/background.chrs 00010000
+REM C:\Users\death\Documents\C65\megatool\megatool -a assets/background_0.chrs 00010000
+REM C:\Users\death\Documents\C65\megatool\megatool -a assets/background_1.chrs 00010000
 
-C:\Users\death\Documents\C65\megatool\megatool -a assets/background_2.chrs 00010000
+REM C:\Users\death\Documents\C65\megatool\megatool -a assets/background_2.chrs 00010000
 C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_3.raw 00017c00
 
 REM Game Over Data
@@ -176,10 +177,11 @@ C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_1.raw.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/falling.raw.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_2.raw.addr
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/background_0.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/background_1.chrs.addr
+C:\Users\death\Documents\C65\megatool\megatool -c assets/background.chrs.addr
+REM C:\Users\death\Documents\C65\megatool\megatool -c assets/background_0.chrs.addr
+REM C:\Users\death\Documents\C65\megatool\megatool -c assets/background_1.chrs.addr
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/background_2.chrs.addr
+REM C:\Users\death\Documents\C65\megatool\megatool -c assets/background_2.chrs.addr
 C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_3.raw.addr
 
 REM Game Over Data
@@ -195,7 +197,7 @@ C:\Users\death\Documents\C65\megatool\megatool -c assets/level_end.raw.addr
 
 C:\Users\death\Documents\C65\megatool\megatool -i assets/pixies.clut.addr.mc assets/unicorn_title_plain_0.chrs.addr.mc assets/unicorn_title_plain_1.chrs.addr.mc assets/unicorn_title_plain_2.chrs.addr.mc assets/unicorn_title_plain_3.chrs.addr.mc assets/unicorn_title_plain_4.chrs.addr.mc assets/unicorn_title_plain.map.addr.mc assets/unicorn_title_plain.atr.addr.mc build/music_swap_stub.bin.addr.mc assets/megakitty_theme_1.prg.addr.mc assets/unicorn_title_credits_0.chrs.addr.mc assets/unicorn_title_credits_1.chrs.addr.mc assets/unicorn_title_credits_2.chrs.addr.mc assets/unicorn_title_credits_3.chrs.addr.mc assets/unicorn_title_credits_4.chrs.addr.mc assets/unicorn_title_credits_5.chrs.addr.mc assets/unicorn_title_credits.map.addr.mc assets/unicorn_title_credits.atr.addr.mc assets/level_end.raw.addr.mc assets/unicone0
 
-C:\Users\death\Documents\C65\megatool\megatool -i assets/sentimental_thing.prg.addr.mc assets/tileset.chrs.addr.mc build/tilemap.bin.addr.mc build/flavors.bin.addr.mc assets/game_start.raw.addr.mc assets/trot.raw.addr.mc assets/splat_1.raw.addr.mc assets/falling.raw.addr.mc assets/splat_2.raw.addr.mc assets/background_0.chrs.addr.mc assets/background_1.chrs.addr.mc assets/background_2.chrs.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc build/attrmap.bin.addr.mc assets/game_over_2.raw.addr.mc assets/game_over_logo.chrs.addr.mc assets/unicone1
+C:\Users\death\Documents\C65\megatool\megatool -i assets/sentimental_thing.prg.addr.mc assets/tileset.chrs.addr.mc build/tilemap.bin.addr.mc build/flavors.bin.addr.mc assets/game_start.raw.addr.mc assets/trot.raw.addr.mc assets/splat_1.raw.addr.mc assets/falling.raw.addr.mc assets/splat_2.raw.addr.mc assets/background.chrs.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc build/attrmap.bin.addr.mc assets/game_over_2.raw.addr.mc assets/game_over_logo.chrs.addr.mc assets/unicone1
 
 
 C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicone.d81 -delete "unicone     /bas" -delete "+unicone0" -delete "+unicone1" -write "build/unicone.prg" "unicone     /bas" -write "assets/unicone0" "+unicone0" -write "assets/unicone1" "+unicone1" -list

@@ -50,7 +50,7 @@ void main() {
 		// reset the game
 		player_lives = 3;
 		last_level = 0;
-		level = 9;
+		level = 1;
 		
 		// load the assets for the ingame loop, and configure the registers
 		ingame_setup();
@@ -75,6 +75,10 @@ void main() {
 					level = 24;
 				}
 			}
+			
+			// and all samples
+			stop_all_samples();
+		
 			// reload bank 3
 			run_dma_job((__far char *)&load_ingame_banks[4]);
 		// continue to run the in-game loop until the player runs out of lives
@@ -82,7 +86,7 @@ void main() {
 		
 		// again, stop all sid sounds
 		stop_all_SID_voices();
-		
+			
 		// and all samples
 		stop_all_samples();
 		

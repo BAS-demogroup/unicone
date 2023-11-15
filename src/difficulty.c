@@ -70,8 +70,8 @@ void set_level_difficulty() {
 
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
-		lose_distance = 24;//16;
-		warn_distance = 16;//12;
+		lose_distance = 16;//16;
+		warn_distance = 12;//12;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 5;
@@ -103,8 +103,8 @@ void set_level_difficulty() {
 
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
-		lose_distance = 12;
-		warn_distance = 8;
+		lose_distance = 8;
+		warn_distance = 6;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 3;
@@ -136,8 +136,8 @@ void set_level_difficulty() {
 
 		// set the distance from the center of one piece and the one below it
 		// at which the stack will slip
-		lose_distance = 6;
-		warn_distance = 4;
+		lose_distance = 4;
+		warn_distance = 3;
 		
 		// set the ice cream top measurements
 		icecream_top_height = 2;
