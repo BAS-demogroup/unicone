@@ -14,26 +14,28 @@
 
 void set_level_difficulty();
 
-extern char scale;
-
-extern char cone_height;
-extern char cone_height_pix;
-extern char cone_width;
-
-extern char lose_distance;
-extern char warn_distance;
-extern signed char splash_offset[3][2];
-
-extern char icecream_top_height;
-extern char icecream_top_width;
-extern char icecream_top_y_add;
-
-extern char icecream_bottom_height;
-extern char icecream_bottom_width;
-extern char icecream_bottom_y_add;
-
-extern char falling_speed;
-
-extern char unicorn_frame_rates[24];
+extern char           scale;
+			          
+extern char           cone_height;
+extern char           cone_height_pix;
+extern char           cone_width;
+			          
+extern char           lose_distance;
+extern char           warn_distance;
+extern signed char    splash_offset[3][2];
+					  
+extern char           icecream_top_height;
+extern char           icecream_top_width;
+extern char           icecream_top_y_add;
+			          
+extern char           icecream_bottom_height;
+extern char           icecream_bottom_width;
+extern char           icecream_bottom_y_add;
+			          
+extern char           falling_speed;
+			          
+extern char           unicorn_frame_rates[24];
+extern unsigned long  random_poop_values[24];
+extern unsigned short max_poop_delays[24];
 
 #endif

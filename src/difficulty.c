@@ -24,27 +24,9 @@
 /// This procedure is called to set the difficulty based on the current level,
 /// and load the ice cream flavor onto the color palette.
 void set_level_difficulty() {
-	// cur_level is used to help set the offset into the flavor storage.  there
-	// are only 24 flavors, after that, it just keeps the highest flavor.
-	char cur_level = level > 24 ? 24 : level;
-	// level is 1 indexed, so we correct for that.
-	cur_level -= 1;
-	// and the level is then multiplied by 16, as that is how long a palette
-	// slice is.
-	cur_level <<= 4;
-
-	// set the DMA job pointers for the flavor being loaded
-	load_flavor[0].source = FLAVORS_RED   + cur_level & 0xffff;
-	load_flavor[1].source = FLAVORS_GREEN + cur_level & 0xffff;
-	load_flavor[2].source = FLAVORS_BLUE  + cur_level & 0xffff;
-
-	// and load the flavor
-	run_dma_job((__far char *)&load_flavor);
-	
 	// there are variables in place to vary the behavior of the unicorn, but at 
 	// this time, it's the same throughout the game.
 	random_poop_mask    = 0x000001ff; // $1ff < $1
-	random_poop_value   = 0x00000001;
 	random_facing_mask  = 0x000003ff; // $3ff < $2
 	random_facing_value = 0x00000002;
 	
@@ -56,6 +38,10 @@ void set_level_difficulty() {
 	
 	// this is the other way to change the unicorn's speed per level
 	unicorn_frame_rate = unicorn_frame_rates[level - 1];
+
+	// tweak the odds of the unicorn pooping to speed things up
+	random_poop_value   = random_poop_values[level - 1];
+	max_poop_delay = max_poop_delays[level - 1];
 	
 	// at this time, there are really only 3 major divisions in difficulty,
 	// after 8 and after 16, so these blocks select each o those.
@@ -266,4 +252,18 @@ char unicorn_frame_rates[24] = {
 	4,4,3,4,3,3,4,4,
 	4,4,3,3,2,2,3,3,
 	3,3,2,2,1,1,2,2
+};
+
+/// \brief This is a level table for the frequency with which the unicorn poops
+unsigned long random_poop_values[24] = {
+	5,4,4,3,3,2,1,1,
+	3,3,2,2,1,1,1,1,
+	2,2,1,1,1,1,1,1
+};
+
+/// \brief	This level table sets the maximum time between poops for each level
+unsigned short max_poop_delays[24] = {
+	102,128,128,170,170,256,512,512,
+	170,170,256,256,512,512,512,512,
+	256,256,512,512,512,512,512,512
 };

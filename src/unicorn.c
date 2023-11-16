@@ -105,18 +105,18 @@ void update_unicorn() {
 	// if there are no falling dollops of ice cream, and the unicorn has not
 	// already started pooping, then check to see if the RNG indicates that it
 	// should trigger a new poop
-	if (!falling_icecream_state && !unicorn_pooping && !falling_stacked_state 
-		&& (
-			(rng & random_poop_mask) < random_poop_value) || 
-			--cur_poop_delay == 0
-		) {
+	if (!falling_icecream_state && !unicorn_pooping && !falling_stacked_state) {
+		--cur_poop_delay;
+		if ( ((rng & random_poop_mask) < random_poop_value) || 
+			cur_poop_delay == 0 ) {
 		
-		// and if so, then flag that the unicorn is in the middle of pooping, 
-		// and set the frame counter for how long the tail will be lifted 
-		// before the unicorn poops.
-		unicorn_pooping = 1;
-		unicorn_countdown = 50;
-		cur_poop_delay = max_poop_delay;
+			// and if so, then flag that the unicorn is in the middle of pooping, 
+			// and set the frame counter for how long the tail will be lifted 
+			// before the unicorn poops.
+			unicorn_pooping = 1;
+			unicorn_countdown = 50;
+			cur_poop_delay = max_poop_delay;
+		}
 	
 	// if the unicorn hasn't just started pooping...
 	} else {
