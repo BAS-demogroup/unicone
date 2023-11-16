@@ -11,8 +11,10 @@
 
 
 #include "audio.h"
-#include "rng.h"
+#include "gameloop.h"
 #include "icecream.h"
+#include "player.h"
+#include "rng.h"
 
 
 /// \brief	This array contains a simple sinus for the vertical movement of the
@@ -107,7 +109,11 @@ void update_unicorn() {
 	// should trigger a new poop
 	if (!falling_icecream_state && !unicorn_pooping && !falling_stacked_state) {
 		--cur_poop_delay;
-		if ( ((rng & random_poop_mask) < random_poop_value) || 
+		unsigned long rpv = random_poop_value;
+		if (level > 8 && stack_size < 8 && 8 - stack_size > rpv) {
+			rpv = 8 - stack_size;
+		}
+		if ( ((rng & random_poop_mask) < rpv) || 
 			cur_poop_delay == 0 ) {
 		
 			// and if so, then flag that the unicorn is in the middle of pooping, 
