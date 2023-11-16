@@ -10,6 +10,7 @@
 
 
 #include "chips.h"
+#include "gameloop.h"
 #include "input.h"
 #include "macros.h"
 #include "rng.h"
@@ -30,6 +31,68 @@ void title_loop() {
 	
 		// process the player's input
 		process_input();
+		
+		// special keyboard processing
+
+		// is 2 pressed?
+		KEYSCAN.MATRIXPEEK = 0x07;
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x03)) == 0) {
+			level = 2;
+			player_input |= 0b00010000;
+		}
+		
+		// is 3 pressed?
+		KEYSCAN.MATRIXPEEK = 0x01;
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x00)) == 0) {
+			level = 3;
+			player_input |= 0b00010000;
+		}
+		
+		// is 4 pressed?
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x03)) == 0) {
+			level = 4;
+			player_input |= 0b00010000;
+		}
+		
+		// is 5 pressed?
+		KEYSCAN.MATRIXPEEK = 0x02;
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x00)) == 0) {
+			level = 5;
+			player_input |= 0b00010000;
+		}
+		
+		// is 6 pressed?
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x03)) == 0) {
+			level = 6;
+			player_input |= 0b00010000;
+		}
+		
+		// is 7 pressed?
+		KEYSCAN.MATRIXPEEK = 0x03;
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x00)) == 0) {
+			level = 7;
+			player_input |= 0b00010000;
+		}
+		
+		// is 8 pressed?
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x03)) == 0) {
+			level = 8;
+			player_input |= 0b00010000;
+		}
+		
+		// is 9 pressed?
+		KEYSCAN.MATRIXPEEK = 0x04;
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x00)) == 0) {
+			level = 9;
+			player_input |= 0b00010000;
+		}
+		
+		// is 0 pressed?
+		if ((KEYSCAN.CRTACSCNT & (0x01 << 0x03)) == 0) {
+			level = 10;
+			player_input |= 0b00010000;
+		}
+		
 		// play the music
 		musicPlay();
 		

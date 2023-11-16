@@ -40,6 +40,7 @@ void main() {
 		// show the title screen
 		title_setup();
 
+		level = 1;
 		// loop waiting for the player to start the game
 		title_loop();
 		
@@ -50,7 +51,6 @@ void main() {
 		// reset the game
 		player_lives = 3;
 		last_level = 0;
-		level = 1;
 		
 		// load the assets for the ingame loop, and configure the registers
 		ingame_setup();
