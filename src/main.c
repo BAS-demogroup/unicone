@@ -40,7 +40,7 @@ void main() {
 		// show the title screen
 		title_setup();
 
-		level = 1;
+		level = 17;
 		// loop waiting for the player to start the game
 		title_loop();
 		

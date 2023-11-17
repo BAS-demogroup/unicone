@@ -629,3 +629,6 @@ FodyWeavers.xsd
 /assets/game_over_logo.clut
 /assets/game_over_logo.info
 /assets/game_over_logo.map
+/src/full_background/attrmap.asm
+/src/full_background/build.cmd
+/src/full_background/tilemap.asm

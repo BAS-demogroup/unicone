@@ -60,17 +60,17 @@ void game_loop() {
 	
 	// cur_level is used to help set the offset into the flavor storage.  there
 	// are only 24 flavors, after that, it just keeps the highest flavor.
-	char cur_level = level > 24 ? 24 : level;
+	unsigned short cur_level = level > 24 ? 24 : level;
 	// level is 1 indexed, so we correct for that.
 	cur_level -= 1;
 	// and the level is then multiplied by 16, as that is how long a palette
 	// slice is.
 	cur_level <<= 4;
-
+	
 	// set the DMA job pointers for the flavor being loaded
-	load_flavor[0].source = FLAVORS_RED   + cur_level & 0xffff;
-	load_flavor[1].source = FLAVORS_GREEN + cur_level & 0xffff;
-	load_flavor[2].source = FLAVORS_BLUE  + cur_level & 0xffff;
+	load_flavor[0].source = (FLAVORS_RED   + cur_level) & 0xffff;
+	load_flavor[1].source = (FLAVORS_GREEN + cur_level) & 0xffff;
+	load_flavor[2].source = (FLAVORS_BLUE  + cur_level) & 0xffff;
 
 	// and load the flavor
 	run_dma_job((__far char *)&load_flavor);
