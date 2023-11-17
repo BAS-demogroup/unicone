@@ -1,3 +1,12 @@
+/// \file	flavors.asm
+/// 
+/// \brief	This file is the palette data for each level's ice cream flavor
+///
+/// This Acme assembly file is used to construct the palette data for each 
+/// level's ice cream flavor.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 !to "build/flavors.bin", plain
 
 * = $2000

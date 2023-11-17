@@ -1,3 +1,12 @@
+/// \file	attrmap.asm
+/// 
+/// \brief	This file is the static data for the attribute map for the game
+///
+/// This Acme assembly file is used to construct the attribute map data for use
+/// with the game.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 !to "build/attrmap.bin", plain
 
 * = $2000

@@ -1,3 +1,12 @@
+/// \file	tilemap.asm
+/// 
+/// \brief	This file is the static data for the tile map for the game
+///
+/// This Acme assembly file is used to construct the tile map data for use with 
+/// the game.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 !to "build/tilemap.bin", plain
 
 * = $2000
