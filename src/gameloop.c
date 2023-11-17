@@ -470,21 +470,19 @@ void draw_icecream_stack() {
 	
 		// for each row that our bottom layer can take up
 		for (char y = 0; y < icecream_bottom_height; y++) {
+			char sdx = stack_size - ribbon - 1;
+			if (sdx > 49) {
+				sdx = 49;
+			}
 			// we once again calculate the base x position of this piece
-			short pos = player_x + 
-				stack_offsets[stack_size - ribbon - 2];
+			short pos = player_x + stack_offsets[sdx];
 			
 			// and then cause the stack to swing using a lookup table, and
 			// adjusted for the current scale
 			if (icecream_swing < 0) {
-				
-				pos -= (short)(swing_table[abs(icecream_swing)]
-					[stack_size - ribbon - 1] >> scale);
-					
+				pos -= (short)(swing_table[abs(icecream_swing)][sdx] >> scale);
 			} else {
-				
-				pos += (short)(swing_table[icecream_swing]
-					[stack_size - ribbon - 1] >> scale);
+				pos += (short)(swing_table[icecream_swing][sdx] >> scale);
 					
 			}
 
@@ -503,7 +501,7 @@ void draw_icecream_stack() {
 				
 			}
 			if (d >= warn_distance) {
-				warn_timer = 25;
+				warn_timer = 50;
 			}
 			if (warn_timer > 0) {
 				effects_position[0][top_tile + icecream_top_height]->XPOS = 

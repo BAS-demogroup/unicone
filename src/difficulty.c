@@ -73,11 +73,11 @@ void set_level_difficulty() {
 		falling_speed = 2;
 		
 		// for levels 7 and 8, the unicorn moves twice as fast
-		if (level < 7) {
+		// if (level < 9) {
 			unicorn_speed = 1;
-		} else {
-			unicorn_speed = 2;
-		}
+		// } else {
+			// unicorn_speed = 2;
+		// }
 	} else if (level < 17) {
 		// set the graphics scale to 1, the middle scale
 		scale = 1;
@@ -198,7 +198,7 @@ signed char splash_offset[3][2] = {
 		-24, 40
 	},
 	{
-		-16, 16
+		-24, 40
 	},
 	{
 		-8,	0
@@ -249,7 +249,7 @@ char falling_speed;
 
 /// \brief	This is a level table for unicorn frame rates
 char unicorn_frame_rates[24] = {
-	4,4,3,4,3,3,4,4,
+	4,4,3,4,3,3,3,2,
 	4,4,3,3,2,2,3,3,
 	3,3,2,2,1,1,2,2
 };

@@ -45,7 +45,7 @@ void update_player() {
 			} else {
 				if (icecream_swing < acceleration) {
 					++icecream_swing;
-				} else if (icecream_swing < acceleration) {
+				} else if (icecream_swing > acceleration) {
 					--icecream_swing;
 				}
 			}

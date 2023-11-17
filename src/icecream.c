@@ -81,14 +81,16 @@ void update_falling_icecream() {
 				if (stack_size) {
 					// but if there is, then we do some quick math to calculate
 					// the x position of the top of the stack
-					calc_x = stack_x[stack_size - 1] +
+					// calc_x = stack_x[stack_size - 1] +
+						// stack_offsets[stack_size - 1];
+					calc_x +=
 						stack_offsets[stack_size - 1];
 				}
-				// then, we add or subtract the value we look up on the swing table
-				// based on which direction the stack is swinging, shifted right to
-				// reduce the swing for the scale differences
+				// then, we add or subtract the value we look up on the swing 
+				// table based on which direction the stack is swinging, 
+				// shifted right to reduce the swing for the scale differences
 				if (icecream_swing < 0) {
-					calc_x -= (short)(swing_table[abs(icecream_swing)]
+					calc_x -= (short)(swing_table[-icecream_swing]
 						[stack_size - 1] >> scale);
 					
 				} else {
