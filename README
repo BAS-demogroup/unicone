@@ -1,0 +1,5 @@
+This is the complete source code to the Mega65 game "Unicone."
+
+It was primarily developed using the Calypsi C compiler, with some Acme assembly.  
+
+While the license is permissive, please do not just clone the game to another platform without permission.  I am providing it more as an example to help inform your own projects than to encourage porting this specific game.
