@@ -1,3 +1,13 @@
+/// \file	music_swap_stub.asm
+/// 
+/// \brief	This file is a small assembly stub to handle the music interface
+///
+/// This stub maps in the music routines into bank 0, then executes the 
+/// interface call, either intializing or playing the music, then maps the
+/// music routines back out again
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 !to "build/music_swap_stub.bin", plain
 !cpu m65
 

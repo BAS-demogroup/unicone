@@ -1,3 +1,11 @@
+/// \file	pixies.h
+/// 
+/// \brief	This file is the header file that declares all of the pixies' tiles
+///
+/// This header file declares the tiles for all of the pixies in the game
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #ifndef __PIXIES_H
 #define __PIXIES_H
 

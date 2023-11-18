@@ -1,3 +1,12 @@
+/// \file	maps.h
+/// 
+/// \brief	This file is the header file that declares all of the maps used to
+///			interface with the tile and attribute map in-game
+///
+/// This header file declares the tile and attribute map pointers used in-game.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #ifndef __MAPS_H
 #define __MAPS_H
 

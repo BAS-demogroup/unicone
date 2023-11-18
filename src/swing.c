@@ -1,6 +1,17 @@
+/// \file	swing.c
+/// 
+/// \brief	This file defines all of the ice cream stack's swing
+///
+/// This file defines the offsets used to desribe the ice cream's swing, as 
+/// well as the sinus used to swing the level number in and out.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #include "swing.h"
 
 
+/// \brief	This table defines the swing amount for the stack, sorted by
+///			acceleration, then y position
 char swing_table[11][50] = {
 	{	// 32/27
 		0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -158,6 +169,8 @@ char swing_table[11][50] = {
 	// }
 };
 
+/// \brief	This table defines the sinus used to swing in the level indicator,
+///			sorted by animation frame
 signed short level_swing[51] = {
 	 330, 320, 307, 289, 266, 240, 212, 181, 149, 116,
 	  82,  48,  16, -16, -45, -71, -96,-117,-134,-149,

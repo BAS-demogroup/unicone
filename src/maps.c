@@ -1,9 +1,27 @@
+/// \file	maps.c
+/// 
+/// \brief	This file defines all of the maps used to interface with the tile 
+///			and attribute map in-game
+///
+/// This file defines the tile and attribute map pointers used in-game.  It
+/// uses a lot of memory to do it this way, but makes the actual code simple
+/// because of it.  That said, I would probably not recommend this way of
+/// handling the screen unless you have a robust memory mapping system in 
+/// place.
+///
+/// Even then, trust me, this was just not the best way to go about it.  It
+/// really wasn't.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #include "maps.h"
 
 
 #include "constants.h"
 
 
+// Screen Layout
+//
 // Lines 0 - 4
 //------------------------------------------
 #define UNICORN_TILE_1                     41
@@ -215,6 +233,7 @@
 #define LIVES_TILE_3                       57
 
 
+/// \brief	This list points to the unicorn's position for each row
 RRB_TILE_GOTOX_t *unicorn_position[5] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (UNICORN_POSITION * 2)),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (UNICORN_POSITION * 2) + (INGAME_LINE_LENGTH * 2)),
@@ -223,6 +242,7 @@ RRB_TILE_GOTOX_t *unicorn_position[5] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (UNICORN_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 4),
 };
 
+/// \brief	This list points to the unicorn's tiles for each column and row
 RRB_TILE_NORMAL_t *unicorn_tiles[2][5] = {
 	{
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (UNICORN_TILE_1 * 2)),
@@ -240,6 +260,8 @@ RRB_TILE_NORMAL_t *unicorn_tiles[2][5] = {
 	}
 };
 
+/// \brief	This list points to the unicorn's attributes for each column and 
+///			row
 __far RRB_ATTR_NORMAL_t *unicorn_attr[2][5] = {
 	{
 		(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (UNICORN_TILE_1 * 2)),
@@ -257,6 +279,7 @@ __far RRB_ATTR_NORMAL_t *unicorn_attr[2][5] = {
 	}
 };
 
+/// \brief	This list points to the unicorn's tail's position for each row
 RRB_TILE_GOTOX_t  *tail_position[4] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (TAIL_POSITION * 2)),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (TAIL_POSITION * 2) + (INGAME_LINE_LENGTH * 2)),
@@ -264,6 +287,7 @@ RRB_TILE_GOTOX_t  *tail_position[4] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (TAIL_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 3),
 };
 
+/// \brief	This list points to the unicorn's tail's tile for each row
 RRB_TILE_NORMAL_t *tail_tiles[4] = {
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (TAIL_TILE * 2)),
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (TAIL_TILE * 2) + (INGAME_LINE_LENGTH * 2)),
@@ -271,6 +295,7 @@ RRB_TILE_NORMAL_t *tail_tiles[4] = {
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (TAIL_TILE * 2) + (INGAME_LINE_LENGTH * 2) * 3),
 };
 
+/// \brief	This list points to the unicorn's tail's attributes for each row
 __far RRB_ATTR_NORMAL_t *tail_attr[4] = {
 	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (TAIL_TILE * 2)),
 	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (TAIL_TILE * 2) + (INGAME_LINE_LENGTH * 2)),
@@ -278,24 +303,28 @@ __far RRB_ATTR_NORMAL_t *tail_attr[4] = {
 	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (TAIL_TILE * 2) + (INGAME_LINE_LENGTH * 2) * 3),
 };
 
+/// \brief	This list points to the unicorn's mane's position for each row
 RRB_TILE_GOTOX_t  *mane_position[3] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (MANE_POSITION * 2)),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (MANE_POSITION * 2) + (INGAME_LINE_LENGTH * 2)),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (MANE_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 2),
 };
 
+/// \brief	This list points to the unicorn's mane's tile for each row
 RRB_TILE_NORMAL_t *mane_tiles[3] = {
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (MANE_TILE * 2)),
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (MANE_TILE * 2) + (INGAME_LINE_LENGTH * 2)),
 	(RRB_TILE_NORMAL_t *)(TILE_MAP + (MANE_TILE * 2) + (INGAME_LINE_LENGTH * 2) * 2),
 };
 
+/// \brief	This list points to the uncicorn's mane's attributes for each row
 __far RRB_ATTR_NORMAL_t *mane_attr[3] = {
 	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (MANE_TILE * 2)),
 	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (MANE_TILE * 2) + (INGAME_LINE_LENGTH * 2)),
 	(__far RRB_ATTR_NORMAL_t *)(ATTR_MAP + (MANE_TILE * 2) + (INGAME_LINE_LENGTH * 2) * 2),
 };
 
+/// \brief	This list points to the cone's shadow's position for each row
 RRB_TILE_GOTOX_t  *cone_shadow_position[6] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (CONE_SHADOW_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 38),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (CONE_SHADOW_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 39),
@@ -305,6 +334,8 @@ RRB_TILE_GOTOX_t  *cone_shadow_position[6] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (CONE_SHADOW_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 43)
 };
 
+/// \brief	This list points to the cone's shadow's tiles for each column and 
+///			row.
 RRB_TILE_NORMAL_t *cone_shadow_tiles[2][6] = {
 	{
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (CONE_SHADOW_TILE_1 * 2) + (INGAME_LINE_LENGTH * 2) * 38),
@@ -324,6 +355,7 @@ RRB_TILE_NORMAL_t *cone_shadow_tiles[2][6] = {
 	}
 };
 
+/// \brief	This list points to the cone's position for each row
 RRB_TILE_GOTOX_t  *cone_position[6] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (CONE_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 38),
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (CONE_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 39),
@@ -333,6 +365,7 @@ RRB_TILE_GOTOX_t  *cone_position[6] = {
 	(RRB_TILE_GOTOX_t *)(TILE_MAP + (CONE_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 43)
 };
 
+/// \brief	This list points to the cone's position for each column and row
 RRB_TILE_NORMAL_t *cone_tiles[2][6] = {
 	{
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (CONE_TILE_1 * 2) + (INGAME_LINE_LENGTH * 2) * 38),
@@ -352,6 +385,8 @@ RRB_TILE_NORMAL_t *cone_tiles[2][6] = {
 	}
 };
 
+/// \brief	This list points to the ice cream stack's shadow's position, by 
+///			layer and row
 RRB_TILE_GOTOX_t  *stacked_icecream_shadow_position[3][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (STACKED_SHADOW_POSITION_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -475,6 +510,8 @@ RRB_TILE_GOTOX_t  *stacked_icecream_shadow_position[3][38] = {
 	}
 };
 
+/// \brief	This list points to the ice cream stack's shadow's tiles, by layer,
+///			column and row.
 RRB_TILE_NORMAL_t *stacked_icecream_shadow_tiles[3][2][38] = {
 	{
 		{
@@ -724,6 +761,8 @@ RRB_TILE_NORMAL_t *stacked_icecream_shadow_tiles[3][2][38] = {
 	}
 };
 
+/// \brief	This list points to the extra stacks for the smaller scales shadow
+///			positions, by layer and row
 RRB_TILE_GOTOX_t  *small_stacked_shadow_position[3][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (SMALL_STACKED_SHADOW_POSITION_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -847,6 +886,8 @@ RRB_TILE_GOTOX_t  *small_stacked_shadow_position[3][38] = {
 	}
 };
 
+/// \brief	This list points to the extra stacks for smaller scales shadow's
+///			tiles, by layer and row
 RRB_TILE_NORMAL_t *small_stacked_shadow_tiles[3][38] = {
 	{
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (SMALL_STACKED_SHADOW_TILE_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -970,6 +1011,8 @@ RRB_TILE_NORMAL_t *small_stacked_shadow_tiles[3][38] = {
 	}
 };
 
+/// \brief	This list points to the falling ice cream's shadow's position, by
+///			layer and row
 RRB_TILE_GOTOX_t  *falling_icecream_shadow_position[3][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (FALLING_SHADOW_POSITION_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -1093,6 +1136,8 @@ RRB_TILE_GOTOX_t  *falling_icecream_shadow_position[3][38] = {
 	}
 };
 
+/// \brief	This list points to the falling ice cream's shadow's tiles, by 
+///			layer and row
 RRB_TILE_NORMAL_t *falling_icecream_shadow_tiles[3][2][38] = {
 	{
 		{
@@ -1342,6 +1387,8 @@ RRB_TILE_NORMAL_t *falling_icecream_shadow_tiles[3][2][38] = {
 	}
 };
 
+/// \brief	This list points to the extra columns for the smaller scale's
+///			falling ice cream show position, by layer and row
 RRB_TILE_GOTOX_t  *small_icecream_shadow_position[2][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (SMALL_SHADOW_POSITION_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -1425,6 +1472,8 @@ RRB_TILE_GOTOX_t  *small_icecream_shadow_position[2][38] = {
 	}
 };
 
+/// \brief	This list points to the extra columns for the smaller scale's
+///			falling ice cream shadow tiles, by layer and row
 RRB_TILE_NORMAL_t *small_icecream_shadow_tiles[2][38] = {
 	{
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (SMALL_SHADOW_TILE_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -1508,6 +1557,7 @@ RRB_TILE_NORMAL_t *small_icecream_shadow_tiles[2][38] = {
 	}
 };
 
+/// \brief	This list points to the effects' positions, by layer and row
 RRB_TILE_GOTOX_t  *effects_position[2][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (EFFECT_A_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -1591,6 +1641,7 @@ RRB_TILE_GOTOX_t  *effects_position[2][38] = {
 	}
 };
 
+/// \brief	This list points to the effect's tiles, by layer and row
 RRB_TILE_NORMAL_t *effects_tiles[2][38] = {
 	{
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (EFFECT_A_TILE * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -1674,6 +1725,8 @@ RRB_TILE_NORMAL_t *effects_tiles[2][38] = {
 	}
 };
 
+/// \brief	This list points to the stacked ice cream's positions, by layer and
+///			row
 RRB_TILE_GOTOX_t  *stacked_icecream_position[3][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (STACKED_POSITION_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -1797,6 +1850,8 @@ RRB_TILE_GOTOX_t  *stacked_icecream_position[3][38] = {
 	}
 };
 
+/// \brief	This list points to the stacked ice cream's tiles, by layer, column
+///			and row
 RRB_TILE_NORMAL_t *stacked_icecream_tiles[3][2][38] = {
 	{
 		{
@@ -2046,6 +2101,8 @@ RRB_TILE_NORMAL_t *stacked_icecream_tiles[3][2][38] = {
 	}
 };
 
+/// \brief	This list points to extra stacks for the smaller scale, the 
+///			positions of the ice cream ribbons
 RRB_TILE_GOTOX_t  *small_stacked_position[3][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (SMALL_STACKED_POSITION_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -2169,6 +2226,8 @@ RRB_TILE_GOTOX_t  *small_stacked_position[3][38] = {
 	}
 };
 
+/// \brief	This list points to extra stacks for the smaller scale, the tiles
+///			for each of the ice cream ribbons in the stack
 RRB_TILE_NORMAL_t *small_stacked_tiles[3][38] = {
 	{
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (SMALL_STACKED_TILE_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -2292,6 +2351,8 @@ RRB_TILE_NORMAL_t *small_stacked_tiles[3][38] = {
 	}
 };
 
+/// \brief	This list points to the falling ice cream positions, by layer and
+///			row
 RRB_TILE_GOTOX_t  *falling_icecream_position[3][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (FALLING_POSITION_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -2415,6 +2476,7 @@ RRB_TILE_GOTOX_t  *falling_icecream_position[3][38] = {
 	}
 };
 
+/// \brief	This list points to the falling ice cream tiles, by layer and row
 RRB_TILE_NORMAL_t *falling_icecream_tiles[3][2][38] = {
 	{
 		{
@@ -2664,6 +2726,8 @@ RRB_TILE_NORMAL_t *falling_icecream_tiles[3][2][38] = {
 	}
 };
 
+/// \brief	This list points to the extra positions for the falling ice cream
+///			at the smaller scale, by layer and row
 RRB_TILE_GOTOX_t  *small_icecream_position[2][38] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (SMALL_POSITION_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -2747,6 +2811,8 @@ RRB_TILE_GOTOX_t  *small_icecream_position[2][38] = {
 	}
 };
 
+/// \brief	This list points to the extra tiles for the falling ice cream at 
+///			the smaller scale, by layer and row
 RRB_TILE_NORMAL_t *small_icecream_tiles[2][38] = {
 	{
 		(RRB_TILE_NORMAL_t *)(TILE_MAP + (SMALL_TILE_U * 2) + (INGAME_LINE_LENGTH * 2) * 6),
@@ -2830,6 +2896,8 @@ RRB_TILE_NORMAL_t *small_icecream_tiles[2][38] = {
 	}
 };
 
+/// \brief	This list points to the life markers' shadow positions, by life and
+///			row
 RRB_TILE_GOTOX_t  *lives_shadow_position[3][2] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (LIVES_SHADOW_POSITION_1 * 2) + (INGAME_LINE_LENGTH * 2) * 45),
@@ -2845,6 +2913,8 @@ RRB_TILE_GOTOX_t  *lives_shadow_position[3][2] = {
 	}
 };
 
+/// \brief	This list points to the lifer marker's positions, by life and 
+/// 		row
 RRB_TILE_GOTOX_t  *lives_position[3][2] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (LIVES_POSITION_1 * 2) + (INGAME_LINE_LENGTH * 2) * 45),
@@ -2860,6 +2930,8 @@ RRB_TILE_GOTOX_t  *lives_position[3][2] = {
 	}
 };
 
+/// \brief	This list points to the level indicator's position, by digit and
+///			row
 RRB_TILE_GOTOX_t  *level_number_position[2][5] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (LEVEL_NUMBER_POSITION_1 * 2) + (INGAME_LINE_LENGTH * 2) * 45),
@@ -2877,6 +2949,7 @@ RRB_TILE_GOTOX_t  *level_number_position[2][5] = {
 	}
 };
 
+/// \brief	This list points to the level indicator's tiles, by digit and row
 RRB_TILE_NORMAL_t *level_number_tiles[2][2][5] = {
 	{
 		{
@@ -2912,6 +2985,8 @@ RRB_TILE_NORMAL_t *level_number_tiles[2][2][5] = {
 	}
 };
 
+/// \brief	This list points to the game over logo's position, by letter and 
+///			row
 RRB_TILE_GOTOX_t  *gameover_logo_position[9][4] = {
 	{
 		(RRB_TILE_GOTOX_t *)(TILE_MAP + (G_POSITION * 2) + (INGAME_LINE_LENGTH * 2) * 1),

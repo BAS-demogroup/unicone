@@ -1,3 +1,13 @@
+/// \file	pixies.c
+/// 
+/// \brief	This file is the code and supporting data for all of the pixies' 
+///			tiles
+///
+/// This file contains the procedures and data used to show pixies on the 
+/// screen
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #include "pixies.h"
 
 
@@ -5,6 +15,12 @@
 #include "maps.h"
 
 
+/// \brief	This gets the tile for the cone, at the current scale
+///
+/// \param	shadow	Whether we want the shadow of the cone, or the cone itself
+/// \param	x		The column of the pixie we're returning
+/// \param	y		The row of the pixie we're returning
+/// \returns		The tile number for the piece of the cone requested
 unsigned short get_cone_tile(char shadow, char x, char y) {
 	switch (scale) {
 		case 1:
@@ -16,6 +32,15 @@ unsigned short get_cone_tile(char shadow, char x, char y) {
 	}
 }
 
+/// \brief	This gets the tile for the top dollop of the ice cream, at the
+///			current scale
+///
+/// \param	shadow	Whether we want the shadow of the dollop, or the dollop 
+///					itself
+/// \param	x		The column of the pixie we're returning
+/// \param	y		The row of the pixie we're returning
+/// \returns		The tile number for the piece of the ice cream dollop 
+///					requested
 unsigned short get_icecream_top_tile(char shadow, char x, char y) {
 	switch (scale) {
 		case 1:
@@ -27,6 +52,15 @@ unsigned short get_icecream_top_tile(char shadow, char x, char y) {
 	}
 }
 
+/// \brief	This gets the tile for the bottom ribbon of the ice cream, at the
+///			current scale
+///
+/// \param	shadow	Whether we want the shadow of the ribbon, or the ribbon 
+///					itself
+/// \param	x		The column of the pixie we're returning
+/// \param	y		The row of the pixie we're returning
+/// \returns		The tile number for the piece of the ice cream ribbon 
+///					requested
 unsigned short get_icecream_bottom_tile(char shadow, char x, char y) {
 	switch (scale) {
 		case 1:
@@ -38,6 +72,12 @@ unsigned short get_icecream_bottom_tile(char shadow, char x, char y) {
 	}
 }
 
+/// \brief	This sets the tiles for a specific ice cream dollop location
+///
+/// \param	x_tile		The horizontal tile map position of the dollop
+/// \param	y_tile		The vertical tile map position of the dollop
+/// \param	y_offset	The vertical pixel offset where the dollop will be 
+///						painted
 void paint_icecream_top_tile(char x_tile, char y_tile, char y_offset) {
 	switch (scale) {
 		case 1:
@@ -61,6 +101,13 @@ void paint_icecream_top_tile(char x_tile, char y_tile, char y_offset) {
 	}
 }
 
+/// \brief	This sets the tiles for a specific ice cream ribbon location
+///
+/// \param	layer		The layer to draw with
+/// \param	x_tile		The horizontal tile map position of the ribbon
+/// \param	y_tile		The vertical tile map position of the ribbon
+/// \param	y_offset	The vertical pixel offset where the ribbon will be 
+///						painted
 void paint_icecream_bottom_tile(char layer, char x_tile, char y_tile, 
 	char y_offset) {
 		
@@ -97,6 +144,13 @@ void paint_icecream_bottom_tile(char layer, char x_tile, char y_tile,
 	}
 }
 
+/// \brief	This procedure sets the position of the ice cream ribbon
+///
+/// \param	layer	The layer to draw with
+/// \param	x_tile	The horizontal tile map position of the ribbon
+/// \param	y_tile	The vertical tile map position of the ribbon
+/// \param	y_pix	The vertical pixel offset where the ribbon will be 
+///					painted
 void set_icecream_pos(char layer, unsigned short x_pix, char y_tile, 
 	char y_pix) {
 		
@@ -132,6 +186,13 @@ void set_icecream_pos(char layer, unsigned short x_pix, char y_tile,
 	}
 }
 
+/// \brief	This procedure sets the position of the stacked ice cream
+///
+/// \param	layer	The layer to draw with
+/// \param	x_tile	The horizontal tile map position of the stack ribbon
+/// \param	y_tile	The vertical tile map position of the stack ribbon
+/// \param	y_pix	The vertical pixel offset where the stack ribbon will be 
+///					painted
 void set_stacked_pos(char layer, unsigned short x_pix, char y_tile, 
 	char y_pix) {
 		
@@ -166,7 +227,13 @@ void set_stacked_pos(char layer, unsigned short x_pix, char y_tile,
 			break;
 	}
 }
-	
+
+/// \brief	This sets the tiles for a specific stack dollop location
+///
+/// \param	x_tile		The horizontal tile map position of the dollop
+/// \param	y_tile		The vertical tile map position of the dollop
+/// \param	y_offset	The vertical pixel offset where the dollop will be 
+///						painted
 void paint_stacked_top_tile(char x_tile, char y_tile, char y_offset) {
 	switch (scale) {
 		case 1:
@@ -189,6 +256,13 @@ void paint_stacked_top_tile(char x_tile, char y_tile, char y_offset) {
 	}
 }
 
+/// \brief	This sets the tiles for a specific stack ribbon location
+///
+/// \param	layer		The layer to draw with
+/// \param	x_tile		The horizontal tile map position of the ribbon
+/// \param	y_tile		The vertical tile map position of the ribbon
+/// \param	y_offset	The vertical pixel offset where the ribbon will be 
+///						painted
 void paint_stacked_bottom_tile(char layer, char x_tile, char y_tile, 
 	char y_offset) {
 
@@ -224,6 +298,11 @@ void paint_stacked_bottom_tile(char layer, char x_tile, char y_tile,
 }
 
 
+/// \brief	This list contains the tile numbers for the complete unicorn pixie
+///
+/// This list contains the tile numbers for the complete unicorn pixie, by 
+/// animation frame, then column, then row.  The column's first two lists are
+/// the leftmost column, but with tail down or lifted.
 unsigned short unicorn_pixie_tiles[5][3][5] = {
 	{
 		{ 0x05b8,0x05b9,0x05ba,0x05bb,0x05bc },
@@ -252,6 +331,10 @@ unsigned short unicorn_pixie_tiles[5][3][5] = {
 	}
 };
 
+/// \brief	This list contains the tile numbers for the unicorn's tail
+///
+/// This list contains the tile numbers for the unicorn's tail, by whether it
+/// is down or up, then the frame of the animation, then the row.
 unsigned short tail_pixie_tiles[2][5][4] = {
 	{
 		{ 0x0603,0x0604,0x0605,0x0606 },
@@ -269,6 +352,8 @@ unsigned short tail_pixie_tiles[2][5][4] = {
 	}
 };
 
+/// \brief	This list contains the tile numbers for the unicorn's mane, by 
+///			animation frame and row
 unsigned short mane_pixie_tiles[5][3] = {
 	{ 0x062b,0x062c,0x062d },
 	{ 0x062e,0x062f,0x0630 },
@@ -277,6 +362,12 @@ unsigned short mane_pixie_tiles[5][3] = {
 	{ 0x0637,0x0638,0x0639 }
 };
 
+/// \brief	This list contains the tile numbers for the top dollop of the large
+///			scale version of the ice cream
+///
+/// This list contains the tile number for the top dollop of the large scale
+/// version of the ice cream, divided first by shadow, then by column, then by
+/// row
 unsigned short large_icecream_top_pixie_tiles[2][2][5] = {
 	{
 		{ 0x063a,0x063b,0x063c,0x063d,0x063e },
@@ -288,16 +379,26 @@ unsigned short large_icecream_top_pixie_tiles[2][2][5] = {
 	}
 };
 
+/// \brief	This list contains the tile numbers for the top dollop of the 
+///			medium scale version of the ice cream, sorted by shadow, then row
 unsigned short medium_icecream_top_pixie_tiles[2][3] = {
 	{ 0x064e,0x064f,0x0650 },
 	{ 0x0651,0x0652,0x0653 }
 };
 
+/// \brief	This list contains the file numbers for the top dollop of the small
+///			scale version of the ice cream, sorted by shadow then row
 unsigned short small_icecream_top_pixie_tiles[2][2] = {
 	{ 0x0654,0x0655 },
 	{ 0x0656,0x0657 }
 };
 
+/// \brief	This list contains the tile numbers for the bottom ribbon of the 
+///			large scale version of the ice cream
+///
+/// This list contains the tile numbers for the bottom ribbon of the large 
+/// scale version of the ice cream, sorted by shadow, then by column, then by
+/// row.
 unsigned short large_icecream_bottom_pixie_tiles[2][2][3] = {
 	{
 		{ 0x0658,0x0659,0x065a },
@@ -309,16 +410,22 @@ unsigned short large_icecream_bottom_pixie_tiles[2][2][3] = {
 	}
 };
 
+/// \brief	This list contains the tile numbers for the bottom ribbon of the
+///			medium scale version of the ice cream, sorted by shadow and row
 unsigned short medium_icecream_bottom_pixie_tiles[2][2] = {
 	{ 0x0664,0x0665 },
 	{ 0x0666,0x0667 }
 };
 
+/// \brief	This list contains the tile numbers for the bottom ribbon of the 
+///			small scale version of the ice cream, sorted by shadow and row
 unsigned short small_icecream_bottom_pixie_tiles[2][2] = {
 	{ 0x0668,0x0669 },
 	{ 0x066a,0x066b }
 };
 
+/// \brief	This list contains the tile numbers for the large version of the
+///			cone, sorted by shadow, column and row
 unsigned short large_cone_pixie_tiles[2][2][7] = {
 	{
 		{ 0x066c,0x066d,0x066e,0x066f,0x0670,0x0671,0x0672 },
@@ -330,16 +437,22 @@ unsigned short large_cone_pixie_tiles[2][2][7] = {
 	}
 };
 
+/// \brief	This list contains the tile numbers for the medium version of the
+///			cone, sorted by shadow and row
 unsigned short medium_cone_pixie_tiles[2][4] = {
 	{ 0x0688,0x0689,0x068a,0x068b },
 	{ 0x068c,0x068d,0x068e,0x068f }
 };
 
+/// \brief	This list contains the tile numbers for the small version of the 
+///			cone, sorted by shadow and row
 unsigned short small_cone_pixie_tiles[2][3] = {
 	{ 0x0690,0x0691,0x0692 },
 	{ 0x0693,0x0694,0x0695 }
 };
 
+/// \brief	This list contains the tile numbers for all of the numbers used to
+///			indicate level, sorted by number, column and row
 unsigned short numbers[10][2][5] = {
 	{	// 0
 		{
@@ -423,6 +536,8 @@ unsigned short numbers[10][2][5] = {
 	}
 };
 
+/// \brief	This list contains the tile numbers for the splash effect, by scale 
+///			and then side (left and right)
 unsigned short splash_pixie_tiles[3][2] = {
 	{
 		0x0673,0x067a

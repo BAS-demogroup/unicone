@@ -1,8 +1,20 @@
+/// \file	chips.h
+/// 
+/// \brief	This file defines the interface to IO registers.
+///
+/// This header file defines the structures that are used to interface with the
+/// various chips and their IO registers.  Wherever possible, the naming
+/// convention used is the same as it is in the Big Book, though there are a
+/// few places where I had to take some liberties.
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #ifndef __CHIPS_H
 #define __CHIPS_H
 
 #include <stdint.h>
 
+// This block just creates the types for the structs
 typedef struct _CPU           _CPU_t;
 typedef struct _VIC2          _VIC2_t;
 typedef struct _VIC3          _VIC3_t;
@@ -19,11 +31,18 @@ typedef struct _CIA1          _CIA1_t;
 typedef struct _CIA2          _CIA2_t;
 typedef struct _IRQ_VECTORS   _IRQ_VECTORS_t;
 
+/// \brief	This is the interface to the CPU registers.
+///
+/// This is the interface to the CPU registers.  It starts at $00.
 struct _CPU {
 	uint8_t     PORTDDR;
 	uint8_t     PORT;
 };
 
+/// \brief	This is the interface to the VIC2.
+///
+/// This is the interface to the VIC2.  It contains all the registers that 
+/// existed on the VIC2.  It starts at $d000.
 struct _VIC2 {
 	uint8_t     S0X;
 	uint8_t     S0Y;
@@ -101,6 +120,11 @@ struct _VIC2 {
 	uint8_t     C128_FAST;
 };
 
+/// \brief	This is the interface to the VIC3 extensions.
+///
+/// This is the interface to the VIC3's extensions.  It contains all the 
+/// registers that were added with the VIC3, but does not point to any of the
+/// VIC2's registers.  It starts at $d02f.
 struct _VIC3 {
 	uint8_t     KEY;
 	union {
@@ -191,6 +215,10 @@ struct _VIC3 {
 	
 };
 
+/// \brief	This is the interface to the VIC4 extensions.
+///
+/// This is the interface to the VIC4's extensions.  As with the VIC3, it only
+/// contains those registers that it adds.  It starts at $d048.
 struct _VIC4 {
 	uint8_t     TBDRPOSLSB;
 	union {
@@ -314,6 +342,9 @@ struct _VIC4 {
 	uint8_t     PALBLUE  [0x100];
 };
 
+/// \brief	This is the interface to the Floppy Disk Controller registers
+///
+/// This is the interface to the Floppy Disk Controller.  It starts at $d080.
 struct _FDC {
 	union {
 		uint8_t DS    : 3;
@@ -362,6 +393,7 @@ struct _FDC {
 	uint8_t     PCODE;
 };
 
+/// \brief	This is the interface to each individual channel on a SID
 struct _SID_VOICE {
 	uint16_t    FREQUENCY;
 	uint16_t    PULSE_WIDTH;
@@ -371,6 +403,10 @@ struct _SID_VOICE {
 	uint8_t     SUSTAINRELEASE;
 };
 
+/// \brief	This is the interface to a single SID chip
+///
+/// This is the interface to a specific SID chip.  It will start at one of 
+/// $d400, $d420, $d440, or $d460.
 struct _SID {
 	_SID_VOICE_t VOICE[3];
 
@@ -380,11 +416,18 @@ struct _SID {
 	uint8_t      VOLUME_FTYPE;
 };
 
+/// \brief	This is the interface to the keyscanning registers.
+///
+/// This is the interface to the keyscanning registers, used for real time
+/// unbuffered keyboard scanning.  It starts at $d613.
 struct _KEYSCAN {
 	uint8_t     CRTACSCNT;
 	uint8_t     MATRIXPEEK;
 };
 
+/// \brief	This is the interface to the DMA registers.
+///
+/// This is the interface to the DMA.  It starts at $d700.
 struct _DMA {
 	uint8_t     ADDRLSBTRIG;
 	uint8_t     ADDRMSB;
@@ -397,6 +440,12 @@ struct _DMA {
 	uint8_t     ADDRLSB;
 };
 
+/// \brief	This is the interface to the math registers.
+///
+/// This is the interface to the math registers.  Do not trust these, I think
+/// I have a mistake somewhere in here that makes it not work right, but I
+/// didn't need it enough to have solved it so, tread on this interface with 
+/// care.
 struct _MATH {
 	union {
 		uint8_t _NA1    : 6;
@@ -411,6 +460,10 @@ struct _MATH {
 	uint32_t    MULTOUT;
 };
 
+/// \brief	This is the interface to a single audio DAC channel
+///
+/// This interface contains all of the registers that pertain to a single audio
+/// DMA channel.  It will start at one of $d720, $d730, $d740 or $d750.
 struct _AUDIO_CHANNEL {
 	uint8_t     CONTROL;
 	uint16_t    BADDR;
@@ -425,6 +478,9 @@ struct _AUDIO_CHANNEL {
 	uint8_t     TMRADDRMB;
 };
 
+/// \brief	The main interface to the Audio DMA.
+///
+/// The main interface to the Audio DMA.  It starts at $$d71c.
 struct _AUDIO_DMA {
 	uint8_t          CH0RVOL;
 	uint8_t          CH1RVOL;
@@ -434,8 +490,12 @@ struct _AUDIO_DMA {
 	_AUDIO_CHANNEL_t CHANNELS[4];
 };
 
-// I can't get the CIA chips to work right.
+/// \brief	This is the interface to the first CIA chip
+///
+/// This is the interface to the first CIA chip's registers, starting at $dc00.
+/// I never did get a CIA timed interrupt working.
 struct _CIA1 {
+	// I can't get the CIA chips to work right.
 	uint8_t     PORTA;
 	uint8_t     PORTB;
 	uint8_t     DDRA;
@@ -468,6 +528,11 @@ struct _CIA1 {
 	uint8_t     ALRMHOUR;
 };
 
+/// \brief	This is the interface to the second CIA chip
+///
+/// This is the interface to the second CIA chip's registers, starting at 
+/// $dd00.  I never did get CIA timing working, so do not take this interface
+/// as usable as is.
 struct _CIA2 {
 	uint8_t     PORTA;
 	uint8_t     PORTB;
@@ -501,12 +566,16 @@ struct _CIA2 {
 	uint8_t     ALRMHOUR;
 };
 
+/// \brief	This is the interface to the IRQ vectors
+///
+/// This is the interface to the IRQ vectors, starting at $fffa.
 struct _IRQ_VECTORS {
 	uint16_t    NMI;
 	uint16_t    COLDSTART;
 	uint16_t    IRQ;
 };
 
+// This block points all the structs at an IO register bank.
 #define CPU         (* (volatile _CPU_t *)           0x00)
 #define VIC2        (* (volatile _VIC2_t *)        0xd000)
 #define VIC3        (* (volatile _VIC3_t *)        0xd02f)

@@ -1,13 +1,24 @@
+/// \file	rrb.h
+/// 
+/// \brief	This file defines the interface to rrb.
+///
+/// This header file defines the structures that are used to interface with the
+/// raster rewrite buffer
+///
+/// \copyright 2023 by BAS and deathy (AKA Clifford A. Anderson).  
+/// All rights reserved.
 #ifndef __RRB_H
 #define __RRB_H
 
 #include <stdint.h>
 
+// This block just creates the types for the structs
 typedef struct _RRB_TILE_NORMAL RRB_TILE_NORMAL_t;
 typedef struct _RRB_TILE_GOTOX  RRB_TILE_GOTOX_t;
 typedef struct _RRB_ATTR_NORMAL RRB_ATTR_NORMAL_t;
 typedef struct _RRB_ATTR_GOTOX  RRB_ATTR_GOTOX_t;
 
+/// \brief	This struct interfaces with a normal entry on a tile map
 struct _RRB_TILE_NORMAL {
 	union {
 		uint16_t TILE      : 13;
@@ -15,6 +26,7 @@ struct _RRB_TILE_NORMAL {
 	};
 };
 
+/// \brief	This struct interfaces with a normal entry on an attribute map
 struct _RRB_ATTR_NORMAL {
 	union {
 		uint8_t  VTRIM         : 2;
@@ -31,6 +43,7 @@ struct _RRB_ATTR_NORMAL {
 	uint8_t      FGCOLOR;
 };
 
+/// \brief	This struct interfaces with a GOTOX entry on a tile map
 struct _RRB_TILE_GOTOX {
 	union {
 		uint16_t XPOS     : 10;
@@ -39,6 +52,7 @@ struct _RRB_TILE_GOTOX {
 	};
 };
 
+/// \brief	This struct interfaces with a GOTO entry on an attribute map
 struct _RRB_ATTR_GOTOX {
 	union {
 		uint8_t  RESERVED1  : 2;	// set to 0
