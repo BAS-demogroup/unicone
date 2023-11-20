@@ -6,16 +6,16 @@ echo %time%
 
 cd assets
 
-..\..\tilemizer_nopack.py -b4 -m=16e00 -o=pixies -t="pixies.png"
-C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b4 -m=1a640 -o=level_indicator -t="level_marker.png"
-C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b4 -m=1b900 -o=unicorn_background -t="unicorn_background.png"
-C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b4 -m=40000 -o=background -t="background.png"
-..\..\tilemizer_nopack.py -b4 -m=3a800 -o=game_over_logo -t="game_over_logo.png"
+tilemizer_nopack.py -b4 -m=16e00 -o=pixies -t="pixies.png"
+tilemizer.py -b4 -m=1a640 -o=level_indicator -t="level_marker.png"
+tilemizer.py -b4 -m=1b900 -o=unicorn_background -t="unicorn_background.png"
+tilemizer.py -b4 -m=40000 -o=background -t="background.png"
+tilemizer_nopack.py -b4 -m=3a800 -o=game_over_logo -t="game_over_logo.png"
 
 copy /b pixies.chrs+level_indicator.chrs+unicorn_background.chrs tileset.chrs
 
-C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b8 -m=30000 -o=unicorn_title_plain -t="unicorn_title_plain.png"
-C:\Users\death\Documents\C65\JettMonsters\tools\tilemizer.py -b8 -m=30000 -o=unicorn_title_credits -t="unicorn_title_credits.png"
+tilemizer.py -b8 -m=30000 -o=unicorn_title_plain -t="unicorn_title_plain.png"
+tilemizer.py -b8 -m=30000 -o=unicorn_title_credits -t="unicorn_title_credits.png"
 
 split unicorn_title_plain.chrs 32768
 split unicorn_title_credits.chrs 32768
@@ -68,139 +68,139 @@ echo %time%
 
 pause
 
-C:\Users\death\Documents\C65\exomizer-3.1.1\win32\exomizer sfx basic -t 65 -o build/unicone.prg build/unicone_full.prg
+exomizer sfx basic -t 65 -o build/unicone.prg build/unicone_full.prg
 
-C:\Users\death\Documents\C65\acme\acme src\music_swap_stub.asm
-C:\Users\death\Documents\C65\acme\acme src\tilemap.asm
-C:\Users\death\Documents\C65\acme\acme src\attrmap.asm
-C:\Users\death\Documents\C65\acme\acme src\flavors.asm
-
-REM Loading Screen Data
-C:\Users\death\Documents\C65\megatool\megatool -a assets/pixies.clut 00025000
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain_0.chrs 00030000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain_1.chrs 00010000
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain_2.chrs 00040000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain_3.chrs 00010000
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain_4.chrs 00050000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain.map 00059200
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_plain.atr 0005b800
-
-REM Title Screen Data
-C:\Users\death\Documents\C65\megatool\megatool -a build/music_swap_stub.bin 0000c000
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/megakitty_theme_1.prg 00010000
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_0.chrs 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_1.chrs 00010000
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_2.chrs 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_3.chrs 00010000
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_4.chrs 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits_5.chrs 00018000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits.map 00019400
-C:\Users\death\Documents\C65\megatool\megatool -a assets/unicorn_title_credits.atr 0001ba00
-
-REM In Game Data
-C:\Users\death\Documents\C65\megatool\megatool -a assets/sentimental_thing.prg 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/tileset.chrs 00016e00
-C:\Users\death\Documents\C65\megatool\megatool -a build/tilemap.bin 0001c600
-C:\Users\death\Documents\C65\megatool\megatool -a build/flavors.bin 0001f100
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/game_start.raw 00012b00
-C:\Users\death\Documents\C65\megatool\megatool -a assets/trot.raw 00019100
-C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_1.raw 0001ac00
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/falling.raw 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_2.raw 0001b700
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/background.chrs 00010000
-REM C:\Users\death\Documents\C65\megatool\megatool -a assets/background_0.chrs 00010000
-REM C:\Users\death\Documents\C65\megatool\megatool -a assets/background_1.chrs 00010000
-
-REM C:\Users\death\Documents\C65\megatool\megatool -a assets/background_2.chrs 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/splat_3.raw 00017c00
-
-REM Game Over Data
-C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_1.raw 00012b00
-C:\Users\death\Documents\C65\megatool\megatool -a build/attrmap.bin 0001b200
-
-C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_2.raw 00010000
-C:\Users\death\Documents\C65\megatool\megatool -a assets/game_over_logo.chrs 0001a800
-
-REM Level Complete Data
-C:\Users\death\Documents\C65\megatool\megatool -a assets/level_end.raw 00010000
-
+acme src\music_swap_stub.asm
+acme src\tilemap.asm
+acme src\attrmap.asm
+acme src\flavors.asm
 
 REM Loading Screen Data
-C:\Users\death\Documents\C65\megatool\megatool -c assets/pixies.clut.addr
+megatool -a assets/pixies.clut 00025000
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_plain_0.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_plain_1.chrs.addr
+megatool -a assets/unicorn_title_plain_0.chrs 00030000
+megatool -a assets/unicorn_title_plain_1.chrs 00010000
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_plain_2.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_plain_3.chrs.addr
+megatool -a assets/unicorn_title_plain_2.chrs 00040000
+megatool -a assets/unicorn_title_plain_3.chrs 00010000
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_plain_4.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_plain.map.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_plain.atr.addr
+megatool -a assets/unicorn_title_plain_4.chrs 00050000
+megatool -a assets/unicorn_title_plain.map 00059200
+megatool -a assets/unicorn_title_plain.atr 0005b800
 
 REM Title Screen Data
-C:\Users\death\Documents\C65\megatool\megatool -c build/music_swap_stub.bin.addr
+megatool -a build/music_swap_stub.bin 0000c000
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/megakitty_theme_1.prg.addr
+megatool -a assets/megakitty_theme_1.prg 00010000
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_credits_0.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_credits_1.chrs.addr
+megatool -a assets/unicorn_title_credits_0.chrs 00010000
+megatool -a assets/unicorn_title_credits_1.chrs 00010000
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_credits_2.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_credits_3.chrs.addr
+megatool -a assets/unicorn_title_credits_2.chrs 00010000
+megatool -a assets/unicorn_title_credits_3.chrs 00010000
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_credits_4.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_credits_5.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_credits.map.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/unicorn_title_credits.atr.addr
+megatool -a assets/unicorn_title_credits_4.chrs 00010000
+megatool -a assets/unicorn_title_credits_5.chrs 00018000
+megatool -a assets/unicorn_title_credits.map 00019400
+megatool -a assets/unicorn_title_credits.atr 0001ba00
 
 REM In Game Data
-C:\Users\death\Documents\C65\megatool\megatool -c assets/sentimental_thing.prg.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/tileset.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c build/tilemap.bin.addr
-C:\Users\death\Documents\C65\megatool\megatool -c build/flavors.bin.addr
+megatool -a assets/sentimental_thing.prg 00010000
+megatool -a assets/tileset.chrs 00016e00
+megatool -a build/tilemap.bin 0001c600
+megatool -a build/flavors.bin 0001f100
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/game_start.raw.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/trot.raw.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_1.raw.addr
+megatool -a assets/game_start.raw 00012b00
+megatool -a assets/trot.raw 00019100
+megatool -a assets/splat_1.raw 0001ac00
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/falling.raw.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_2.raw.addr
+megatool -a assets/falling.raw 00010000
+megatool -a assets/splat_2.raw 0001b700
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/background.chrs.addr
-REM C:\Users\death\Documents\C65\megatool\megatool -c assets/background_0.chrs.addr
-REM C:\Users\death\Documents\C65\megatool\megatool -c assets/background_1.chrs.addr
+megatool -a assets/background.chrs 00010000
+REM megatool -a assets/background_0.chrs 00010000
+REM megatool -a assets/background_1.chrs 00010000
 
-REM C:\Users\death\Documents\C65\megatool\megatool -c assets/background_2.chrs.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/splat_3.raw.addr
+REM megatool -a assets/background_2.chrs 00010000
+megatool -a assets/splat_3.raw 00017c00
 
 REM Game Over Data
-C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_1.raw.addr
-C:\Users\death\Documents\C65\megatool\megatool -c build/attrmap.bin.addr
+megatool -a assets/game_over_1.raw 00012b00
+megatool -a build/attrmap.bin 0001b200
 
-C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_2.raw.addr
-C:\Users\death\Documents\C65\megatool\megatool -c assets/game_over_logo.chrs.addr 
+megatool -a assets/game_over_2.raw 00010000
+megatool -a assets/game_over_logo.chrs 0001a800
 
 REM Level Complete Data
-C:\Users\death\Documents\C65\megatool\megatool -c assets/level_end.raw.addr
+megatool -a assets/level_end.raw 00010000
 
 
-C:\Users\death\Documents\C65\megatool\megatool -i assets/pixies.clut.addr.mc assets/unicorn_title_plain_0.chrs.addr.mc assets/unicorn_title_plain_1.chrs.addr.mc assets/unicorn_title_plain_2.chrs.addr.mc assets/unicorn_title_plain_3.chrs.addr.mc assets/unicorn_title_plain_4.chrs.addr.mc assets/unicorn_title_plain.map.addr.mc assets/unicorn_title_plain.atr.addr.mc build/music_swap_stub.bin.addr.mc assets/megakitty_theme_1.prg.addr.mc assets/unicorn_title_credits_0.chrs.addr.mc assets/unicorn_title_credits_1.chrs.addr.mc assets/unicorn_title_credits_2.chrs.addr.mc assets/unicorn_title_credits_3.chrs.addr.mc assets/unicorn_title_credits_4.chrs.addr.mc assets/unicorn_title_credits_5.chrs.addr.mc assets/unicorn_title_credits.map.addr.mc assets/unicorn_title_credits.atr.addr.mc assets/level_end.raw.addr.mc assets/unicone0
+REM Loading Screen Data
+megatool -c assets/pixies.clut.addr
 
-C:\Users\death\Documents\C65\megatool\megatool -i assets/sentimental_thing.prg.addr.mc assets/tileset.chrs.addr.mc build/tilemap.bin.addr.mc build/flavors.bin.addr.mc assets/game_start.raw.addr.mc assets/trot.raw.addr.mc assets/splat_1.raw.addr.mc assets/falling.raw.addr.mc assets/splat_2.raw.addr.mc assets/background.chrs.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc build/attrmap.bin.addr.mc assets/game_over_2.raw.addr.mc assets/game_over_logo.chrs.addr.mc assets/unicone1
+megatool -c assets/unicorn_title_plain_0.chrs.addr
+megatool -c assets/unicorn_title_plain_1.chrs.addr
+
+megatool -c assets/unicorn_title_plain_2.chrs.addr
+megatool -c assets/unicorn_title_plain_3.chrs.addr
+
+megatool -c assets/unicorn_title_plain_4.chrs.addr
+megatool -c assets/unicorn_title_plain.map.addr
+megatool -c assets/unicorn_title_plain.atr.addr
+
+REM Title Screen Data
+megatool -c build/music_swap_stub.bin.addr
+
+megatool -c assets/megakitty_theme_1.prg.addr
+
+megatool -c assets/unicorn_title_credits_0.chrs.addr
+megatool -c assets/unicorn_title_credits_1.chrs.addr
+
+megatool -c assets/unicorn_title_credits_2.chrs.addr
+megatool -c assets/unicorn_title_credits_3.chrs.addr
+
+megatool -c assets/unicorn_title_credits_4.chrs.addr
+megatool -c assets/unicorn_title_credits_5.chrs.addr
+megatool -c assets/unicorn_title_credits.map.addr
+megatool -c assets/unicorn_title_credits.atr.addr
+
+REM In Game Data
+megatool -c assets/sentimental_thing.prg.addr
+megatool -c assets/tileset.chrs.addr
+megatool -c build/tilemap.bin.addr
+megatool -c build/flavors.bin.addr
+
+megatool -c assets/game_start.raw.addr
+megatool -c assets/trot.raw.addr
+megatool -c assets/splat_1.raw.addr
+
+megatool -c assets/falling.raw.addr
+megatool -c assets/splat_2.raw.addr
+
+megatool -c assets/background.chrs.addr
+REM megatool -c assets/background_0.chrs.addr
+REM megatool -c assets/background_1.chrs.addr
+
+REM megatool -c assets/background_2.chrs.addr
+megatool -c assets/splat_3.raw.addr
+
+REM Game Over Data
+megatool -c assets/game_over_1.raw.addr
+megatool -c build/attrmap.bin.addr
+
+megatool -c assets/game_over_2.raw.addr
+megatool -c assets/game_over_logo.chrs.addr 
+
+REM Level Complete Data
+megatool -c assets/level_end.raw.addr
 
 
-C:\Users\death\Documents\C64\GTK3VICE-3.6.1-win64\bin\c1541 -attach build/unicone.d81 -delete "unicone     /bas" -delete "+unicone0" -delete "+unicone1" -write "build/unicone.prg" "unicone     /bas" -write "assets/unicone0" "+unicone0" -write "assets/unicone1" "+unicone1" -list
+megatool -i assets/pixies.clut.addr.mc assets/unicorn_title_plain_0.chrs.addr.mc assets/unicorn_title_plain_1.chrs.addr.mc assets/unicorn_title_plain_2.chrs.addr.mc assets/unicorn_title_plain_3.chrs.addr.mc assets/unicorn_title_plain_4.chrs.addr.mc assets/unicorn_title_plain.map.addr.mc assets/unicorn_title_plain.atr.addr.mc build/music_swap_stub.bin.addr.mc assets/megakitty_theme_1.prg.addr.mc assets/unicorn_title_credits_0.chrs.addr.mc assets/unicorn_title_credits_1.chrs.addr.mc assets/unicorn_title_credits_2.chrs.addr.mc assets/unicorn_title_credits_3.chrs.addr.mc assets/unicorn_title_credits_4.chrs.addr.mc assets/unicorn_title_credits_5.chrs.addr.mc assets/unicorn_title_credits.map.addr.mc assets/unicorn_title_credits.atr.addr.mc assets/level_end.raw.addr.mc assets/unicone0
+
+megatool -i assets/sentimental_thing.prg.addr.mc assets/tileset.chrs.addr.mc build/tilemap.bin.addr.mc build/flavors.bin.addr.mc assets/game_start.raw.addr.mc assets/trot.raw.addr.mc assets/splat_1.raw.addr.mc assets/falling.raw.addr.mc assets/splat_2.raw.addr.mc assets/background.chrs.addr.mc assets/splat_3.raw.addr.mc assets/game_over_1.raw.addr.mc build/attrmap.bin.addr.mc assets/game_over_2.raw.addr.mc assets/game_over_logo.chrs.addr.mc assets/unicone1
+
+
+c1541 -attach build/unicone.d81 -delete "unicone     /bas" -delete "+unicone0" -delete "+unicone1" -write "build/unicone.prg" "unicone     /bas" -write "assets/unicone0" "+unicone0" -write "assets/unicone1" "+unicone1" -list
 
 pause
 
